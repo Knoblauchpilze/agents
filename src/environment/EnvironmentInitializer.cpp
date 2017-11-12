@@ -30,7 +30,7 @@ namespace environment
 
     void EnvironmentInitializer::createObjects(Environment& environment)
     {
-        for (unsigned int indexObject = 0 ; indexObject < m_objectsCount ; ++indexObject)
+        /*for (unsigned int indexObject = 0 ; indexObject < m_objectsCount ; ++indexObject)
         {
             const utils::Vector2d position(m_spawnArea());
             environment.spawnObject(std::make_shared<objects::EnvironmentalObject>(position.x(),
@@ -39,7 +39,14 @@ namespace environment
                                                                                    sk_defaultObjectsDimension,
                                                                                    m_density(),
                                                                                    m_elasticity()));
-        }
+        }*/
+        const utils::Vector2d position(0.0, 0.0);
+        environment.spawnObject(std::make_shared<objects::EnvironmentalObject>(position.x(),
+                                                                               position.y(),
+                                                                               10.0,
+                                                                               sk_defaultObjectsDimension,
+                                                                               2.0,
+                                                                               0.95));
     }
 
     void EnvironmentInitializer::createAgents(Environment& environment)
@@ -53,16 +60,16 @@ namespace environment
                                                                      m_elasticity()));
         }*/
 
-        const utils::Vector2d position(5.0, 0.0);
+        /*const utils::Vector2d position(5.0, 0.0);
         environment.spawnAnimat(std::make_shared<agents::Animat>(position.x(),
                                                                  position.y(),
                                                                  50.0,
-                                                                 0.65));
+                                                                 0.65));*/
 
-        const utils::Vector2d position2(0.0, 0.0);
+        const utils::Vector2d position2(3.5, -5.0);
         environment.spawnAnimat(std::make_shared<agents::Animat>(position2.x(),
                                                                  position2.y(),
                                                                  2.0,
-                                                                 0.65));
+                                                                 1.5));
     }
 }
