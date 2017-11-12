@@ -5,8 +5,6 @@
 #include "MotionBehavior.h"
 
 #include "ImpulseBehavior.h"
-#include "FixedSpeedBehavior.h"
-#include "WanderBehavior.h"
 
 namespace environment
 {
@@ -65,7 +63,7 @@ namespace environment
             ++count;
 
             std::shared_ptr<agents::behaviors::MotionBehavior> behavior(nullptr);
-            behavior = std::make_shared<agents::behaviors::FixedSpeedBehavior>(getPosition(), utils::sdl::Area(0.0, 0.0, 10.0, 0.0), 1.0, 5.0);
+            behavior = std::make_shared<agents::behaviors::ImpulseBehavior>(getPosition(), utils::Vector2d(0.0, 10.0), false, 10.0);
 
             m_motionBehaviors.push_back(behavior);
         }
