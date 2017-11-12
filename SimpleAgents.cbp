@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="SimpleAgents" />
+		<Option pch_mode="2" />
+		<Option default_target="Release" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Debug">
+				<Option output="bin/Debug/SimpleAgents" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Debug/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Option parameters="-width 640 -height 480" />
+				<Compiler>
+					<Add option="-g" />
+					<Add directory="src/core" />
+					<Add directory="src/utils" />
+					<Add directory="tests/utils" />
+					<Add directory="src/app" />
+					<Add directory="src/environment" />
+					<Add directory="src/objects" />
+					<Add directory="src/objects/frustum" />
+					<Add directory="src/agents" />
+					<Add directory="src/influences" />
+					<Add directory="src/physics" />
+					<Add directory="src/behaviors" />
+				</Compiler>
+				<Linker>
+					<Add directory="E:/Programming/ExternalLibs/SDL-1.2.14/lib" />
+				</Linker>
+			</Target>
+			<Target title="Release">
+				<Option output="bin/Release/SimpleAgents" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Release/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Option parameters="-width 640 -height 480" />
+				<Compiler>
+					<Add option="-O2" />
+					<Add directory="src/core" />
+					<Add directory="src/utils" />
+					<Add directory="tests/utils" />
+					<Add directory="src/app" />
+					<Add directory="src/environment" />
+					<Add directory="src/objects" />
+					<Add directory="src/objects/frustum" />
+					<Add directory="src/agents" />
+					<Add directory="src/influences" />
+					<Add directory="src/physics" />
+					<Add directory="src/behaviors" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+					<Add directory="E:/Programming/ExternalLibs/SDL-1.2.14/lib/" />
+					<Add directory="E:/Programming/ExternalLibs/SDL-1.2.14/lib" />
+				</Linker>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-Wnon-virtual-dtor" />
+			<Add option="-pedantic-errors" />
+			<Add option="-pedantic" />
+			<Add option="-Wextra" />
+			<Add option="-Wall" />
+			<Add option="-std=c++11" />
+			<Add option="-fexceptions" />
+			<Add option="-Werror" />
+			<Add option="--std=c++11" />
+			<Add option="-Wreturn-type" />
+			<Add option="-Wno-error=narrowing" />
+			<Add directory="E:/Programming/ExternalLibs/SDL-1.2.14/include" />
+		</Compiler>
+		<Linker>
+			<Add option="-lmingw32" />
+			<Add option="-lSDLmain" />
+			<Add option="-lSDL" />
+			<Add directory="E:/Programming/ExternalLibs/SDL-1.2.14/lib" />
+		</Linker>
+		<Unit filename="main.cpp" />
+		<Unit filename="src/agents/Agent.cpp" />
+		<Unit filename="src/agents/Agent.h" />
+		<Unit filename="src/agents/Animat.cpp" />
+		<Unit filename="src/agents/Animat.h" />
+		<Unit filename="src/agents/Body.cpp" />
+		<Unit filename="src/agents/Body.h" />
+		<Unit filename="src/agents/BodyDrawer.cpp" />
+		<Unit filename="src/agents/BodyDrawer.h" />
+		<Unit filename="src/agents/Perception.cpp" />
+		<Unit filename="src/agents/Perception.h" />
+		<Unit filename="src/app/Application.cpp" />
+		<Unit filename="src/app/Application.h" />
+		<Unit filename="src/app/Drawable.cpp" />
+		<Unit filename="src/app/Drawable.h" />
+		<Unit filename="src/app/GenericApplication.cpp" />
+		<Unit filename="src/app/GenericApplication.h" />
+		<Unit filename="src/app/SdlApplication.cpp" />
+		<Unit filename="src/app/SdlApplication.h" />
+		<Unit filename="src/app/SdlEventListener.cpp" />
+		<Unit filename="src/app/SdlEventListener.h" />
+		<Unit filename="src/behaviors/Behavior.cpp" />
+		<Unit filename="src/behaviors/Behavior.h" />
+		<Unit filename="src/behaviors/DirectedMotionBehavior.cpp" />
+		<Unit filename="src/behaviors/DirectedMotionBehavior.h" />
+		<Unit filename="src/behaviors/FixedSpeedBehavior.cpp" />
+		<Unit filename="src/behaviors/FixedSpeedBehavior.h" />
+		<Unit filename="src/behaviors/ImpulseBehavior.cpp" />
+		<Unit filename="src/behaviors/ImpulseBehavior.h" />
+		<Unit filename="src/behaviors/MotionBehavior.cpp" />
+		<Unit filename="src/behaviors/MotionBehavior.h" />
+		<Unit filename="src/behaviors/WanderBehavior.cpp" />
+		<Unit filename="src/behaviors/WanderBehavior.h" />
+		<Unit filename="src/core/InternalException.cpp" />
+		<Unit filename="src/core/InternalException.h" />
+		<Unit filename="src/core/ProgramOptions.cpp" />
+		<Unit filename="src/core/ProgramOptions.h" />
+		<Unit filename="src/core/ProgramOptions.hxx" />
+		<Unit filename="src/core/Uuid.cpp" />
+		<Unit filename="src/core/Uuid.h" />
+		<Unit filename="src/core/Uuid.hxx" />
+		<Unit filename="src/core/UuidHash.h" />
+		<Unit filename="src/environment/DrawablesUpdater.cpp" />
+		<Unit filename="src/environment/DrawablesUpdater.h" />
+		<Unit filename="src/environment/Environment.cpp" />
+		<Unit filename="src/environment/Environment.h" />
+		<Unit filename="src/environment/EnvironmentDrawer.cpp" />
+		<Unit filename="src/environment/EnvironmentDrawer.h" />
+		<Unit filename="src/environment/EnvironmentInitializer.cpp" />
+		<Unit filename="src/environment/EnvironmentInitializer.h" />
+		<Unit filename="src/environment/EnvironmentLauncher.cpp" />
+		<Unit filename="src/environment/EnvironmentLauncher.h" />
+		<Unit filename="src/environment/EnvironmentListener.cpp" />
+		<Unit filename="src/environment/EnvironmentListener.h" />
+		<Unit filename="src/environment/TimeManager.cpp" />
+		<Unit filename="src/environment/TimeManager.h" />
+		<Unit filename="src/influences/Influence.cpp" />
+		<Unit filename="src/influences/Influence.h" />
+		<Unit filename="src/influences/LinearMotionInfluence.cpp" />
+		<Unit filename="src/influences/LinearMotionInfluence.h" />
+		<Unit filename="src/objects/BoundingBox.cpp" />
+		<Unit filename="src/objects/BoundingBox.h" />
+		<Unit filename="src/objects/EnvironmentalObject.cpp" />
+		<Unit filename="src/objects/EnvironmentalObject.h" />
+		<Unit filename="src/objects/EnvironmentalObject.hxx" />
+		<Unit filename="src/objects/EnvironmentalObjectDrawer.cpp" />
+		<Unit filename="src/objects/EnvironmentalObjectDrawer.h" />
+		<Unit filename="src/objects/EnvironmentalObjectListener.cpp" />
+		<Unit filename="src/objects/EnvironmentalObjectListener.h" />
+		<Unit filename="src/objects/MovingObject.cpp" />
+		<Unit filename="src/objects/MovingObject.h" />
+		<Unit filename="src/objects/frustum/Frustum.cpp" />
+		<Unit filename="src/objects/frustum/Frustum.h" />
+		<Unit filename="src/objects/frustum/RectangleFrustum.cpp" />
+		<Unit filename="src/objects/frustum/RectangleFrustum.h" />
+		<Unit filename="src/physics/CollisionsSolver.cpp" />
+		<Unit filename="src/physics/CollisionsSolver.h" />
+		<Unit filename="src/physics/PhysicEngine.cpp" />
+		<Unit filename="src/physics/PhysicEngine.h" />
+		<Unit filename="src/physics/RigidBody.cpp" />
+		<Unit filename="src/physics/RigidBody.h" />
+		<Unit filename="src/physics/RigidBody.hxx" />
+		<Unit filename="src/physics/RigidBodyListener.cpp" />
+		<Unit filename="src/physics/RigidBodyListener.h" />
+		<Unit filename="src/utils/Area.cpp" />
+		<Unit filename="src/utils/Area.h" />
+		<Unit filename="src/utils/ComparisonUtils.cpp" />
+		<Unit filename="src/utils/ComparisonUtils.h" />
+		<Unit filename="src/utils/RandomPositionGenerator.cpp" />
+		<Unit filename="src/utils/RandomPositionGenerator.h" />
+		<Unit filename="src/utils/StringUtils.cpp" />
+		<Unit filename="src/utils/StringUtils.h" />
+		<Unit filename="src/utils/StringUtils.hxx" />
+		<Unit filename="src/utils/Vector2d.cpp" />
+		<Unit filename="src/utils/Vector2d.h" />
+		<Unit filename="src/utils/Vector2d.hxx" />
+		<Unit filename="src/utils/Vector3d.cpp" />
+		<Unit filename="src/utils/Vector3d.h" />
+		<Unit filename="src/utils/Vector3d.hxx" />
+		<Unit filename="tests/utils/StringUtilsTest.cpp" />
+		<Unit filename="tests/utils/StringUtilsTest.h" />
+		<Extensions>
+			<code_completion />
+			<envvars />
+			<debugger />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>

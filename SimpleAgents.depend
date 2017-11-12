@@ -1,0 +1,1152 @@
+# depslib dependency file v1.0
+1506275078 source:e:\programming\developmentsdl\simpleagents\main.cpp
+	<iostream>
+	"StringUtilsTest.h"
+	"SdlApplication.h"
+
+1506273360 source:e:\programming\developmentsdl\simpleagents\src\core\programoptions.cpp
+	"ProgramOptions.h"
+
+1506273111 e:\programming\developmentsdl\simpleagents\src\core\programoptions.h
+	<iostream>
+	<vector>
+	<string>
+	<functional>
+	"ProgramOptions.hxx"
+
+1506851138 e:\programming\developmentsdl\simpleagents\src\utils\stringutils.h
+	<iostream>
+	<string>
+	"StringUtils.hxx"
+
+1506247217 e:\programming\developmentsdl\simpleagents\src\utils\stringutils.hxx
+	"StringUtils.h"
+
+1506247653 e:\programming\developmentsdl\simpleagents\tests\utils\stringutilstest.h
+	<iostream>
+	"StringUtils.h"
+
+1506856650 source:e:\programming\developmentsdl\simpleagents\tests\utils\stringutilstest.cpp
+	<limits>
+	<cmath>
+	"StringUtilsTest.h"
+
+1506248816 source:e:\programming\developmentsdl\simpleagents\src\utils\stringutils.cpp
+	<cmath>
+	"StringUtils.h"
+
+1506273380 source:e:\programming\developmentsdl\simpleagents\src\app\application.cpp
+	"Application.h"
+	"InternalException.h"
+
+1506269608 e:\programming\developmentsdl\simpleagents\src\app\application.h
+	<iostream>
+	<string>
+	<vector>
+	<unordered_map>
+	"ProgramOptions.h"
+
+1506251936 source:e:\programming\developmentsdl\simpleagents\genericapplication.cpp
+	"GenericApplication.h"
+
+1506251872 e:\programming\developmentsdl\simpleagents\genericapplication.h
+	<iostream>
+	"Application.h"
+
+1506252461 e:\programming\developmentsdl\simpleagents\src\app\genericapplication.h
+	<iostream>
+	"Application.h"
+
+1506252473 source:e:\programming\developmentsdl\simpleagents\src\app\genericapplication.cpp
+	"GenericApplication.h"
+
+1506272601 e:\programming\developmentsdl\simpleagents\src\app\simpleagentsapplication.h
+	<SDL.h>
+	"SdlApplication.h"
+
+1506269826 source:e:\programming\developmentsdl\simpleagents\src\app\simpleagentsapplication.cpp
+	"SimpleAgentsApplication.h"
+	"InternalException.h"
+
+1506259936 e:\programming\developmentsdl\simpleagents\src\core\internalexception.h
+	<iostream>
+	<stdexcept>
+
+1506259963 source:e:\programming\developmentsdl\simpleagents\src\core\internalexception.cpp
+	"InternalException.h"
+
+1506260351 e:\programming\developmentsdl\simpleagents\src\core\programoptions.hxx
+	"ProgramOptions.h"
+	"StringUtils.h"
+
+1506110051 e:\programming\externallibs\sdl2-2.0.6\x86_64-w64-mingw32\include\sdl2\sdl.h
+	"SDL_main.h"
+	"SDL_stdinc.h"
+	"SDL_assert.h"
+	"SDL_atomic.h"
+	"SDL_audio.h"
+	"SDL_clipboard.h"
+	"SDL_cpuinfo.h"
+	"SDL_endian.h"
+	"SDL_error.h"
+	"SDL_events.h"
+	"SDL_filesystem.h"
+	"SDL_gamecontroller.h"
+	"SDL_haptic.h"
+	"SDL_hints.h"
+	"SDL_joystick.h"
+	"SDL_loadso.h"
+	"SDL_log.h"
+	"SDL_messagebox.h"
+	"SDL_mutex.h"
+	"SDL_power.h"
+	"SDL_render.h"
+	"SDL_rwops.h"
+	"SDL_shape.h"
+	"SDL_system.h"
+	"SDL_thread.h"
+	"SDL_timer.h"
+	"SDL_version.h"
+	"SDL_video.h"
+	"begin_code.h"
+	"close_code.h"
+
+1506110051 e:\programming\externallibs\sdl2-2.0.6\x86_64-w64-mingw32\include\sdl2\sdl_main.h
+	"SDL_stdinc.h"
+	"begin_code.h"
+	"close_code.h"
+
+1506110051 e:\programming\externallibs\sdl2-2.0.6\x86_64-w64-mingw32\include\sdl2\sdl_stdinc.h
+	"SDL_config.h"
+	<sys/types.h>
+	<stdio.h>
+	<stdlib.h>
+	<stddef.h>
+	<stdarg.h>
+	<stdlib.h>
+	<malloc.h>
+	<stddef.h>
+	<stdarg.h>
+	<memory.h>
+	<string.h>
+	<strings.h>
+	<wchar.h>
+	<inttypes.h>
+	<stdint.h>
+	<ctype.h>
+	<math.h>
+	<float.h>
+	<sal.h>
+	"begin_code.h"
+	<alloca.h>
+	<malloc.h>
+	<malloc.h>
+	<malloc.h>
+	<stdlib.h>
+	"close_code.h"
+
+1506110051 e:\programming\externallibs\sdl2-2.0.6\x86_64-w64-mingw32\include\sdl2\sdl_config.h
+	"SDL_platform.h"
+
+1506110051 e:\programming\externallibs\sdl2-2.0.6\x86_64-w64-mingw32\include\sdl2\sdl_platform.h
+	"AvailabilityMacros.h"
+	"TargetConditionals.h"
+	<winapifamily.h>
+	"begin_code.h"
+	"close_code.h"
+
+1506110051 e:\programming\externallibs\sdl2-2.0.6\x86_64-w64-mingw32\include\sdl2\begin_code.h
+
+1506110051 e:\programming\externallibs\sdl2-2.0.6\x86_64-w64-mingw32\include\sdl2\close_code.h
+
+1506110051 e:\programming\externallibs\sdl2-2.0.6\x86_64-w64-mingw32\include\sdl2\sdl_assert.h
+	"SDL_config.h"
+	"begin_code.h"
+	<signal.h>
+	"close_code.h"
+
+1506110051 e:\programming\externallibs\sdl2-2.0.6\x86_64-w64-mingw32\include\sdl2\sdl_atomic.h
+	"SDL_stdinc.h"
+	"SDL_platform.h"
+	"begin_code.h"
+	<mbarrier.h>
+	"close_code.h"
+
+1506110051 e:\programming\externallibs\sdl2-2.0.6\x86_64-w64-mingw32\include\sdl2\sdl_audio.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"SDL_endian.h"
+	"SDL_mutex.h"
+	"SDL_thread.h"
+	"SDL_rwops.h"
+	"begin_code.h"
+	"close_code.h"
+
+1506110051 e:\programming\externallibs\sdl2-2.0.6\x86_64-w64-mingw32\include\sdl2\sdl_error.h
+	"SDL_stdinc.h"
+	"begin_code.h"
+	"close_code.h"
+
+1506110051 e:\programming\externallibs\sdl2-2.0.6\x86_64-w64-mingw32\include\sdl2\sdl_endian.h
+	"SDL_stdinc.h"
+	<endian.h>
+	"begin_code.h"
+	"close_code.h"
+
+1506110051 e:\programming\externallibs\sdl2-2.0.6\x86_64-w64-mingw32\include\sdl2\sdl_mutex.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"begin_code.h"
+	"close_code.h"
+
+1506110051 e:\programming\externallibs\sdl2-2.0.6\x86_64-w64-mingw32\include\sdl2\sdl_thread.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"SDL_atomic.h"
+	"SDL_mutex.h"
+	"begin_code.h"
+	<process.h>
+	<process.h>
+	"close_code.h"
+
+1506110051 e:\programming\externallibs\sdl2-2.0.6\x86_64-w64-mingw32\include\sdl2\sdl_rwops.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"begin_code.h"
+	"close_code.h"
+
+1506110051 e:\programming\externallibs\sdl2-2.0.6\x86_64-w64-mingw32\include\sdl2\sdl_clipboard.h
+	"SDL_stdinc.h"
+	"begin_code.h"
+	"close_code.h"
+
+1506110051 e:\programming\externallibs\sdl2-2.0.6\x86_64-w64-mingw32\include\sdl2\sdl_cpuinfo.h
+	"SDL_stdinc.h"
+	<intrin.h>
+	<intrin.h>
+	<altivec.h>
+	<mmintrin.h>
+	<mm3dnow.h>
+	<xmmintrin.h>
+	<emmintrin.h>
+	<pmmintrin.h>
+	"begin_code.h"
+	"close_code.h"
+
+1506110051 e:\programming\externallibs\sdl2-2.0.6\x86_64-w64-mingw32\include\sdl2\sdl_events.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"SDL_video.h"
+	"SDL_keyboard.h"
+	"SDL_mouse.h"
+	"SDL_joystick.h"
+	"SDL_gamecontroller.h"
+	"SDL_quit.h"
+	"SDL_gesture.h"
+	"SDL_touch.h"
+	"begin_code.h"
+	"close_code.h"
+
+1506110051 e:\programming\externallibs\sdl2-2.0.6\x86_64-w64-mingw32\include\sdl2\sdl_video.h
+	"SDL_stdinc.h"
+	"SDL_pixels.h"
+	"SDL_rect.h"
+	"SDL_surface.h"
+	"begin_code.h"
+	"close_code.h"
+
+1506110051 e:\programming\externallibs\sdl2-2.0.6\x86_64-w64-mingw32\include\sdl2\sdl_pixels.h
+	"SDL_stdinc.h"
+	"SDL_endian.h"
+	"begin_code.h"
+	"close_code.h"
+
+1506110051 e:\programming\externallibs\sdl2-2.0.6\x86_64-w64-mingw32\include\sdl2\sdl_rect.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"SDL_pixels.h"
+	"SDL_rwops.h"
+	"begin_code.h"
+	"close_code.h"
+
+1506110051 e:\programming\externallibs\sdl2-2.0.6\x86_64-w64-mingw32\include\sdl2\sdl_surface.h
+	"SDL_stdinc.h"
+	"SDL_pixels.h"
+	"SDL_rect.h"
+	"SDL_blendmode.h"
+	"SDL_rwops.h"
+	"begin_code.h"
+	"close_code.h"
+
+1506110051 e:\programming\externallibs\sdl2-2.0.6\x86_64-w64-mingw32\include\sdl2\sdl_blendmode.h
+	"begin_code.h"
+	"close_code.h"
+
+1506110051 e:\programming\externallibs\sdl2-2.0.6\x86_64-w64-mingw32\include\sdl2\sdl_keyboard.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"SDL_keycode.h"
+	"SDL_video.h"
+	"begin_code.h"
+	"close_code.h"
+
+1506110051 e:\programming\externallibs\sdl2-2.0.6\x86_64-w64-mingw32\include\sdl2\sdl_keycode.h
+	"SDL_stdinc.h"
+	"SDL_scancode.h"
+
+1506110051 e:\programming\externallibs\sdl2-2.0.6\x86_64-w64-mingw32\include\sdl2\sdl_scancode.h
+	"SDL_stdinc.h"
+
+1506110051 e:\programming\externallibs\sdl2-2.0.6\x86_64-w64-mingw32\include\sdl2\sdl_mouse.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"SDL_video.h"
+	"begin_code.h"
+	"close_code.h"
+
+1506110051 e:\programming\externallibs\sdl2-2.0.6\x86_64-w64-mingw32\include\sdl2\sdl_joystick.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"begin_code.h"
+	"close_code.h"
+
+1506110051 e:\programming\externallibs\sdl2-2.0.6\x86_64-w64-mingw32\include\sdl2\sdl_gamecontroller.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"SDL_rwops.h"
+	"SDL_joystick.h"
+	"begin_code.h"
+	"close_code.h"
+
+1506110051 e:\programming\externallibs\sdl2-2.0.6\x86_64-w64-mingw32\include\sdl2\sdl_quit.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+
+1506110051 e:\programming\externallibs\sdl2-2.0.6\x86_64-w64-mingw32\include\sdl2\sdl_gesture.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"SDL_video.h"
+	"SDL_touch.h"
+	"begin_code.h"
+	"close_code.h"
+
+1506110051 e:\programming\externallibs\sdl2-2.0.6\x86_64-w64-mingw32\include\sdl2\sdl_touch.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"SDL_video.h"
+	"begin_code.h"
+	"close_code.h"
+
+1506110051 e:\programming\externallibs\sdl2-2.0.6\x86_64-w64-mingw32\include\sdl2\sdl_filesystem.h
+	"SDL_stdinc.h"
+	"begin_code.h"
+	"close_code.h"
+
+1506110051 e:\programming\externallibs\sdl2-2.0.6\x86_64-w64-mingw32\include\sdl2\sdl_haptic.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"SDL_joystick.h"
+	"begin_code.h"
+	"close_code.h"
+
+1506110051 e:\programming\externallibs\sdl2-2.0.6\x86_64-w64-mingw32\include\sdl2\sdl_hints.h
+	"SDL_stdinc.h"
+	"begin_code.h"
+	"close_code.h"
+
+1506110051 e:\programming\externallibs\sdl2-2.0.6\x86_64-w64-mingw32\include\sdl2\sdl_loadso.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"begin_code.h"
+	"close_code.h"
+
+1506110051 e:\programming\externallibs\sdl2-2.0.6\x86_64-w64-mingw32\include\sdl2\sdl_log.h
+	"SDL_stdinc.h"
+	"begin_code.h"
+	"close_code.h"
+
+1506110051 e:\programming\externallibs\sdl2-2.0.6\x86_64-w64-mingw32\include\sdl2\sdl_messagebox.h
+	"SDL_stdinc.h"
+	"SDL_video.h"
+	"begin_code.h"
+	"close_code.h"
+
+1506110051 e:\programming\externallibs\sdl2-2.0.6\x86_64-w64-mingw32\include\sdl2\sdl_power.h
+	"SDL_stdinc.h"
+	"begin_code.h"
+	"close_code.h"
+
+1506110051 e:\programming\externallibs\sdl2-2.0.6\x86_64-w64-mingw32\include\sdl2\sdl_render.h
+	"SDL_stdinc.h"
+	"SDL_rect.h"
+	"SDL_video.h"
+	"begin_code.h"
+	"close_code.h"
+
+1506110051 e:\programming\externallibs\sdl2-2.0.6\x86_64-w64-mingw32\include\sdl2\sdl_shape.h
+	"SDL_stdinc.h"
+	"SDL_pixels.h"
+	"SDL_rect.h"
+	"SDL_surface.h"
+	"SDL_video.h"
+	"begin_code.h"
+	"close_code.h"
+
+1506110051 e:\programming\externallibs\sdl2-2.0.6\x86_64-w64-mingw32\include\sdl2\sdl_system.h
+	"SDL_stdinc.h"
+	"SDL_keyboard.h"
+	"SDL_render.h"
+	"SDL_video.h"
+	"begin_code.h"
+	"close_code.h"
+
+1506110051 e:\programming\externallibs\sdl2-2.0.6\x86_64-w64-mingw32\include\sdl2\sdl_timer.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"begin_code.h"
+	"close_code.h"
+
+1506110051 e:\programming\externallibs\sdl2-2.0.6\x86_64-w64-mingw32\include\sdl2\sdl_version.h
+	"SDL_stdinc.h"
+	"begin_code.h"
+	"close_code.h"
+
+1506281826 e:\programming\developmentsdl\simpleagents\src\app\sdlapplication.h
+	<iostream>
+	<SDL.h>
+	"GenericApplication.h"
+	"SdlEventListener.h"
+
+1506274969 source:e:\programming\developmentsdl\simpleagents\src\app\sdlapplication.cpp
+	"SdlApplication.h"
+	"InternalException.h"
+
+1506281981 e:\programming\developmentsdl\simpleagents\src\app\sdleventlistener.h
+	<iostream>
+	<SDL.h>
+
+1506852269 source:e:\programming\developmentsdl\simpleagents\src\app\drawable.cpp
+	"Drawable.h"
+
+1506856996 e:\programming\developmentsdl\simpleagents\src\app\drawable.h
+	<iostream>
+	<SDL.h>
+	<mutex>
+	"Area.h"
+
+1506851273 e:\programming\developmentsdl\simpleagents\src\utils\area.h
+	<iostream>
+	<SDL.h>
+
+1506282068 source:e:\programming\developmentsdl\simpleagents\src\app\sdleventlistener.cpp
+	"SdlEventListener.h"
+
+1506851191 source:e:\programming\developmentsdl\simpleagents\src\utils\area.cpp
+	"Area.h"
+
+1510495814 source:e:\programming\developmentsdl\simpleagentsc11sdl1\main.cpp
+	<iostream>
+	"StringUtilsTest.h"
+	"SdlApplication.h"
+	"Environment.h"
+	"EnvironmentDrawer.h"
+	"EnvironmentLauncher.h"
+	"EnvironmentInitializer.h"
+
+1506244053 e:\programming\developmentsdl\simpleagentsc11sdl1\tests\utils\stringutilstest.h
+	<iostream>
+	"StringUtils.h"
+
+1506847538 e:\programming\developmentsdl\simpleagentsc11sdl1\src\utils\stringutils.h
+	<iostream>
+	<string>
+	"StringUtils.hxx"
+
+1508080299 e:\programming\developmentsdl\simpleagentsc11sdl1\src\utils\stringutils.hxx
+	"StringUtils.h"
+
+1507394610 e:\programming\developmentsdl\simpleagentsc11sdl1\src\app\sdlapplication.h
+	<iostream>
+	<SDL.h>
+	"GenericApplication.h"
+	"SdlEventListener.h"
+	"Drawable.h"
+
+1255800450 e:\programming\externallibs\sdl-1.2.14\include\sdl.h
+	"SDL_main.h"
+	"SDL_stdinc.h"
+	"SDL_audio.h"
+	"SDL_cdrom.h"
+	"SDL_cpuinfo.h"
+	"SDL_endian.h"
+	"SDL_error.h"
+	"SDL_events.h"
+	"SDL_loadso.h"
+	"SDL_mutex.h"
+	"SDL_rwops.h"
+	"SDL_thread.h"
+	"SDL_timer.h"
+	"SDL_video.h"
+	"SDL_version.h"
+	"begin_code.h"
+	"close_code.h"
+
+1255800450 e:\programming\externallibs\sdl-1.2.14\include\sdl_main.h
+	"SDL_stdinc.h"
+	"begin_code.h"
+	"close_code.h"
+	"begin_code.h"
+	"close_code.h"
+
+1255800450 e:\programming\externallibs\sdl-1.2.14\include\sdl_stdinc.h
+	"SDL_config.h"
+	<sys/types.h>
+	<stdio.h>
+	<stdlib.h>
+	<stddef.h>
+	<stdarg.h>
+	<stdlib.h>
+	<malloc.h>
+	<stddef.h>
+	<stdarg.h>
+	<memory.h>
+	<string.h>
+	<strings.h>
+	<inttypes.h>
+	<stdint.h>
+	<ctype.h>
+	<iconv.h>
+	"begin_code.h"
+	<alloca.h>
+	<malloc.h>
+	<malloc.h>
+	<malloc.h>
+	<stdlib.h>
+	"close_code.h"
+
+1255800464 e:\programming\externallibs\sdl-1.2.14\include\sdl_config.h
+	"SDL_platform.h"
+	<stdarg.h>
+
+1255800450 e:\programming\externallibs\sdl-1.2.14\include\sdl_platform.h
+
+1255800450 e:\programming\externallibs\sdl-1.2.14\include\begin_code.h
+
+1255800450 e:\programming\externallibs\sdl-1.2.14\include\close_code.h
+
+1255800450 e:\programming\externallibs\sdl-1.2.14\include\sdl_audio.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"SDL_endian.h"
+	"SDL_mutex.h"
+	"SDL_thread.h"
+	"SDL_rwops.h"
+	"begin_code.h"
+	"close_code.h"
+
+1255800450 e:\programming\externallibs\sdl-1.2.14\include\sdl_error.h
+	"SDL_stdinc.h"
+	"begin_code.h"
+	"close_code.h"
+
+1255800450 e:\programming\externallibs\sdl-1.2.14\include\sdl_endian.h
+	"SDL_stdinc.h"
+	"begin_code.h"
+	"close_code.h"
+
+1255800450 e:\programming\externallibs\sdl-1.2.14\include\sdl_mutex.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"begin_code.h"
+	"close_code.h"
+
+1255800450 e:\programming\externallibs\sdl-1.2.14\include\sdl_thread.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"SDL_mutex.h"
+	"begin_code.h"
+	<process.h>
+	"close_code.h"
+
+1255800450 e:\programming\externallibs\sdl-1.2.14\include\sdl_rwops.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"begin_code.h"
+	"close_code.h"
+
+1255800450 e:\programming\externallibs\sdl-1.2.14\include\sdl_cdrom.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"begin_code.h"
+	"close_code.h"
+
+1255800450 e:\programming\externallibs\sdl-1.2.14\include\sdl_cpuinfo.h
+	"SDL_stdinc.h"
+	"begin_code.h"
+	"close_code.h"
+
+1255800450 e:\programming\externallibs\sdl-1.2.14\include\sdl_events.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"SDL_active.h"
+	"SDL_keyboard.h"
+	"SDL_mouse.h"
+	"SDL_joystick.h"
+	"SDL_quit.h"
+	"begin_code.h"
+	"close_code.h"
+
+1255800450 e:\programming\externallibs\sdl-1.2.14\include\sdl_active.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"begin_code.h"
+	"close_code.h"
+
+1255800450 e:\programming\externallibs\sdl-1.2.14\include\sdl_keyboard.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"SDL_keysym.h"
+	"begin_code.h"
+	"close_code.h"
+
+1255800450 e:\programming\externallibs\sdl-1.2.14\include\sdl_keysym.h
+
+1255800450 e:\programming\externallibs\sdl-1.2.14\include\sdl_mouse.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"SDL_video.h"
+	"begin_code.h"
+	"close_code.h"
+
+1255800450 e:\programming\externallibs\sdl-1.2.14\include\sdl_video.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"SDL_rwops.h"
+	"begin_code.h"
+	"close_code.h"
+
+1255800450 e:\programming\externallibs\sdl-1.2.14\include\sdl_joystick.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"begin_code.h"
+	"close_code.h"
+
+1255800450 e:\programming\externallibs\sdl-1.2.14\include\sdl_quit.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+
+1255800450 e:\programming\externallibs\sdl-1.2.14\include\sdl_loadso.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"begin_code.h"
+	"close_code.h"
+
+1255800450 e:\programming\externallibs\sdl-1.2.14\include\sdl_timer.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"begin_code.h"
+	"close_code.h"
+
+1255800450 e:\programming\externallibs\sdl-1.2.14\include\sdl_version.h
+	"SDL_stdinc.h"
+	"begin_code.h"
+	"close_code.h"
+
+1506248861 e:\programming\developmentsdl\simpleagentsc11sdl1\src\app\genericapplication.h
+	<iostream>
+	"Application.h"
+
+1506266008 e:\programming\developmentsdl\simpleagentsc11sdl1\src\app\application.h
+	<iostream>
+	<string>
+	<vector>
+	<unordered_map>
+	"ProgramOptions.h"
+
+1508057098 e:\programming\developmentsdl\simpleagentsc11sdl1\src\core\programoptions.h
+	<iostream>
+	<vector>
+	<string>
+	<functional>
+	"ProgramOptions.hxx"
+
+1508059132 e:\programming\developmentsdl\simpleagentsc11sdl1\src\core\programoptions.hxx
+	"ProgramOptions.h"
+	"StringUtils.h"
+
+1507394709 e:\programming\developmentsdl\simpleagentsc11sdl1\src\app\sdleventlistener.h
+	<iostream>
+	<SDL.h>
+
+1506269780 source:e:\programming\developmentsdl\simpleagentsc11sdl1\src\app\application.cpp
+	"Application.h"
+	"InternalException.h"
+
+1506256336 e:\programming\developmentsdl\simpleagentsc11sdl1\src\core\internalexception.h
+	<iostream>
+	<stdexcept>
+
+1506858073 source:e:\programming\developmentsdl\simpleagentsc11sdl1\src\app\drawable.cpp
+	"Drawable.h"
+
+1506859093 e:\programming\developmentsdl\simpleagentsc11sdl1\src\app\drawable.h
+	<iostream>
+	<SDL.h>
+	<mutex>
+	"Area.h"
+
+1508660376 e:\programming\developmentsdl\simpleagentsc11sdl1\src\utils\area.h
+	<iostream>
+	<SDL.h>
+	"Area.hxx"
+
+1506248873 source:e:\programming\developmentsdl\simpleagentsc11sdl1\src\app\genericapplication.cpp
+	"GenericApplication.h"
+
+1510494711 source:e:\programming\developmentsdl\simpleagentsc11sdl1\src\app\sdlapplication.cpp
+	"SdlApplication.h"
+	"InternalException.h"
+
+1507394716 source:e:\programming\developmentsdl\simpleagentsc11sdl1\src\app\sdleventlistener.cpp
+	"SdlEventListener.h"
+
+1506256363 source:e:\programming\developmentsdl\simpleagentsc11sdl1\src\core\internalexception.cpp
+	"InternalException.h"
+
+1506269760 source:e:\programming\developmentsdl\simpleagentsc11sdl1\src\core\programoptions.cpp
+	"ProgramOptions.h"
+
+1508661208 source:e:\programming\developmentsdl\simpleagentsc11sdl1\src\utils\area.cpp
+	"Area.h"
+
+1506245216 source:e:\programming\developmentsdl\simpleagentsc11sdl1\src\utils\stringutils.cpp
+	<cmath>
+	"StringUtils.h"
+
+1506853050 source:e:\programming\developmentsdl\simpleagentsc11sdl1\tests\utils\stringutilstest.cpp
+	<limits>
+	<cmath>
+	"StringUtilsTest.h"
+
+1506872379 source:e:\programming\developmentsdl\simpleagentsc11sdl1\src\environment\drawableenvironment.cpp
+	"DrawableEnvironment.h"
+
+1506872361 e:\programming\developmentsdl\simpleagentsc11sdl1\src\environment\drawableenvironment.h
+	"Drawable.h"
+	"Environment.h"
+	"EnvironmentalObject.h"
+	"EnvironmentListener.h"
+
+1509891262 e:\programming\developmentsdl\simpleagentsc11sdl1\src\environment\environment.h
+	<unordered_map>
+	<memory>
+	<vector>
+	"TimeManager.h"
+	"EnvironmentalObject.h"
+	"EnvironmentInitializer.h"
+	"EnvironmentListener.h"
+	"Uuid.h"
+	"EnvironmentalObjectDrawer.h"
+	"Body.h"
+	"DrawablesUpdater.h"
+	"Agent.h"
+	"Animat.h"
+	"PhysicEngine.h"
+
+1509915872 source:e:\programming\developmentsdl\simpleagentsc11sdl1\src\environment\environment.cpp
+	<iostream>
+	"Environment.h"
+	"BodyDrawer.h"
+
+1508084556 e:\programming\developmentsdl\simpleagentsc11sdl1\src\environment\environmentlauncher.h
+	"Environment.h"
+	"TimeManager.h"
+	<thread>
+	<mutex>
+	<vector>
+	"SdlEventListener.h"
+
+1508082113 e:\programming\developmentsdl\simpleagentsc11sdl1\src\environment\timemanager.h
+	<vector>
+
+1510494662 source:e:\programming\developmentsdl\simpleagentsc11sdl1\src\environment\environmentlauncher.cpp
+	"EnvironmentLauncher.h"
+	"InternalException.h"
+	<SDL.h>
+
+1508082141 source:e:\programming\developmentsdl\simpleagentsc11sdl1\src\environment\timemanager.cpp
+	"TimeManager.h"
+
+1510494914 e:\programming\developmentsdl\simpleagentsc11sdl1\src\objects\environmentalobject.h
+	<memory>
+	<vector>
+	"RigidBody.h"
+	"BoundingBox.h"
+	"TimeManager.h"
+	"EnvironmentalObjectListener.h"
+	"EnvironmentalObject.hxx"
+
+1509893648 e:\programming\developmentsdl\simpleagentsc11sdl1\src\objects\boundingbox.h
+	"Area.h"
+	"Vector2d.h"
+
+1510495371 e:\programming\developmentsdl\simpleagentsc11sdl1\src\environment\environmentinitializer.h
+	"Area.h"
+	"Environment.h"
+	"RandomNumberGenerator.h"
+	"RandomPositionGenerator.h"
+
+1509893658 source:e:\programming\developmentsdl\simpleagentsc11sdl1\src\objects\boundingbox.cpp
+	"BoundingBox.h"
+
+1510494947 source:e:\programming\developmentsdl\simpleagentsc11sdl1\src\objects\environmentalobject.cpp
+	"EnvironmentalObject.h"
+
+1510495654 source:e:\programming\developmentsdl\simpleagentsc11sdl1\src\environment\environmentinitializer.cpp
+	"EnvironmentInitializer.h"
+	<chrono>
+
+1506868638 e:\programming\developmentsdl\simpleagentsc11sdl1\src\environment\environmentlistener.h
+
+1506869014 source:e:\programming\developmentsdl\simpleagentsc11sdl1\src\environment\environmentlistener.cpp
+	"EnvironmentListener.h"
+
+1508688488 source:e:\programming\developmentsdl\simpleagentsc11sdl1\src\environment\environmentdrawer.cpp
+	"EnvironmentDrawer.h"
+	"ComparisonUtils.h"
+
+1508596631 e:\programming\developmentsdl\simpleagentsc11sdl1\src\environment\environmentdrawer.h
+	"Drawable.h"
+	"Environment.h"
+	"EnvironmentalObjectDrawer.h"
+	"EnvironmentListener.h"
+	"SdlEventListener.h"
+
+1508058631 e:\programming\developmentsdl\simpleagentsc11sdl1\src\core\uuid.h
+	"UuidHash.h"
+	"Uuid.hxx"
+
+1509892145 e:\programming\developmentsdl\simpleagentsc11sdl1\src\objects\environmentalobject.hxx
+	"EnvironmentalObject.h"
+
+1508062787 e:\programming\developmentsdl\simpleagentsc11sdl1\src\objects\environmentalobjecthash.h
+
+1508058823 e:\programming\developmentsdl\simpleagentsc11sdl1\src\core\uuid.hxx
+	"Uuid.h"
+
+1508059164 e:\programming\developmentsdl\simpleagentsc11sdl1\src\core\uuidhash.h
+	<functional>
+
+1508058738 source:e:\programming\developmentsdl\simpleagentsc11sdl1\src\core\uuid.cpp
+	"Uuid.h"
+
+1508180017 e:\programming\developmentsdl\simpleagentsc11sdl1\src\objects\environmentalobjectdrawer.h
+	"Drawable.h"
+	<memory>
+	"EnvironmentalObject.h"
+	"EnvironmentalObjectListener.h"
+
+1508180422 source:e:\programming\developmentsdl\simpleagentsc11sdl1\src\objects\environmentalobjectdrawer.cpp
+	"EnvironmentalObjectDrawer.h"
+
+1508107656 source:e:\programming\developmentsdl\simpleagentsc11sdl1\src\objects\agents\body.cpp
+	"Body.h"
+	"RectangleFrustum.h"
+
+1508107174 e:\programming\developmentsdl\simpleagentsc11sdl1\src\objects\agents\body.h
+	<memory>
+	"EnvironmentalObject.h"
+	"Frustum.h"
+
+1509893719 e:\programming\developmentsdl\simpleagentsc11sdl1\src\objects\frustum\frustum.h
+	<memory>
+	"Vector2d.h"
+	"Area.h"
+	"EnvironmentalObject.h"
+
+1508666285 e:\programming\developmentsdl\simpleagentsc11sdl1\src\objects\frustum\rectanglefrustum.h
+	"Area.h"
+	"Frustum.h"
+
+1509893779 source:e:\programming\developmentsdl\simpleagentsc11sdl1\src\objects\frustum\frustum.cpp
+	"Frustum.h"
+
+1508666303 source:e:\programming\developmentsdl\simpleagentsc11sdl1\src\objects\frustum\rectanglefrustum.cpp
+	"RectangleFrustum.h"
+
+1508088431 e:\programming\developmentsdl\simpleagentsc11sdl1\src\objects\agents\bodydrawer.h
+	"EnvironmentalObjectDrawer.h"
+	"Body.h"
+	"Frustum.h"
+
+1508083005 source:e:\programming\developmentsdl\simpleagentsc11sdl1\src\objects\agents\bodydrawer.cpp
+	"BodyDrawer.h"
+
+1508683533 e:\programming\developmentsdl\simpleagentsc11sdl1\src\utils\vector3d.h
+	<iostream>
+	"Vector2d.h"
+	"Vector3d.hxx"
+
+1508613024 e:\programming\developmentsdl\simpleagentsc11sdl1\src\utils\vector3d.hxx
+	<cmath>
+	"Vector3d.h"
+
+1508704147 e:\programming\developmentsdl\simpleagentsc11sdl1\src\utils\comparisonutils.h
+	"Vector3d.h"
+	"Vector2d.h"
+
+1508704163 source:e:\programming\developmentsdl\simpleagentsc11sdl1\src\utils\comparisonutils.cpp
+	<limits>
+	<cmath>
+	"ComparisonUtils.h"
+
+1508683558 source:e:\programming\developmentsdl\simpleagentsc11sdl1\src\utils\vector3d.cpp
+	"Vector3d.h"
+	"ComparisonUtils.h"
+
+1508267361 e:\programming\developmentsdl\simpleagentsc11sdl1\src\objects\environmentalobjectlistener.h
+	"EnvironmentalObject.h"
+
+1508083499 source:e:\programming\developmentsdl\simpleagentsc11sdl1\src\objects\environmentalobjectlistener.cpp
+	"EnvironmentalObjectListener.h"
+
+1508180276 source:e:\programming\developmentsdl\simpleagentsc11sdl1\src\environment\drawablesupdater.cpp
+	"DrawablesUpdater.h"
+
+1508180279 e:\programming\developmentsdl\simpleagentsc11sdl1\src\environment\drawablesupdater.h
+	"SdlEventListener.h"
+	"EnvironmentalObjectDrawer.h"
+	"BodyDrawer.h"
+
+1508269409 e:\programming\developmentsdl\simpleagentsc11sdl1\src\objects\agents\agent.h
+	<memory>
+
+1508269384 source:e:\programming\developmentsdl\simpleagentsc11sdl1\src\objects\agents\agent.cpp
+	"Agent.h"
+
+1510495505 e:\programming\developmentsdl\simpleagentsc11sdl1\src\agents\body.h
+	<memory>
+	"MovingObject.h"
+	"Frustum.h"
+	"Influence.h"
+	"Perception.h"
+
+1508084831 e:\programming\developmentsdl\simpleagentsc11sdl1\src\agents\bodydrawer.h
+	"EnvironmentalObjectDrawer.h"
+	"Body.h"
+	"Frustum.h"
+
+1508676698 e:\programming\developmentsdl\simpleagentsc11sdl1\src\agents\agent.h
+	<memory>
+	"Animat.h"
+	"Vector3d.h"
+	"Perception.h"
+
+1510495824 source:e:\programming\developmentsdl\simpleagentsc11sdl1\src\agents\agent.cpp
+	"Agent.h"
+	"Area.h"
+	"LinearMotionInfluence.h"
+	"MotionBehavior.h"
+	"ImpulseBehavior.h"
+	"FixedSpeedBehavior.h"
+	"WanderBehavior.h"
+
+1510495562 e:\programming\developmentsdl\simpleagentsc11sdl1\src\agents\animat.h
+	<memory>
+	"Agent.h"
+	"Body.h"
+	"Influence.h"
+	"Perception.h"
+
+1510495585 source:e:\programming\developmentsdl\simpleagentsc11sdl1\src\agents\animat.cpp
+	"Animat.h"
+
+1510495516 source:e:\programming\developmentsdl\simpleagentsc11sdl1\src\agents\body.cpp
+	"Body.h"
+	"RectangleFrustum.h"
+
+1508658032 source:e:\programming\developmentsdl\simpleagentsc11sdl1\src\agents\bodydrawer.cpp
+	"BodyDrawer.h"
+
+1508269526 e:\programming\developmentsdl\simpleagentsc11sdl1\src\influences\influence.h
+	"Agent.h"
+	"Body.h"
+	<memory>
+
+1509897018 e:\programming\developmentsdl\simpleagentsc11sdl1\src\influences\linearmotioninfluence.h
+	"Vector2d.h"
+	"Influence.h"
+
+1508269847 source:e:\programming\developmentsdl\simpleagentsc11sdl1\src\influences\influence.cpp
+	"Influence.h"
+
+1509897042 source:e:\programming\developmentsdl\simpleagentsc11sdl1\src\influences\linearmotioninfluence.cpp
+	"LinearMotionInfluence.h"
+
+1508658630 e:\programming\developmentsdl\simpleagentsc11sdl1\src\agents\perception.h
+	<memory>
+	"EnvironmentalObject.h"
+
+1508659146 source:e:\programming\developmentsdl\simpleagentsc11sdl1\src\agents\perception.cpp
+	"Perception.h"
+
+1510495444 e:\programming\developmentsdl\simpleagentsc11sdl1\src\objects\movingobject.h
+	"Vector3d.h"
+	"RigidBodyListener.h"
+	"EnvironmentalObject.h"
+
+1510495470 source:e:\programming\developmentsdl\simpleagentsc11sdl1\src\objects\movingobject.cpp
+	"Vector2d.h"
+	"MovingObject.h"
+	"ComparisonUtils.h"
+
+1508612311 e:\programming\developmentsdl\simpleagentsc11sdl1\src\utils\area.hxx
+	"Area.h"
+
+1508672651 source:e:\programming\developmentsdl\simpleagentsc11sdl1\src\behaviors\behavior.cpp
+	"Behavior.h"
+
+1508672640 e:\programming\developmentsdl\simpleagentsc11sdl1\src\behaviors\behavior.h
+	<memory>
+	<vector>
+	"Vector2d.h"
+	"Perception.h"
+	"Influence.h"
+
+1509048181 source:e:\programming\developmentsdl\simpleagentsc11sdl1\src\behaviors\forcebasedbehavior.cpp
+	"ComparisonUtils.h"
+	"ForceBasedBehavior.h"
+
+1509048160 e:\programming\developmentsdl\simpleagentsc11sdl1\src\behaviors\forcebasedbehavior.h
+	"MotionBehavior.h"
+
+1509897105 e:\programming\developmentsdl\simpleagentsc11sdl1\src\behaviors\motionbehavior.h
+	"Vector2d.h"
+	"Behavior.h"
+	"Influence.h"
+
+1509900051 e:\programming\developmentsdl\simpleagentsc11sdl1\src\utils\vector2d.h
+	<iostream>
+	"Vector2d.hxx"
+
+1508613003 e:\programming\developmentsdl\simpleagentsc11sdl1\src\utils\vector2d.hxx
+	<cmath>
+	"Vector2d.h"
+
+1509046791 source:e:\programming\developmentsdl\simpleagentsc11sdl1\src\utils\vector2d.cpp
+	<cmath>
+	"Vector2d.h"
+	"ComparisonUtils.h"
+
+1509897206 source:e:\programming\developmentsdl\simpleagentsc11sdl1\src\behaviors\motionbehavior.cpp
+	<limits>
+	"MotionBehavior.h"
+	"LinearMotionInfluence.h"
+
+1510494741 source:e:\programming\developmentsdl\simpleagentsc11sdl1\src\behaviors\wanderbehavior.cpp
+	<chrono>
+	"WanderBehavior.h"
+
+1509901128 e:\programming\developmentsdl\simpleagentsc11sdl1\src\behaviors\wanderbehavior.h
+	"Area.h"
+	"DirectedMotionBehavior.h"
+	"RandomPositionGenerator.h"
+
+1509897560 source:e:\programming\developmentsdl\simpleagentsc11sdl1\src\behaviors\impulsebehavior.cpp
+	"ImpulseBehavior.h"
+
+1509897396 e:\programming\developmentsdl\simpleagentsc11sdl1\src\behaviors\impulsebehavior.h
+	"Vector2d.h"
+	"MotionBehavior.h"
+
+1509289308 source:e:\programming\developmentsdl\simpleagentsc11sdl1\src\behaviors\directedforcebasedbehavior.cpp
+	<chrono>
+	"DirectedForceBasedBehavior.h"
+	"ComparisonUtils.h"
+
+1509289277 e:\programming\developmentsdl\simpleagentsc11sdl1\src\behaviors\directedforcebasedbehavior.h
+	"DirectedMotionBehavior.h"
+	"RandomPositionGenerator.h"
+
+1509900370 e:\programming\developmentsdl\simpleagentsc11sdl1\src\behaviors\directedmotionbehavior.h
+	"Vector2d.h"
+	"MotionBehavior.h"
+
+1509903258 source:e:\programming\developmentsdl\simpleagentsc11sdl1\src\behaviors\directedmotionbehavior.cpp
+	"DirectedMotionBehavior.h"
+	"ComparisonUtils.h"
+
+1509897973 source:e:\programming\developmentsdl\simpleagentsc11sdl1\src\behaviors\fixedspeedbehavior.cpp
+	"FixedSpeedBehavior.h"
+
+1509897760 e:\programming\developmentsdl\simpleagentsc11sdl1\src\behaviors\fixedspeedbehavior.h
+	"Vector2d.h"
+	"MotionBehavior.h"
+
+1509289522 e:\programming\developmentsdl\simpleagentsc11sdl1\src\behaviors\directedfixedspeedbehavior.h
+	"Area.h"
+	"Vector2d.h"
+	"DirectedMotionBehavior.h"
+	"RandomPositionGenerator.h"
+
+1509289641 source:e:\programming\developmentsdl\simpleagentsc11sdl1\src\behaviors\directedfixedspeedbehavior.cpp
+	"DirectedFixedSpeedBehavior.h"
+
+1509292826 source:e:\programming\developmentsdl\simpleagentsc11sdl1\src\utils\randompositiongenerator.cpp
+	<chrono>
+	"RandomPositionGenerator.h"
+
+1509288962 e:\programming\developmentsdl\simpleagentsc11sdl1\src\utils\randompositiongenerator.h
+	<random>
+	"Area.h"
+	"Vector2d.h"
+
+1510495738 source:e:\programming\developmentsdl\simpleagentsc11sdl1\src\physics\rigidbody.cpp
+	"RigidBody.h"
+
+1510493027 e:\programming\developmentsdl\simpleagentsc11sdl1\src\physics\rigidbody.h
+	<vector>
+	<memory>
+	"Area.h"
+	"Vector2d.h"
+	"RigidBodyListener.h"
+	"TimeManager.h"
+	"RigidBody.hxx"
+
+1509917322 e:\programming\developmentsdl\simpleagentsc11sdl1\src\physics\rigidbody.hxx
+	"ComparisonUtils.h"
+	"RigidBody.h"
+
+1510494255 source:e:\programming\developmentsdl\simpleagentsc11sdl1\src\physics\physicengine.cpp
+	<algorithm>
+	"PhysicEngine.h"
+
+1509895261 e:\programming\developmentsdl\simpleagentsc11sdl1\src\physics\physicengine.h
+	<vector>
+	"RigidBody.h"
+	"TimeManager.h"
+	"CollisionsSolver.h"
+
+1509892259 e:\programming\developmentsdl\simpleagentsc11sdl1\src\physics\collisionssolver.h
+	<vector>
+	<memory>
+	"RigidBody.h"
+	"BoundingBox.h"
+
+1510494255 source:e:\programming\developmentsdl\simpleagentsc11sdl1\src\physics\collisionssolver.cpp
+	<algorithm>
+	"CollisionsSolver.h"
+
+1509892856 e:\programming\developmentsdl\simpleagentsc11sdl1\src\physics\rigidbodylistener.h
+
+1509892900 source:e:\programming\developmentsdl\simpleagentsc11sdl1\src\physics\rigidbodylistener.cpp
+	"RigidBodyListener.h"
+
+1510495626 e:\programming\developmentsdl\simpleagentsc11sdl1\src\utils\randomnumbergenerator.h
+	<random>
+	"RandomNumberGenerator.hxx"
+
+1510495268 e:\programming\developmentsdl\simpleagentsc11sdl1\src\utils\randomnumbergenerator.hxx
+	<chrono>
+	"RandomNumberGenerator.h"
+
