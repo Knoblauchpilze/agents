@@ -120,25 +120,25 @@ namespace environment
                 const double slop(0.01);
                 const utils::Vector2d correction(std::max(penetrationDepth.length() - slop, 0.0) * percent * collisionNormal / (currentCollision.first->getInverseMass() + currentCollision.second->getInverseMass()));
 
-                /*std::cout << "------" << std::endl;
+                std::cout << "------" << std::endl;
                 std::cout << "[FIX] Solving collision between obj1=" << currentCollision.first->getMass() << " and obj2=" << currentCollision.second->getMass() << std::endl;
                 std::cout << "[FIX] v1=" << currentCollision.first->getLinearSpeed() << ", v2=" << currentCollision.second->getLinearSpeed() << std::endl;
                 std::cout << "[FIX] p1=" << currentCollision.first->getPosition() << ", p2=" << currentCollision.second->getPosition() << std::endl;
-                std::cout << "[FIX] n=" << collisionNormal << ", impulse=" << impulseMagnitude << ", (vec=" << impulse << ")" << std::endl;
+                std::cout << "[FIX] n=" << collisionNormal << " (old=" << (currentCollision.second->getPosition() - currentCollision.first->getPosition()).normalized() << "), impulse=" << impulseMagnitude << ", (vec=" << impulse << ")" << std::endl;
                 std::cout << "[FIX] obj1=" << (-1.0 / currentCollision.first->getMass()) * impulse << ", obj2=" << (1.0 / currentCollision.second->getMass()) * impulse << ", m1=" << currentCollision.first->getMass() << ", m2=" << currentCollision.second->getMass() << std::endl;
                 std::cout << "[FIX] correction is " << correction << " (penetration=" << penetrationDepth << ")" << std::endl;
 
-                //currentCollision.first->translate(-currentCollision.first->getInverseMass() * correction);
-                //currentCollision.second->translate(currentCollision.second->getInverseMass() * correction);
+                currentCollision.first->translate(-currentCollision.first->getInverseMass() * correction);
+                currentCollision.second->translate(currentCollision.second->getInverseMass() * correction);
 
                 std::cout << "[FIX] newP1=" << currentCollision.first->getPosition() << ", newP2=" << currentCollision.second->getPosition() << " (d1=" << currentCollision.first->asArea().getWidth() << "x" << currentCollision.first->asArea().getHeight() << ", d2=" << currentCollision.second->asArea().getWidth() << "x" << currentCollision.second->asArea().getHeight() << ")" << std::endl;
-                std::cout << "------" << std::endl;*/
+                std::cout << "------" << std::endl;
             }
         }
 
         utils::Vector2d CollisionsSolver::computeCollisionNormal(const PotentialCollision& collision) const
         {
-            return (collision.second->getPosition() - collision.first->getPosition()).normalized();
+            return -(collision.second->getLinearSpeed() - collision.first->getLinearSpeed()).normalized();
         }
 
         utils::Vector2d CollisionsSolver::computePenetrationDepth(const PotentialCollision& collision) const

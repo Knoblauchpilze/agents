@@ -133,6 +133,11 @@ namespace utils
 	    return *this;
     }
 
+    double Vector2d::operator^(const Vector2d& other) const
+    {
+        return m_x * other.m_y - m_y * other.m_x;
+    }
+
 	// Non-member functions
 	Vector2d operator*(const double& scale, const Vector2d& vector)
 	{

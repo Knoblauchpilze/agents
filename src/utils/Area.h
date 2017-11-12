@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <SDL.h>
+#include "Vector2d.h"
 
 namespace utils
 {
@@ -53,6 +54,12 @@ namespace utils
                 bool intersects(const utils::sdl::Area& other) const;
 
                 bool isInside(const utils::sdl::Area& other) const;
+
+                bool isInside(const utils::Vector2d& point) const;
+
+                utils::Vector2d getNearestPoint(const utils::Vector2d& point) const;
+
+                utils::Vector2d getNearestPointAlongDirection(const utils::Vector2d& point, const utils::Vector2d& direction) const;
 
             private:
 

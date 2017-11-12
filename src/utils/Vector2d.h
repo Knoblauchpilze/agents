@@ -61,6 +61,8 @@ namespace utils
 
             Vector2d& operator/=(const double& scale);
 
+            double operator^(const Vector2d& other) const;
+
         private:
 
             double m_x;
