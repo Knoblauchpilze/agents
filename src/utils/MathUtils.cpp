@@ -49,11 +49,11 @@ namespace utils
                 return origin1;
             }
             // Compute using some... hum... formulas.
-            const double denom(direction1.x() * direction2.y() - direction2.x() * direction1.y());
+            const double denom(direction1.x() * direction2.y() - direction1.y() * direction2.x());
             const double firstNum(direction2.y() * (origin2.x() - origin1.x()));
             const double secondNum(direction2.x() * (origin2.y() - origin1.y()));
             const double t((firstNum - secondNum) / denom);
-            return origin2 + t * direction2;
+            return origin1 + t * direction1;
         }
     }
 }

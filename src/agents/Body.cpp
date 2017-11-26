@@ -7,7 +7,7 @@ namespace environment
     namespace objects
     {
         const double Body::sk_bodyToFrustumRatio(1.32);
-        const double Body::sk_forceClampThreshold(1.0);
+        const double Body::sk_forceClampThreshold(7.5);
 
         Body::Body(const double& x,
                    const double& y,

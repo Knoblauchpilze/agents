@@ -38,14 +38,14 @@ namespace environment
 
         void PhysicEngine::simulate(const environment::time::TimeManager& manager)
         {
-            //std::cout << "-----" << std::endl;
-            //std::cout << "[PHYSIC] Applying forces" << std::endl;
+            /*std::cout << "*****" << std::endl;
+            std::cout << "[PHYSIC] Applying forces" << std::endl;*/
             // Apply forces to objects.
             applyForces(manager);
             //std::cout << "[PHYSIC] Solving collisions" << std::endl;
             // Solve collisions.
             m_collisionsSolver.solve(m_bodies);
-            //std::cout << "-----" << std::endl;
+            //std::cout << "*****" << std::endl;
         }
 
         //===========

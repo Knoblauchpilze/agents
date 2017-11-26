@@ -44,14 +44,18 @@ namespace environment
             // Apply force to modify speed.
             m_linearSpeed += (m_linearAcceleration * timeDelta);
 
-            //std::cout << "[RIGID " << m_rb << "] Force " << m_force << ", speed " << m_linearSpeed << ", p=" << getPosition() << " (mass=" << getMass() << ")" << std::endl;
+            const utils::Vector2d oldPos(getPosition());
 
             // Apply speed to modify position.
             const utils::Vector2d translation(m_linearSpeed * timeDelta);
             m_area.setX(m_area.getX() + translation.x());
             m_area.setY(m_area.getY() + translation.y());
+
+            std::cout << "[RIGID " << m_rb << "] Force " << m_force << ", speed " << m_linearSpeed << ", p=" << getPosition() << " (old=" << oldPos << ") (mass=" << getMass() << ")" << std::endl;
+
             // Clear the force.
             m_force = utils::Vector2d();
+
             // Notify listeners.
             fireRigidBodyModification();
         }

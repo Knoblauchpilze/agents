@@ -74,9 +74,6 @@ namespace environment
                 // speed, and then add the contribution to operate a motion in the general direction of the target.
                 // Assume maximum speed.
                 double forceMagnitude(0.0);
-
-                //double theo(m_desiredSpeed);
-
                 // And let's check for the valid motion.
                 const bool validMotion(directionToTarget * getSpeed() > 0.0);
                 if (!validMotion)
@@ -113,8 +110,6 @@ namespace environment
                     const double theoreticalSpeed(offset + abscissa * slope);
                     // We can compute the force to obtain the desired speed.
                     forceMagnitude += (theoreticalSpeed - speedMagnitude);
-
-                    //theo = theoreticalSpeed;
                 }
                 // Then check for maximum cruising speed.
                 else
@@ -122,9 +117,6 @@ namespace environment
                     // Reduce the speed or accelerate based on the difference between the desired speed and the current.
                     forceMagnitude += (m_desiredSpeed - speedMagnitude);
                 }
-                // We computed the magnitude of the force to
-
-                //std::cout << "[WANDER] p=" << getPosition() << ", t=" << getTarget() << ", d= " << distanceToTarget << ", s=" << getSpeed() << ", t=" << theo << ", f=" << forceMagnitude << ", u=" << directionToTarget << std::endl;
                 // Return the built-in force.
                 return forceMagnitude * directionToTarget;
             }

@@ -62,6 +62,7 @@ namespace environment
         {
             m_area.setX(m_area.getX() + translation.x());
             m_area.setY(m_area.getY() + translation.y());
+            fireRigidBodyModification();
         }
 
         inline const utils::sdl::Area& RigidBody::asArea() const

@@ -444,7 +444,7 @@
 1506851191 source:e:\programming\developmentsdl\simpleagents\src\utils\area.cpp
 	"Area.h"
 
-1510495814 source:e:\programming\developmentsdl\simpleagentsc11sdl1\main.cpp
+1511713763 source:e:\programming\developmentsdl\simpleagentsc11sdl1\main.cpp
 	<iostream>
 	"StringUtilsTest.h"
 	"SdlApplication.h"
@@ -695,9 +695,10 @@
 	<mutex>
 	"Area.h"
 
-1508660376 e:\programming\developmentsdl\simpleagentsc11sdl1\src\utils\area.h
+1511711666 e:\programming\developmentsdl\simpleagentsc11sdl1\src\utils\area.h
 	<iostream>
 	<SDL.h>
+	"Vector2d.h"
 	"Area.hxx"
 
 1506248873 source:e:\programming\developmentsdl\simpleagentsc11sdl1\src\app\genericapplication.cpp
@@ -716,8 +717,11 @@
 1506269760 source:e:\programming\developmentsdl\simpleagentsc11sdl1\src\core\programoptions.cpp
 	"ProgramOptions.h"
 
-1508661208 source:e:\programming\developmentsdl\simpleagentsc11sdl1\src\utils\area.cpp
+1511713463 source:e:\programming\developmentsdl\simpleagentsc11sdl1\src\utils\area.cpp
+	<vector>
+	<algorithm>
 	"Area.h"
+	"MathUtils.h"
 
 1506245216 source:e:\programming\developmentsdl\simpleagentsc11sdl1\src\utils\stringutils.cpp
 	<cmath>
@@ -802,7 +806,7 @@
 1510494947 source:e:\programming\developmentsdl\simpleagentsc11sdl1\src\objects\environmentalobject.cpp
 	"EnvironmentalObject.h"
 
-1510495654 source:e:\programming\developmentsdl\simpleagentsc11sdl1\src\environment\environmentinitializer.cpp
+1510499648 source:e:\programming\developmentsdl\simpleagentsc11sdl1\src\environment\environmentinitializer.cpp
 	"EnvironmentInitializer.h"
 	<chrono>
 
@@ -811,7 +815,7 @@
 1506869014 source:e:\programming\developmentsdl\simpleagentsc11sdl1\src\environment\environmentlistener.cpp
 	"EnvironmentListener.h"
 
-1508688488 source:e:\programming\developmentsdl\simpleagentsc11sdl1\src\environment\environmentdrawer.cpp
+1511712482 source:e:\programming\developmentsdl\simpleagentsc11sdl1\src\environment\environmentdrawer.cpp
 	"EnvironmentDrawer.h"
 	"ComparisonUtils.h"
 
@@ -942,14 +946,12 @@
 	"Vector3d.h"
 	"Perception.h"
 
-1510495824 source:e:\programming\developmentsdl\simpleagentsc11sdl1\src\agents\agent.cpp
+1510505650 source:e:\programming\developmentsdl\simpleagentsc11sdl1\src\agents\agent.cpp
 	"Agent.h"
 	"Area.h"
 	"LinearMotionInfluence.h"
 	"MotionBehavior.h"
 	"ImpulseBehavior.h"
-	"FixedSpeedBehavior.h"
-	"WanderBehavior.h"
 
 1510495562 e:\programming\developmentsdl\simpleagentsc11sdl1\src\agents\animat.h
 	<memory>
@@ -961,7 +963,7 @@
 1510495585 source:e:\programming\developmentsdl\simpleagentsc11sdl1\src\agents\animat.cpp
 	"Animat.h"
 
-1510495516 source:e:\programming\developmentsdl\simpleagentsc11sdl1\src\agents\body.cpp
+1510506439 source:e:\programming\developmentsdl\simpleagentsc11sdl1\src\agents\body.cpp
 	"Body.h"
 	"RectangleFrustum.h"
 
@@ -995,12 +997,12 @@
 	"RigidBodyListener.h"
 	"EnvironmentalObject.h"
 
-1510495470 source:e:\programming\developmentsdl\simpleagentsc11sdl1\src\objects\movingobject.cpp
+1511713637 source:e:\programming\developmentsdl\simpleagentsc11sdl1\src\objects\movingobject.cpp
 	"Vector2d.h"
 	"MovingObject.h"
 	"ComparisonUtils.h"
 
-1508612311 e:\programming\developmentsdl\simpleagentsc11sdl1\src\utils\area.hxx
+1511711690 e:\programming\developmentsdl\simpleagentsc11sdl1\src\utils\area.hxx
 	"Area.h"
 
 1508672651 source:e:\programming\developmentsdl\simpleagentsc11sdl1\src\behaviors\behavior.cpp
@@ -1025,7 +1027,7 @@
 	"Behavior.h"
 	"Influence.h"
 
-1509900051 e:\programming\developmentsdl\simpleagentsc11sdl1\src\utils\vector2d.h
+1510502692 e:\programming\developmentsdl\simpleagentsc11sdl1\src\utils\vector2d.h
 	<iostream>
 	"Vector2d.hxx"
 
@@ -1033,7 +1035,7 @@
 	<cmath>
 	"Vector2d.h"
 
-1509046791 source:e:\programming\developmentsdl\simpleagentsc11sdl1\src\utils\vector2d.cpp
+1510502718 source:e:\programming\developmentsdl\simpleagentsc11sdl1\src\utils\vector2d.cpp
 	<cmath>
 	"Vector2d.h"
 	"ComparisonUtils.h"
@@ -1043,7 +1045,7 @@
 	"MotionBehavior.h"
 	"LinearMotionInfluence.h"
 
-1510494741 source:e:\programming\developmentsdl\simpleagentsc11sdl1\src\behaviors\wanderbehavior.cpp
+1510498704 source:e:\programming\developmentsdl\simpleagentsc11sdl1\src\behaviors\wanderbehavior.cpp
 	<chrono>
 	"WanderBehavior.h"
 
@@ -1101,7 +1103,7 @@
 	"Area.h"
 	"Vector2d.h"
 
-1510495738 source:e:\programming\developmentsdl\simpleagentsc11sdl1\src\physics\rigidbody.cpp
+1511713624 source:e:\programming\developmentsdl\simpleagentsc11sdl1\src\physics\rigidbody.cpp
 	"RigidBody.h"
 
 1510493027 e:\programming\developmentsdl\simpleagentsc11sdl1\src\physics\rigidbody.h
@@ -1113,11 +1115,11 @@
 	"TimeManager.h"
 	"RigidBody.hxx"
 
-1509917322 e:\programming\developmentsdl\simpleagentsc11sdl1\src\physics\rigidbody.hxx
+1511711533 e:\programming\developmentsdl\simpleagentsc11sdl1\src\physics\rigidbody.hxx
 	"ComparisonUtils.h"
 	"RigidBody.h"
 
-1510494255 source:e:\programming\developmentsdl\simpleagentsc11sdl1\src\physics\physicengine.cpp
+1511713647 source:e:\programming\developmentsdl\simpleagentsc11sdl1\src\physics\physicengine.cpp
 	<algorithm>
 	"PhysicEngine.h"
 
@@ -1127,13 +1129,13 @@
 	"TimeManager.h"
 	"CollisionsSolver.h"
 
-1509892259 e:\programming\developmentsdl\simpleagentsc11sdl1\src\physics\collisionssolver.h
+1510506985 e:\programming\developmentsdl\simpleagentsc11sdl1\src\physics\collisionssolver.h
 	<vector>
 	<memory>
 	"RigidBody.h"
 	"BoundingBox.h"
 
-1510494255 source:e:\programming\developmentsdl\simpleagentsc11sdl1\src\physics\collisionssolver.cpp
+1511713783 source:e:\programming\developmentsdl\simpleagentsc11sdl1\src\physics\collisionssolver.cpp
 	<algorithm>
 	"CollisionsSolver.h"
 
@@ -1149,4 +1151,11 @@
 1510495268 e:\programming\developmentsdl\simpleagentsc11sdl1\src\utils\randomnumbergenerator.hxx
 	<chrono>
 	"RandomNumberGenerator.h"
+
+1511709742 source:e:\programming\developmentsdl\simpleagentsc11sdl1\src\utils\mathutils.cpp
+	"MathUtils.h"
+	"ComparisonUtils.h"
+
+1510502876 e:\programming\developmentsdl\simpleagentsc11sdl1\src\utils\mathutils.h
+	"Vector2d.h"
 

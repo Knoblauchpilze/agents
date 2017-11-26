@@ -39,6 +39,16 @@ namespace utils
 
                 inline double getBottomBound() const;
 
+                inline utils::Vector2d getCenter() const;
+
+                inline utils::Vector2d getTopLeftCorner() const;
+
+                inline utils::Vector2d getTopRightCorner() const;
+
+                inline utils::Vector2d getBottomRightCorner() const;
+
+                inline utils::Vector2d getBottomLeftCorner() const;
+
                 inline void setX(const double& x);
 
                 inline void setY(const double& y);

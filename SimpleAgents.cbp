@@ -164,8 +164,13 @@
 		<Unit filename="src/physics/RigidBodyListener.h" />
 		<Unit filename="src/utils/Area.cpp" />
 		<Unit filename="src/utils/Area.h" />
+		<Unit filename="src/utils/Area.hxx" />
 		<Unit filename="src/utils/ComparisonUtils.cpp" />
 		<Unit filename="src/utils/ComparisonUtils.h" />
+		<Unit filename="src/utils/MathUtils.cpp" />
+		<Unit filename="src/utils/MathUtils.h" />
+		<Unit filename="src/utils/RandomNumberGenerator.h" />
+		<Unit filename="src/utils/RandomNumberGenerator.hxx" />
 		<Unit filename="src/utils/RandomPositionGenerator.cpp" />
 		<Unit filename="src/utils/RandomPositionGenerator.h" />
 		<Unit filename="src/utils/StringUtils.cpp" />

@@ -26,7 +26,7 @@ namespace environment
 
         void MovingObject::onRigidBodyUpdated()
         {
-		    getBoundingBox().setPosition(getRigidBody()->getPosition());
+            getBoundingBox().setPosition(getRigidBody()->getPosition());
 		    fireObjectModification();
         }
 

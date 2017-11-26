@@ -16,7 +16,7 @@ int main(int argc, char* argv[])
 
     environment::Environment env;
     environment::drawable::EnvironmentDrawer drawable(env, utils::sdl::Area(0.0, 0.0, 13.47, 10.0), utils::sdl::Area(10.0, 10.0, 620, 460.0));
-    environment::launcher::EnvironmentLauncher launcher(10.0, 1.0 / 1.0, environment::time::Unit::Second);
+    environment::launcher::EnvironmentLauncher launcher(10.0, 1/2.0, environment::time::Unit::Second);
     environment::EnvironmentInitializer init(0u, 2u, utils::sdl::Area(0.0, 0.0, 10.0, 0.0));
 
     SDL_EnableKeyRepeat(1, 1);
