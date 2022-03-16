@@ -2,7 +2,7 @@
 #define DRAWABLE_H
 
 #include <iostream>
-#include <SDL.h>
+#include <SDL/SDL.h>
 #include <mutex>
 #include "Area.h"
 

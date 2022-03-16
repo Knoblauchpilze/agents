@@ -2,7 +2,7 @@
 #define SDLAPPLICATION_H
 
 #include <iostream>
-#include <SDL.h>
+#include <SDL/SDL.h>
 #include "GenericApplication.h"
 #include "SdlEventListener.h"
 #include "Drawable.h"

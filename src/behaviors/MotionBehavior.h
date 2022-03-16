@@ -30,6 +30,8 @@ namespace environment
 
                     const utils::Vector2d& getSpeed() const;
 
+                    const utils::Vector2d& getAcceleration() const;
+
                     const double& getMaxForce() const;
 
                     bool isMoving(const double& threshold) const;
@@ -40,6 +42,7 @@ namespace environment
 
                     utils::Vector2d m_position;
                     utils::Vector2d m_speed;
+                    utils::Vector2d m_acceleration;
                     double m_maxForce;
             };
         }

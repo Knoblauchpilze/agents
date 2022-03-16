@@ -2,7 +2,7 @@
 #define AREA_H
 
 #include <iostream>
-#include <SDL.h>
+#include <SDL/SDL.h>
 
 namespace utils
 {

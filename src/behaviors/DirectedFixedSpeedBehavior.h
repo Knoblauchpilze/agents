@@ -18,7 +18,7 @@ namespace environment
 
                     DirectedFixedSpeedBehavior(const utils::Vector2d& position,
                                                const utils::sdl::Area& wanderingArea,
-                                               const double& desiredSpeed,
+                                               const utils::Vector2d& desiredSpeed,
                                                const double& timeInterval);
 
                     virtual ~DirectedFixedSpeedBehavior();
@@ -40,7 +40,7 @@ namespace environment
                 private:
 
                     double m_timeInterval;
-                    double m_desiredSpeed;
+                    utils::Vector2d m_desiredSpeed;
                     double m_speedTolerance;
                     utils::random::RandomPositionGenerator m_targetPicker;
             };

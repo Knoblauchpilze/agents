@@ -1,0 +1,1 @@
+/usr/bin/c++  -Wall -Wextra -Werror -O3 -DNDEBUG CMakeFiles/cellify.dir/main.cc.o -o bin/cellify  -Wl,-rpath,/home/knoblauch/IAmDeveloper/agents/build/Release/lib -lcore_utils lib/libmain-app_lib.so 

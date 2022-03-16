@@ -36,6 +36,8 @@ namespace environment
 
                     virtual const utils::Vector2d& getTarget() const = 0;
 
+                    virtual void setTarget(const utils::Vector2d& target) const = 0;
+
                     virtual void pickNewTarget() = 0;
 
                     virtual utils::Vector2d computeMotionForceToTarget() const = 0;
