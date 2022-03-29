@@ -44,15 +44,10 @@ endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
-  include("/home/knoblauch/IAmDeveloper/agents/build/Release/src/utils/cmake_install.cmake")
-  include("/home/knoblauch/IAmDeveloper/agents/build/Release/src/core/cmake_install.cmake")
-  include("/home/knoblauch/IAmDeveloper/agents/build/Release/src/agents/cmake_install.cmake")
+  include("/home/knoblauch/IAmDeveloper/agents/build/Release/src/coordinates/cmake_install.cmake")
   include("/home/knoblauch/IAmDeveloper/agents/build/Release/src/app/cmake_install.cmake")
-  include("/home/knoblauch/IAmDeveloper/agents/build/Release/src/behaviors/cmake_install.cmake")
-  include("/home/knoblauch/IAmDeveloper/agents/build/Release/src/environment/cmake_install.cmake")
-  include("/home/knoblauch/IAmDeveloper/agents/build/Release/src/influences/cmake_install.cmake")
-  include("/home/knoblauch/IAmDeveloper/agents/build/Release/src/objects/cmake_install.cmake")
-  include("/home/knoblauch/IAmDeveloper/agents/build/Release/src/physics/cmake_install.cmake")
+  include("/home/knoblauch/IAmDeveloper/agents/build/Release/src/game/cmake_install.cmake")
+  include("/home/knoblauch/IAmDeveloper/agents/build/Release/src/ui/cmake_install.cmake")
 
 endif()
 

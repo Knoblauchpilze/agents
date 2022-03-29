@@ -209,39 +209,6 @@ CMAKE_STRIP:FILEPATH=/usr/bin/strip
 // Studio IDE projects all commands are done without /nologo.
 CMAKE_VERBOSE_MAKEFILE:BOOL=FALSE
 
-//Path to a library.
-SDL2MAIN_LIBRARY:FILEPATH=/usr/lib/x86_64-linux-gnu/libSDL2main.a
-
-//The directory containing a CMake configuration file for SDL2.
-SDL2_DIR:PATH=/usr/lib/x86_64-linux-gnu/cmake/SDL2
-
-//Path to a file.
-SDL2_INCLUDE_DIR:PATH=/usr/include/SDL2
-
-//Where the SDL Library can be found
-SDL2_LIBRARY:STRING=/usr/lib/x86_64-linux-gnu/libSDL2main.a;/usr/lib/x86_64-linux-gnu/libSDL2.so;-lpthread
-
-//SDL2 directory
-SDL2_TTF_DIR:PATH=
-
-//Path to a file.
-SDL2_TTF_INCLUDE_DIR:PATH=/usr/include/SDL2
-
-//Path to a library.
-SDL2_TTF_LIBRARY:FILEPATH=/usr/lib/x86_64-linux-gnu/libSDL2_ttf.so
-
-//The directory containing a CMake configuration file for SDL2_ttf.
-SDL2_ttf_DIR:PATH=SDL2_ttf_DIR-NOTFOUND
-
-//Path to a library.
-SDLMAIN_LIBRARY:FILEPATH=SDLMAIN_LIBRARY-NOTFOUND
-
-//SDL directory
-SDL_DIR:PATH=
-
-//Path to a file.
-SDL_INCLUDE_DIR:PATH=/usr/include/SDL
-
 //Value Computed by CMake
 agents_BINARY_DIR:STATIC=/home/knoblauch/IAmDeveloper/agents/build/Release
 
@@ -249,13 +216,10 @@ agents_BINARY_DIR:STATIC=/home/knoblauch/IAmDeveloper/agents/build/Release
 agents_SOURCE_DIR:STATIC=/home/knoblauch/IAmDeveloper/agents
 
 //Value Computed by CMake
-cellify_BINARY_DIR:STATIC=/home/knoblauch/IAmDeveloper/agents/build/Release
-
-//Value Computed by CMake
-cellify_SOURCE_DIR:STATIC=/home/knoblauch/IAmDeveloper/agents
-
-//Value Computed by CMake
 main-app_lib_BINARY_DIR:STATIC=/home/knoblauch/IAmDeveloper/agents/build/Release/src
+
+//Dependencies for the target
+main-app_lib_LIB_DEPENDS:STATIC=general;png;general;X11;general;GL;general;pthread;general;stdc++fs;
 
 //Value Computed by CMake
 main-app_lib_SOURCE_DIR:STATIC=/home/knoblauch/IAmDeveloper/agents/src
@@ -343,14 +307,6 @@ CMAKE_GENERATOR_INSTANCE:INTERNAL=
 CMAKE_GENERATOR_PLATFORM:INTERNAL=
 //Name of generator toolset.
 CMAKE_GENERATOR_TOOLSET:INTERNAL=
-//Test CMAKE_HAVE_LIBC_PTHREAD
-CMAKE_HAVE_LIBC_PTHREAD:INTERNAL=
-//Have library pthreads
-CMAKE_HAVE_PTHREADS_CREATE:INTERNAL=
-//Have library pthread
-CMAKE_HAVE_PTHREAD_CREATE:INTERNAL=1
-//Have include pthread.h
-CMAKE_HAVE_PTHREAD_H:INTERNAL=1
 //Source directory with the top level CMakeLists.txt file for this
 // project
 CMAKE_HOME_DIRECTORY:INTERNAL=/home/knoblauch/IAmDeveloper/agents
@@ -373,7 +329,7 @@ CMAKE_MODULE_LINKER_FLAGS_RELWITHDEBINFO-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_NM
 CMAKE_NM-ADVANCED:INTERNAL=1
 //number of local generators
-CMAKE_NUMBER_OF_MAKEFILES:INTERNAL=12
+CMAKE_NUMBER_OF_MAKEFILES:INTERNAL=16
 //ADVANCED property for variable: CMAKE_OBJCOPY
 CMAKE_OBJCOPY-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_OBJDUMP
@@ -416,22 +372,4 @@ CMAKE_STRIP-ADVANCED:INTERNAL=1
 CMAKE_UNAME:INTERNAL=/usr/bin/uname
 //ADVANCED property for variable: CMAKE_VERBOSE_MAKEFILE
 CMAKE_VERBOSE_MAKEFILE-ADVANCED:INTERNAL=1
-//Details about finding SDL2
-FIND_PACKAGE_MESSAGE_DETAILS_SDL2:INTERNAL=[/usr/lib/x86_64-linux-gnu/libSDL2main.a;/usr/lib/x86_64-linux-gnu/libSDL2.so;-lpthread][/usr/include/SDL2][v2.0.10()]
-//Details about finding SDL2_ttf
-FIND_PACKAGE_MESSAGE_DETAILS_SDL2_ttf:INTERNAL=[/usr/lib/x86_64-linux-gnu/libSDL2_ttf.so][/usr/include/SDL2][v2.0.14()]
-//Details about finding Threads
-FIND_PACKAGE_MESSAGE_DETAILS_Threads:INTERNAL=[TRUE][v()]
-//ADVANCED property for variable: SDL2_INCLUDE_DIR
-SDL2_INCLUDE_DIR-ADVANCED:INTERNAL=1
-//ADVANCED property for variable: SDL2_LIBRARY
-SDL2_LIBRARY-ADVANCED:INTERNAL=1
-//Path to a library.
-SDL2_LIBRARY_TEMP:INTERNAL=/usr/lib/x86_64-linux-gnu/libSDL2.so
-//ADVANCED property for variable: SDL2_TTF_INCLUDE_DIR
-SDL2_TTF_INCLUDE_DIR-ADVANCED:INTERNAL=1
-//ADVANCED property for variable: SDL2_TTF_LIBRARY
-SDL2_TTF_LIBRARY-ADVANCED:INTERNAL=1
-//Path to a library.
-SDL_LIBRARY_TEMP:INTERNAL=SDL_LIBRARY_TEMP-NOTFOUND
 

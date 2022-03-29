@@ -155,32 +155,32 @@ main-app_lib/fast:
 	$(MAKE) $(MAKESILENT) -f src/CMakeFiles/main-app_lib.dir/build.make src/CMakeFiles/main-app_lib.dir/build
 .PHONY : main-app_lib/fast
 
-main.o: main.cc.o
+main.o: main.cpp.o
 
 .PHONY : main.o
 
 # target to build an object file
-main.cc.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/agents.dir/build.make CMakeFiles/agents.dir/main.cc.o
-.PHONY : main.cc.o
+main.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/agents.dir/build.make CMakeFiles/agents.dir/main.cpp.o
+.PHONY : main.cpp.o
 
-main.i: main.cc.i
+main.i: main.cpp.i
 
 .PHONY : main.i
 
 # target to preprocess a source file
-main.cc.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/agents.dir/build.make CMakeFiles/agents.dir/main.cc.i
-.PHONY : main.cc.i
+main.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/agents.dir/build.make CMakeFiles/agents.dir/main.cpp.i
+.PHONY : main.cpp.i
 
-main.s: main.cc.s
+main.s: main.cpp.s
 
 .PHONY : main.s
 
 # target to generate assembly for a file
-main.cc.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/agents.dir/build.make CMakeFiles/agents.dir/main.cc.s
-.PHONY : main.cc.s
+main.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/agents.dir/build.make CMakeFiles/agents.dir/main.cpp.s
+.PHONY : main.cpp.s
 
 # Help Target
 help:

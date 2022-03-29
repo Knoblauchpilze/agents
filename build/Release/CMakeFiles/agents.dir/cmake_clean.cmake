@@ -1,5 +1,5 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/agents.dir/main.cc.o"
+  "CMakeFiles/agents.dir/main.cpp.o"
   "bin/agents"
   "bin/agents.pdb"
 )

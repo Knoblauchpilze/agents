@@ -4,7 +4,7 @@
 # compile CXX with /usr/bin/c++
 CXX_DEFINES = 
 
-CXX_INCLUDES = -I/home/knoblauch/IAmDeveloper/agents/src/utils -I/home/knoblauch/IAmDeveloper/agents/src/core -I/home/knoblauch/IAmDeveloper/agents/src/agents -I/home/knoblauch/IAmDeveloper/agents/src/app -I/home/knoblauch/IAmDeveloper/agents/src/behaviors -I/home/knoblauch/IAmDeveloper/agents/src/environment -I/home/knoblauch/IAmDeveloper/agents/src/influences -I/home/knoblauch/IAmDeveloper/agents/src/objects -I/home/knoblauch/IAmDeveloper/agents/src/objects/frustum -I/home/knoblauch/IAmDeveloper/agents/src/physics
+CXX_INCLUDES = -I/home/knoblauch/IAmDeveloper/agents/src/coordinates -I/home/knoblauch/IAmDeveloper/agents/src/app -I/home/knoblauch/IAmDeveloper/agents/src/game -I/home/knoblauch/IAmDeveloper/agents/src/game/utils -I/home/knoblauch/IAmDeveloper/agents/src/game/core -I/home/knoblauch/IAmDeveloper/agents/src/game/agents -I/home/knoblauch/IAmDeveloper/agents/src/game/app -I/home/knoblauch/IAmDeveloper/agents/src/game/behaviors -I/home/knoblauch/IAmDeveloper/agents/src/game/environment -I/home/knoblauch/IAmDeveloper/agents/src/game/influences -I/home/knoblauch/IAmDeveloper/agents/src/game/objects -I/home/knoblauch/IAmDeveloper/agents/src/game/objects/frustum -I/home/knoblauch/IAmDeveloper/agents/src/game/physics -I/home/knoblauch/IAmDeveloper/agents/src/ui -I/home/knoblauch/IAmDeveloper/agents/src
 
 CXX_FLAGS =  -Wall -Wextra -Werror -O3 -DNDEBUG -std=c++17
 

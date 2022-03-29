@@ -4,22 +4,27 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/home/knoblauch/IAmDeveloper/agents/main.cc" "/home/knoblauch/IAmDeveloper/agents/build/Release/CMakeFiles/agents.dir/main.cc.o"
+  "/home/knoblauch/IAmDeveloper/agents/main.cpp" "/home/knoblauch/IAmDeveloper/agents/build/Release/CMakeFiles/agents.dir/main.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 
 # The include file search paths:
 set(CMAKE_CXX_TARGET_INCLUDE_PATH
-  "../../src/utils"
-  "../../src/core"
-  "../../src/agents"
+  "../../src/coordinates"
   "../../src/app"
-  "../../src/behaviors"
-  "../../src/environment"
-  "../../src/influences"
-  "../../src/objects"
-  "../../src/objects/frustum"
-  "../../src/physics"
+  "../../src/game"
+  "../../src/game/utils"
+  "../../src/game/core"
+  "../../src/game/agents"
+  "../../src/game/app"
+  "../../src/game/behaviors"
+  "../../src/game/environment"
+  "../../src/game/influences"
+  "../../src/game/objects"
+  "../../src/game/objects/frustum"
+  "../../src/game/physics"
+  "../../src/ui"
+  "../../src"
   )
 
 # Targets to which this target links.

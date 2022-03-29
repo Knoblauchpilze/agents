@@ -15,9 +15,6 @@ set (CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/CMakeModules")
 
 project(agents LANGUAGES CXX)
 
-find_package (SDL2 REQUIRED)
-#find_package (SDL2_ttf REQUIRED)
-
 add_executable(agents)
 
 add_subdirectory(
@@ -25,7 +22,7 @@ add_subdirectory(
 	)
 
 target_sources (agents PRIVATE
-	${CMAKE_CURRENT_SOURCE_DIR}/main.cc
+	${CMAKE_CURRENT_SOURCE_DIR}/main.cpp
 	)
 
 target_include_directories (agents PUBLIC
@@ -34,5 +31,4 @@ target_include_directories (agents PUBLIC
 target_link_libraries(agents
 	core_utils
 	main-app_lib
-  ${SDL2_LIBRARIES}
 	)

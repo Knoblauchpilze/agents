@@ -10,15 +10,7 @@ set (CMAKE_POSITION_INDEPENDENT_CODE ON)
 add_library (main-app_lib SHARED "")
 
 add_subdirectory (
-	${CMAKE_CURRENT_SOURCE_DIR}/utils
-	)
-
-add_subdirectory (
-	${CMAKE_CURRENT_SOURCE_DIR}/core
-	)
-
-add_subdirectory (
-	${CMAKE_CURRENT_SOURCE_DIR}/agents
+	${CMAKE_CURRENT_SOURCE_DIR}/coordinates
 	)
 
 add_subdirectory (
@@ -26,24 +18,30 @@ add_subdirectory (
 	)
 
 add_subdirectory (
-	${CMAKE_CURRENT_SOURCE_DIR}/behaviors
+	${CMAKE_CURRENT_SOURCE_DIR}/game
 	)
 
 add_subdirectory (
-	${CMAKE_CURRENT_SOURCE_DIR}/environment
-	)
-
-add_subdirectory (
-	${CMAKE_CURRENT_SOURCE_DIR}/influences
-	)
-
-add_subdirectory (
-	${CMAKE_CURRENT_SOURCE_DIR}/objects
-	)
-
-add_subdirectory (
-	${CMAKE_CURRENT_SOURCE_DIR}/physics
+	${CMAKE_CURRENT_SOURCE_DIR}/ui
 	)
 
 target_sources (main-app_lib PRIVATE
+	${CMAKE_CURRENT_SOURCE_DIR}/App.cc
+	)
+
+set (TDEF_INCLUDE_DIR "${CMAKE_CURRENT_SOURCE_DIR}" PARENT_SCOPE)
+
+target_link_libraries (main-app_lib
+	png
+	X11
+	GL
+	pthread
+	stdc++fs
+	)
+
+target_include_directories (main-app_lib PUBLIC
+	${CMAKE_CURRENT_SOURCE_DIR}
+	${CMAKE_CURRENT_SOURCE_DIR}/app
+	${CMAKE_CURRENT_SOURCE_DIR}/coordinates
+	${CMAKE_CURRENT_SOURCE_DIR}/ui
 	)

@@ -76,31 +76,29 @@ include CMakeFiles/agents.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/agents.dir/flags.make
 
-CMakeFiles/agents.dir/main.cc.o: CMakeFiles/agents.dir/flags.make
-CMakeFiles/agents.dir/main.cc.o: ../../main.cc
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/knoblauch/IAmDeveloper/agents/build/Release/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/agents.dir/main.cc.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/agents.dir/main.cc.o -c /home/knoblauch/IAmDeveloper/agents/main.cc
+CMakeFiles/agents.dir/main.cpp.o: CMakeFiles/agents.dir/flags.make
+CMakeFiles/agents.dir/main.cpp.o: ../../main.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/knoblauch/IAmDeveloper/agents/build/Release/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/agents.dir/main.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/agents.dir/main.cpp.o -c /home/knoblauch/IAmDeveloper/agents/main.cpp
 
-CMakeFiles/agents.dir/main.cc.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/agents.dir/main.cc.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/knoblauch/IAmDeveloper/agents/main.cc > CMakeFiles/agents.dir/main.cc.i
+CMakeFiles/agents.dir/main.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/agents.dir/main.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/knoblauch/IAmDeveloper/agents/main.cpp > CMakeFiles/agents.dir/main.cpp.i
 
-CMakeFiles/agents.dir/main.cc.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/agents.dir/main.cc.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/knoblauch/IAmDeveloper/agents/main.cc -o CMakeFiles/agents.dir/main.cc.s
+CMakeFiles/agents.dir/main.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/agents.dir/main.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/knoblauch/IAmDeveloper/agents/main.cpp -o CMakeFiles/agents.dir/main.cpp.s
 
 # Object files for target agents
 agents_OBJECTS = \
-"CMakeFiles/agents.dir/main.cc.o"
+"CMakeFiles/agents.dir/main.cpp.o"
 
 # External object files for target agents
 agents_EXTERNAL_OBJECTS =
 
-bin/agents: CMakeFiles/agents.dir/main.cc.o
+bin/agents: CMakeFiles/agents.dir/main.cpp.o
 bin/agents: CMakeFiles/agents.dir/build.make
 bin/agents: lib/libmain-app_lib.so
-bin/agents: /usr/lib/x86_64-linux-gnu/libSDL2main.a
-bin/agents: /usr/lib/x86_64-linux-gnu/libSDL2.so
 bin/agents: CMakeFiles/agents.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/knoblauch/IAmDeveloper/agents/build/Release/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable bin/agents"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/agents.dir/link.txt --verbose=$(VERBOSE)
