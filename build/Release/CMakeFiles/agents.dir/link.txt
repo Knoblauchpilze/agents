@@ -1,1 +1,0 @@
-/usr/bin/c++  -Wall -Wextra -Werror -O3 -DNDEBUG CMakeFiles/agents.dir/main.cpp.o -o bin/agents  -Wl,-rpath,/home/knoblauch/IAmDeveloper/agents/build/Release/lib -lcore_utils lib/libmain-app_lib.so -lpng -lX11 -lGL -lpthread -lstdc++fs 
