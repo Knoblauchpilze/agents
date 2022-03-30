@@ -113,7 +113,7 @@
 	However, the excellent "stb_image.h" can be used instead, supporting a variety of
 	image formats, and has no library dependence - something we like at OLC studios ;)
 	To use stb_image.h, make sure it's in your code base, and simply:
-	
+
 	#define OLC_IMAGE_STB
 
 	Before including the olcPixelGameEngine.h header file. stb_image.h works on many systems
@@ -645,7 +645,7 @@ namespace olc
 		static olc::PixelGameEngine* ptrPGE;
 	};
 
-	
+
 
 	static std::unique_ptr<Renderer> renderer;
 	static std::unique_ptr<Platform> platform;
@@ -741,7 +741,7 @@ namespace olc
 		void SetPixelMode(std::function<olc::Pixel(const int x, const int y, const olc::Pixel& pSource, const olc::Pixel& pDest)> pixelMode);
 		// Change the blend factor form between 0.0f to 1.0f;
 		void SetPixelBlend(float fBlend);
-		
+
 
 
 	public: // DRAWING ROUTINES
@@ -853,7 +853,7 @@ namespace olc
 		std::function<olc::Pixel(const int x, const int y, const olc::Pixel&, const olc::Pixel&)> funcPixelMode;
 		std::chrono::time_point<std::chrono::system_clock> m_tp1, m_tp2;
 
-		// State of keyboard		
+		// State of keyboard
 		bool		pKeyNewState[256] = { 0 };
 		bool		pKeyOldState[256] = { 0 };
 		HWButton	pKeyboardState[256] = { 0 };
@@ -1140,7 +1140,7 @@ namespace olc
 		for (int y = 0; y < vSize.y; y++)
 			for (int x = 0; x < vSize.x; x++)
 				spr->SetPixel(x, y, GetPixel(vPos.x + x, vPos.y + y));
-		return spr;		
+		return spr;
 	}
 
 	// O------------------------------------------------------------------------------O
@@ -1226,7 +1226,7 @@ namespace olc
 		{
 			sResourceFile e;
 			e.nSize = (uint32_t)_gfs::file_size(file);
-			e.nOffset = 0; // Unknown at this stage			
+			e.nOffset = 0; // Unknown at this stage
 			mapFiles[file] = e;
 			return true;
 		}
@@ -2621,7 +2621,7 @@ namespace olc
 					}
 
 					renderer->DrawLayerQuad(layer->vOffset, layer->vScale, layer->tint);
-					
+
 
 					// Display Decals in order for this layer
 					for (auto& decal : layer->vecDecalInstance)
@@ -2845,7 +2845,7 @@ namespace olc
 
 			if (glSwapIntervalEXT != nullptr && !bVSYNC)
 				glSwapIntervalEXT(olc_Display, *olc_Window, 0);
-#endif		
+#endif
 
 #if defined(__APPLE__)
 			mFullScreen = bFullScreen;
@@ -2884,11 +2884,11 @@ namespace olc
 #if defined(_WIN32)
 			SwapBuffers(glDeviceContext);
 			if (bSync) DwmFlush(); // Woooohooooooo!!!! SMOOOOOOOTH!
-#endif	
+#endif
 
 #if defined(__linux__) || defined(__FreeBSD__)
 			X11::glXSwapBuffers(olc_Display, *olc_Window);
-#endif		
+#endif
 
 #if defined(__APPLE__)
 			glutSwapBuffers();
@@ -3135,8 +3135,8 @@ namespace olc
 
 			// It does, so clear out existing sprite
 			if (spr->pColData != nullptr) delete[] spr->pColData;
-			
-			
+
+
 			////////////////////////////////////////////////////////////////////////////
 			// Use libpng, Thanks to Guillaume Cottenceau
 			// https://gist.github.com/niw/5963798
@@ -3285,7 +3285,7 @@ namespace olc
 			spr->width = w; spr->height = h;
 			spr->pColData = new Pixel[spr->width * spr->height];
 			std::memcpy(spr->pColData, bytes, spr->width * spr->height * 4);
-			delete[] bytes;			
+			delete[] bytes;
 			return olc::rcode::OK;
 		}
 
@@ -3360,7 +3360,7 @@ namespace olc
 
 		virtual olc::rcode ThreadCleanUp() override
 		{
-			renderer->DestroyDevice();			
+			renderer->DestroyDevice();
 			PostMessage(olc_hWnd, WM_DESTROY, 0, 0);
 			return olc::OK;
 		}
@@ -3588,6 +3588,57 @@ namespace olc
 
 			XMapWindow(olc_Display, olc_Window);
 			XStoreName(olc_Display, olc_Window, "OneLoneCoder.com - Pixel Game Engine");
+
+			// As per this topic:
+			// https://stackoverflow.com/questions/50123173/how-to-set-icon-name-in-x11-ubuntu
+			// Assign the name of the app to the tooltip that
+			// is visible for the application.
+			char appTooltip[] = "agents";
+			XClassHint *class_hint = XAllocClassHint();
+			if (class_hint) {
+				class_hint->res_name = appTooltip;
+				class_hint->res_class = appTooltip;
+				XSetClassHint(olc_Display, olc_Window, class_hint);
+				XFree(class_hint);
+			}
+
+			// Change the icon to something nicer, as defined in this topic:
+			// https://stackoverflow.com/questions/10699927/xlib-argb-window-icon
+			// In order to define the buffer, we have to use the ARGB syntax
+			// and represent each pixel as a unsigned integer.
+			// For example the value
+			// (4278190080)10 =
+			// (1111 1111 0000 0000 0000 0000 0000 0000)b
+			// +    A    +    R    +    G    +    B    +
+			// The following buffer represents a simplified version of the hand
+			// that is characteristic of the application.
+			unsigned long buffer[] = {
+				// Dimensions
+				16, 16,
+								/*   0            1           2          3           4           5           6            7           8          9           10          11          12          13          14          15     */
+				/*  0 */ 4278190080, 4278190080, 4278190080, 4278190080, 4280418304, 4283367424, 4283367424, 4283367424, 4283367424, 4283367424, 4283367424, 4280418304, 4278190080, 4278190080, 4278190080, 4278190080,
+				/*  1 */ 4278190080, 4278190080, 4278190080, 4280418304, 4288413696, 4291559424, 4291559424, 4291559424, 4291559424, 4291559424, 4291559424, 4288413696, 4280418304, 4278190080, 4278190080, 4278190080,
+				/*  2 */ 4278190080, 4278190080, 4280418304, 4288413696, 4291559424, 4291559424, 4291559424, 4291085508, 4291085508, 4291559424, 4291559424, 4291559424, 4288413696, 4280418304, 4278190080, 4278190080,
+				/*  3 */ 4278190080, 4280418304, 4288413696, 4291559424, 4291559424, 4291559424, 4291085508, 4294967295, 4294967295, 4291085508, 4291559424, 4291559424, 4291559424, 4288413696, 4280418304, 4278190080,
+				/*  4 */ 4280418304, 4288413696, 4291559424, 4291559424, 4291559424, 4291085508, 4294967295, 4294967295, 4294967295, 4294967295, 4291085508, 4291559424, 4291559424, 4291559424, 4288413696, 4280418304,
+				/*  5 */ 4283367424, 4291559424, 4291559424, 4291559424, 4291085508, 4294967295, 4294967295, 4294967295, 4294967295, 4294967295, 4291085508, 4291559424, 4291559424, 4291559424, 4291559424, 4283367424,
+				/*  6 */ 4283367424, 4291559424, 4291559424, 4291559424, 4291085508, 4294967295, 4294967295, 4294967295, 4294967295, 4294967295, 4291085508, 4291559424, 4291085508, 4291559424, 4291559424, 4283367424,
+				/*  7 */ 4283367424, 4291559424, 4291559424, 4291559424, 4291085508, 4294967295, 4294967295, 4294967295, 4294967295, 4294967295, 4291085508, 4291085508, 4291085508, 4291559424, 4291559424, 4283367424,
+				/*  8 */ 4283367424, 4291559424, 4291559424, 4291559424, 4291085508, 4294967295, 4294967295, 4294967295, 4294967295, 4291085508, 4291085508, 4294967295, 4291085508, 4291559424, 4291559424, 4283367424,
+				/*  9 */ 4283367424, 4291559424, 4291559424, 4291559424, 4291085508, 4294967295, 4294967295, 4294967295, 4291085508, 4294967295, 4294967295, 4291085508, 4291085508, 4291559424, 4291559424, 4283367424,
+				/* 10 */ 4283367424, 4291559424, 4291559424, 4291559424, 4291085508, 4294967295, 4294967295, 4294967295, 4291085508, 4294967295, 4294967295, 4291085508, 4291559424, 4291559424, 4291559424, 4283367424,
+				/* 11 */ 4280418304, 4288413696, 4291559424, 4291559424, 4291085508, 4294967295, 4294967295, 4291085508, 4294967295, 4294967295, 4291085508, 4291559424, 4291559424, 4291559424, 4288413696, 4280418304,
+				/* 12 */ 4278190080, 4280418304, 4288413696, 4291559424, 4291559424, 4291085508, 4294967295, 4294967295, 4294967295, 4291085508, 4291559424, 4291559424, 4291559424, 4288413696, 4280418304, 4278190080,
+				/* 13 */ 4278190080, 4278190080, 4280418304, 4288413696, 4291559424, 4291559424, 4291085508, 4291085508, 4291085508, 4291559424, 4291559424, 4291559424, 4288413696, 4280418304, 4278190080, 4278190080,
+				/* 14 */ 4278190080, 4278190080, 4278190080, 4280418304, 4288413696, 4291559424, 4291559424, 4291559424, 4291559424, 4291559424, 4291559424, 4288413696, 4280418304, 4278190080, 4278190080, 4278190080,
+				/* 15 */ 4278190080, 4278190080, 4278190080, 4278190080, 4280418304, 4283367424, 4283367424, 4283367424, 4283367424, 4283367424, 4283367424, 4280418304, 4278190080, 4278190080, 4278190080, 4278190080,
+			};
+
+			Display *d = XOpenDisplay(0);
+			Atom net_wm_icon = XInternAtom(d, "_NET_WM_ICON", False);
+			Atom cardinal = XInternAtom(olc_Display, "CARDINAL", False);
+			int length = 2 + 16 * 16;
+			XChangeProperty(olc_Display, olc_Window, net_wm_icon, cardinal, 32, PropModeReplace, (const unsigned char*) buffer, length);
 
 			if (bFullScreen) // Thanks DragonEye, again :D
 			{
