@@ -10,19 +10,7 @@ target_include_directories (main-app_lib PUBLIC
 	)
 
 add_subdirectory (
-	${CMAKE_CURRENT_SOURCE_DIR}/utils
-	)
-
-add_subdirectory (
-	${CMAKE_CURRENT_SOURCE_DIR}/core
-	)
-
-add_subdirectory (
 	${CMAKE_CURRENT_SOURCE_DIR}/agents
-	)
-
-add_subdirectory (
-	${CMAKE_CURRENT_SOURCE_DIR}/app
 	)
 
 add_subdirectory (
@@ -43,4 +31,8 @@ add_subdirectory (
 
 add_subdirectory (
 	${CMAKE_CURRENT_SOURCE_DIR}/physics
+	)
+
+add_subdirectory (
+	${CMAKE_CURRENT_SOURCE_DIR}/time
 	)

@@ -1,56 +1,40 @@
 
-#include "Influence.h"
+# include "Influence.hh"
 
-namespace environment
-{
-	namespace agents
-	{
-		namespace influences
-		{
-			Influence::Influence():
-				m_agent(nullptr),
-				m_body(nullptr)
-			{
-				// Nothing to do.
-			}
+namespace mas {
+  namespace environment {
 
-			Influence::~Influence()
-			{
-				// Nothing to do.
-			}
+    Influence::Influence():
+      m_emitter(nullptr),
+      m_receiver(nullptr)
+    {}
 
-			bool Influence::valid() const
-			{
-				return (m_agent != nullptr && m_body != nullptr);
-			}
+    Influence::~Influence() {}
 
-			const Agent& Influence::getEmitter() const
-			{
-				return *m_agent;
-			}
+    bool
+    Influence::valid() const {
+      return (m_emitter != nullptr && m_receiver != nullptr);
+    }
 
-			const objects::Body& Influence::getReceiver() const
-			{
-				return *m_body;
-			}
+    const Object&
+    Influence::emitter() const noexcept {
+      return *m_emitter;
+    }
 
-			void Influence::setEmitter(const environment::agents::AgentShPtr agent) {
-				m_agent = agent;
-			}
+    const Object&
+    Influence::receiver() const noexcept {
+      return *m_receiver;
+    }
 
-			void Influence::setReceiver(const environment::objects::BodyShPtr body) {
-				m_body = body;
-			}
+    void
+    Influence::setEmitter(ObjectShPtr obj) {
+      m_emitter = obj;
+    }
 
-			//================
+    void
+    Influence::setReceiver(ObjectShPtr obj) {
+      m_receiver = obj;
+    }
 
-			environment::agents::Agent& Influence::getEmitter() {
-				return *m_agent;
-			}
-
-			environment::objects::Body& Influence::getReceiver() {
-				return *m_body;
-			}
-		}
-	}
+  }
 }
