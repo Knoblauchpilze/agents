@@ -2,15 +2,11 @@
 # define   INFLUENCE_HH
 
 # include <memory>
+# include "MovingObject.hh"
+# include "Agent.hh"
 
 namespace mas {
   namespace environment {
-
-    /// @brief - Forward declaration of an environmental object.
-    class Object;
-
-    /// @brief - A shared pointer on an environmental object.
-    using ObjectShPtr = std::shared_ptr<Object>;
 
     class Influence {
       public:
@@ -41,7 +37,7 @@ namespace mas {
          *          occur.
          * @return - the emitter of the influence.
          */
-        const Object&
+        const Agent&
         emitter() const noexcept;
 
         /**
@@ -50,7 +46,7 @@ namespace mas {
          *          occur.
          * @return - the receiver of the influence.
          */
-        const Object&
+        const MovingObject&
         receiver() const noexcept;
 
         /**
@@ -59,7 +55,7 @@ namespace mas {
          * @param obj - the new emitter.
          */
         void
-        setEmitter(ObjectShPtr obj);
+        setEmitter(AgentShPtr obj);
 
         /**
          * @brief - Defines a new receiver for the influence. In case
@@ -67,7 +63,7 @@ namespace mas {
          * @param obj - the new receiver.
          */
         void
-        setReceiver(ObjectShPtr obj);
+        setReceiver(MovingObjectShPtr obj);
 
         /**
          * @brief - Interface method to apply the influence to both the
@@ -81,12 +77,12 @@ namespace mas {
         /**
          * @brief - The emitter of the influence.
          */
-        ObjectShPtr m_emitter;
+        AgentShPtr m_emitter;
 
         /**
          * @brief - The receiver of the influence.
          */
-        ObjectShPtr m_receiver;
+        MovingObjectShPtr m_receiver;
     };
 
     /// @brief - A shared pointer on an influence object.

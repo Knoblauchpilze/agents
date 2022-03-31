@@ -1,5 +1,5 @@
-#ifndef    ENVIRONMENT_INITIALIZER_HH
-# define   ENVIRONMENT_INITIALIZER_HH
+#ifndef    INITIALIZER_HH
+# define   INITIALIZER_HH
 
 # include <core_utils/CoreObject.hh>
 # include <maths_utils/Vector2.hh>
@@ -38,4 +38,4 @@ namespace mas {
   }
 }
 
-#endif    /* ENVIRONMENT_INITIALIZER_HH */
+#endif    /* INITIALIZER_HH */

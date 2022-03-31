@@ -12,27 +12,27 @@ namespace mas {
     Influence::~Influence() {}
 
     bool
-    Influence::valid() const {
+    Influence::valid() const noexcept {
       return (m_emitter != nullptr && m_receiver != nullptr);
     }
 
-    const Object&
+    const Agent&
     Influence::emitter() const noexcept {
       return *m_emitter;
     }
 
-    const Object&
+    const MovingObject&
     Influence::receiver() const noexcept {
       return *m_receiver;
     }
 
     void
-    Influence::setEmitter(ObjectShPtr obj) {
+    Influence::setEmitter(AgentShPtr obj) {
       m_emitter = obj;
     }
 
     void
-    Influence::setReceiver(ObjectShPtr obj) {
+    Influence::setReceiver(MovingObjectShPtr obj) {
       m_receiver = obj;
     }
 
