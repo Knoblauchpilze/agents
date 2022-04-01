@@ -54,14 +54,22 @@ namespace pge {
 
   namespace alpha {
 
+    /// @brief - Alpha value for an opaque color.
     constexpr int Opaque = 255;
+
+    /// @brief - Alpha value for an almost opaque color.
     constexpr int AlmostOpaque = 192;
+
+    /// @brief - Alpha value for a semi opaque color.
     constexpr int SemiOpaque = 128;
+
+    /// @brief - Alpha value for an almost transparent color.
     constexpr int AlmostTransparent = 64;
+
+    /// @brief - Alpha value for a transparent color.
     constexpr int Transparent = 0;
 
   }
-
 }
 
 /**

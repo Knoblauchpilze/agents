@@ -58,7 +58,7 @@ namespace pge {
        *            visible.
        */
       bool
-      visible(const utils::Point2i& p, float radius) const noexcept;
+      visible(const utils::Point2i& p, float radius = 1.0f) const noexcept;
 
       /**
        * @brief - Similar method to the above but handles position
@@ -70,7 +70,7 @@ namespace pge {
        *            visible.
        */
       bool
-      visible(const olc::vf2d& p, const olc::vf2d& sz) const noexcept;
+      visible(const olc::vf2d& p, const olc::vf2d& sz = olc::vf2d(1.0f, 1.0f)) const noexcept;
 
     private:
 
