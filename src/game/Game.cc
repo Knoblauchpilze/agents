@@ -2,6 +2,7 @@
 # include "Game.hh"
 # include <cxxabi.h>
 # include "Menu.hh"
+# include "Initializer.hh"
 
 namespace pge {
 
@@ -22,6 +23,10 @@ namespace pge {
     m_launcher(&m_env, 1.0f, 1.0f, mas::time::Unit::Second)
   {
     setService("game");
+
+    // Initialize the environment.
+    mas::environment::Initializer init(utils::Boxf(0.0f, 0.0f, 10.0f, 5.0f));
+    init(m_env);
   }
 
   Game::~Game() {}

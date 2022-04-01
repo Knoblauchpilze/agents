@@ -4,7 +4,7 @@
 namespace mas {
  namespace environment {
 
-    Initializer::Initializer(const utils::Vector2f& area):
+    Initializer::Initializer(const utils::Boxf& area):
       utils::CoreObject("initializer"),
 
       m_area(area)

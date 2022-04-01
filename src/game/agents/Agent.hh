@@ -2,7 +2,7 @@
 # define   AGENT_HH
 
 # include <memory>
-# include <core_utils/CoreObject.hh>
+# include "Component.hh"
 
 namespace mas {
   namespace environment {
@@ -16,7 +16,7 @@ namespace mas {
     /// @brief - A pointer to a behavior.
     using BehaviorShPtr = std::shared_ptr<Behavior>;
 
-    class Agent: public utils::CoreObject {
+    class Agent: public Component {
       public:
 
         /**

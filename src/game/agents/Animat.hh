@@ -3,17 +3,17 @@
 
 # include <vector>
 # include <memory>
-# include <core_utils/CoreObject.hh>
 # include "Influence.hh"
 # include "MovingObject.hh"
 # include "Perception.hh"
 # include "Frustum.hh"
 # include "Agent.hh"
+# include "Component.hh"
 
 namespace mas {
   namespace environment {
 
-    class Animat: public utils::CoreObject {
+    class Animat: public Component {
       public:
 
         /**

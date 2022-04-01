@@ -3,6 +3,42 @@
 # include "Influence.hh"
 # include "Perception.hh"
 # include "Frustum.hh"
+# include "Animat.hh"
+# include "MovingObject.hh"
+
+/// @brief - Convenience define to reference an iterator
+/// on the components of an entity.
+using eiterator = mas::environment::Entity::iterator;
+
+namespace {
+
+  /**
+   * @brief- Convenience function to iterate on a set of entities
+   *         and only process components of each entity that match
+   *         a type.
+   * @param entities - the list of entities.
+   * @param t - the type of the component to filter.
+   * @param func - the process to apply to each matching component.
+   */
+  void
+  iterate(const std::vector<mas::environment::EntityShPtr>& entities,
+          const mas::environment::Type& t,
+          std::function<void(mas::environment::Component&)> func) noexcept
+  {
+    for (unsigned id = 0u ; id < entities.size() ; ++id) {
+      const mas::environment::Entity& e = *entities[id];
+
+      for (eiterator it = e.begin() ; it != e.end() ; ++it) {
+        if (it->type() != t) {
+          continue;
+        }
+
+        func(*it);
+      }
+    }
+  }
+
+}
 
 namespace mas {
 
@@ -10,10 +46,6 @@ namespace mas {
     utils::CoreObject("environment"),
 
     m_entities(),
-    m_objects(),
-    m_agents(),
-    m_animats(),
-
     m_physic()
   {
     setService("mas");
@@ -32,28 +64,35 @@ namespace mas {
 
   void
   Environment::computePreAgentsStep(const time::Manager& /*manager*/) {
-    // Compute perceptions for each animat.
-    for (unsigned id = 0u ; id < m_animats.size() ; ++id) {
-      const environment::Frustum& frustum = m_animats[id]->frustum();
+    // Traverse the list of entities and check ones that have
+    // an animat component.
+    iterate(m_entities, environment::Type::Animat,
+      [this](environment::Component& c) {
+        const environment::Frustum& frustum = c.as<environment::Animat>()->frustum();
 
-      // Traverse the list of objects and check for intersections.
-      environment::Perceptions pps;
-      for (unsigned id = 0u ; id < m_objects.size() ; ++id) {
-        const environment::MovingObjectShPtr& obj = m_objects[id];
-        if (obj != nullptr && frustum.visible(*obj)) {
-          pps.push_back(environment::Perception(*obj));
-        }
+        environment::Perceptions pps;
+
+        iterate(m_entities, environment::Type::MovingObject,
+          [&pps, &frustum](environment::Component& c) {
+            environment::MovingObject* obj = c.as<environment::MovingObject>();
+            if (obj != nullptr && frustum.visible(*obj)) {
+              pps.push_back(environment::Perception(*obj));
+            }
+          }
+        );
+
+        c.as<environment::Animat>()->perceive(pps);
       }
-
-      m_animats[id]->perceive(pps);
-    }
+    );
   }
 
   void
   Environment::computeAgentsStep(const time::Manager& /*manager*/) {
-    for (unsigned id = 0u ; id < m_agents.size() ; ++id) {
-      m_agents[id]->live();
-    }
+    iterate(m_entities, environment::Type::Agent,
+      [](environment::Component& c) {
+        c.as<environment::Agent>()->live();
+      }
+    );
   }
 
   void
@@ -61,10 +100,12 @@ namespace mas {
     // Collect influences.
     std::vector<environment::InfluenceShPtr> infs;
 
-    for (unsigned id = 0u ; id < m_animats.size() ; ++id) {
-      std::vector<environment::InfluenceShPtr> bInfs = m_animats[id]->consumeInfluences();
-      infs.insert(infs.end(), bInfs.begin(), bInfs.end());
-    }
+    iterate(m_entities, environment::Type::Animat,
+      [&infs](environment::Component& c) {
+        std::vector<environment::InfluenceShPtr> bInfs = c.as<environment::Animat>()->consumeInfluences();
+        infs.insert(infs.end(), bInfs.begin(), bInfs.end());
+      }
+    );
 
     // Make the simulation move forward in time.
     m_physic.simulate(manager);
@@ -75,9 +116,11 @@ namespace mas {
     }
 
     // Apply endogenous processes.
-    for (unsigned id = 0u ; id < m_objects.size() ; ++id) {
-      m_objects[id]->simulate(manager);
-    }
+    iterate(m_entities, environment::Type::MovingObject,
+      [&manager](environment::Component& c) {
+        c.as<environment::MovingObject>()->simulate(manager);
+      }
+    );
   }
 
 }

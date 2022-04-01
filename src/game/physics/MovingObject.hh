@@ -2,16 +2,16 @@
 # define   MOVING_OBJECT_HH
 
 # include <memory>
-# include <core_utils/CoreObject.hh>
 # include <maths_utils/Box.hh>
 # include <maths_utils/Vector2.hh>
+# include "Component.hh"
 # include "RigidBody.hh"
 # include "Manager.hh"
 
 namespace mas {
   namespace environment {
 
-    class MovingObject: public utils::CoreObject {
+    class MovingObject: public Component {
       public:
 
         /**

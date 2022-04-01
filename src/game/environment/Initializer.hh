@@ -2,7 +2,7 @@
 # define   INITIALIZER_HH
 
 # include <core_utils/CoreObject.hh>
-# include <maths_utils/Vector2.hh>
+# include <maths_utils/Box.hh>
 
 namespace mas {
 
@@ -18,7 +18,7 @@ namespace mas {
          * @brief - Create a new initializer to generate the environment.
          * @param area - the spawn radius for elements.
          */
-        Initializer(const utils::Vector2f& area);
+        Initializer(const utils::Boxf& area);
 
         /**
          * @brief - Performs the initialization of the input environment.
@@ -32,7 +32,7 @@ namespace mas {
         /**
          * @brief - The spawn area for this initializer.
          */
-        utils::Vector2f m_area;
+        utils::Boxf m_area;
     };
 
   }

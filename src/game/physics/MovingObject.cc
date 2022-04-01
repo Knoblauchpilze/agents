@@ -6,7 +6,7 @@ namespace mas {
 
     MovingObject::MovingObject(const utils::Boxf& area,
                                const RigidBody& body):
-      utils::CoreObject("moving"),
+      Component(Type::MovingObject),
 
       m_body(body),
       m_area(area),

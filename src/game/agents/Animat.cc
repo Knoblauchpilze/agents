@@ -5,7 +5,7 @@ namespace mas {
   namespace environment {
 
     Animat::Animat(MovingObjectShPtr obj):
-      utils::CoreObject("animat"),
+      Component(Type::Animat),
 
       m_agent(nullptr),
       m_body(obj),

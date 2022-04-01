@@ -133,16 +133,19 @@ namespace pge {
   }
 
   void
-  App::drawDecal(const RenderDesc& /*res*/) {
+  App::drawDecal(const RenderDesc& res) {
     // Clear rendering target.
     SetPixelMode(olc::Pixel::ALPHA);
-    Clear(olc::VERY_DARK_GREY);
+    Clear(olc::BLACK);
 
     // In case we're not in the game screen, do nothing.
     if (m_state->getScreen() != Screen::Game) {
       SetPixelMode(olc::Pixel::NORMAL);
       return;
     }
+
+    drawWorld(res);
+    drawGrid(res);
 
     SetPixelMode(olc::Pixel::NORMAL);
   }
@@ -212,6 +215,77 @@ namespace pge {
     DrawString(olc::vi2d(0, h / 2 + 2 * dOffset), "Intra cell        : " + toString(it), olc::CYAN);
 
     SetPixelMode(olc::Pixel::NORMAL);
+  }
+
+  void
+  App::drawWorld(const RenderDesc& /*res*/) noexcept {
+    /// TODO: Handle this.
+  }
+
+  void
+  App::drawGrid(const RenderDesc& res) noexcept {
+    SpriteDesc sd = {};
+    sd.loc = pge::RelativePosition::Center;
+    sd.radius = 1.0f;
+
+    // Draw the grid.
+    olc::vf2d tl = res.cf.cellsViewport().topLeft();
+    olc::vf2d dims = res.cf.cellsViewport().dims();
+
+    olc::vi2d min;
+    min.x = static_cast<int>(std::floor(tl.x));
+    min.y = static_cast<int>(std::floor(tl.y));
+
+    olc::vi2d max;
+    max.x = static_cast<int>(std::floor(tl.x + dims.x));
+    max.y = static_cast<int>(std::floor(tl.y + dims.y));
+
+    // Rendering function.
+    auto render = [this, &sd, &res, &dims](int x, int y, bool horizontal, olc::Pixel color) {
+      sd.x = x;
+      sd.y = y;
+
+      olc::vf2d p = res.cf.tileCoordsToPixels(sd.x, sd.y, sd.loc, sd.radius);
+
+      // Add a bit of buffer in order to allow the
+      // lines to cover the whole screen.
+      float sx, sy;
+      if (horizontal) {
+        sx = (dims.x + 1.0f) * res.cf.tileSize().x;
+        sy = 1.0f;
+      }
+      else {
+        sx = 1.0f;
+        sy = (dims.y + 1.0f) * res.cf.tileSize().y;
+      }
+
+
+      FillRectDecal(p, olc::vf2d(sx, sy), color);
+    };
+
+    // Render each line
+    olc::Pixel norm = olc::VERY_DARK_GREY;
+    olc::Pixel bold = olc::DARK_RED;
+    olc::Pixel impo = olc::WHITE;
+
+    auto colorize = [&norm, &bold, &impo](int v) {
+      if (v % 10 == 0) {
+        return impo;
+      }
+      if (v % 5 == 0) {
+        return bold;
+      }
+
+      return norm;
+    };
+
+    for (int y = min.y ; y < max.y ; ++y) {
+      for (int x = min.x ; x < max.x ; ++x) {
+        render(x, y, false, colorize(x));
+      }
+
+      render(min.x, y, true, colorize(y));
+    }
   }
 
 }

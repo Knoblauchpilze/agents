@@ -7,7 +7,7 @@ namespace mas {
   namespace environment {
 
     Agent::Agent(Animat& animat):
-      utils::CoreObject("agent"),
+      Component(Type::Agent),
 
       m_animat(animat),
       m_behavior(nullptr)

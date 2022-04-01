@@ -1,22 +1,14 @@
 #ifndef    ENVIRONMENT_HH
 # define   ENVIRONMENT_HH
 
-# include <unordered_map>
+# include <vector>
 # include <core_utils/Uuid.hh>
 # include <core_utils/CoreObject.hh>
+# include "Entity.hh"
 # include "Manager.hh"
-# include "MovingObject.hh"
-# include "Agent.hh"
-# include "Animat.hh"
 # include "PhysicEngine.hh"
 
 namespace mas {
-  namespace environment {
-
-    /// @brief - A convenience define representing an entity.
-    using Entity = utils::Uuid;
-
-  }
 
   class Environment: public utils::CoreObject {
     public:
@@ -69,38 +61,12 @@ namespace mas {
     private:
 
       /// @brief - The list of entities registered in the environment.
-      using Entities = std::unordered_set<environment::Entity>;
-
-      /// @brief - A list of the environmental objects registered in
-      /// the environment. This includes every physical object.
-      using Objects = std::vector<environment::MovingObjectShPtr>;
-
-      /// @brief - A list of agents.
-      using Agents = std::vector<environment::AgentShPtr>;
-
-      /// @brief - A list of animats: these objects ake the binding
-      /// between a brain (an agent) and its body (a moving object).
-      using Animats = std::vector<environment::Animat>;
+      using Entities = std::vector<environment::EntityShPtr>;
 
       /**
        * @brief - The list of entities registered in the world.
        */
       Entities m_entities;
-
-      /**
-       * @brief - The list of objects registered for this environment.
-       */
-      Objects m_objects;
-
-      /**
-       * @brief - The list of agents registered for this environment.
-       */
-      Agents m_agents;
-
-      /**
-       * @brief - The list of animats registered for this environment.
-       */
-      std::vector<environment::AnimatShPtr> m_animats;
 
       /**
        * @brief - The engine allowing to simulate physics in the
