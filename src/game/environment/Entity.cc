@@ -12,6 +12,8 @@ namespace mas {
 
       m_components()
     {
+      // Update the name of the entity to be its identifier.
+      setName(m_uuid.toString());
       setService("mas");
     }
 
@@ -36,6 +38,7 @@ namespace mas {
         return;
       }
 
+      log("Registering " + typeToString(comp->type()) + " component to entity", utils::Level::Info);
       m_components.push_back(comp);
     }
 

@@ -21,19 +21,19 @@ namespace {
    * @param func - the process to apply to each matching component.
    */
   void
-  iterate(const std::vector<mas::environment::EntityShPtr>& entities,
+  iterate(const std::unordered_map<utils::Uuid, mas::environment::EntityShPtr>& entities,
           const mas::environment::Type& t,
           std::function<void(mas::environment::Component&)> func) noexcept
   {
-    for (unsigned id = 0u ; id < entities.size() ; ++id) {
-      const mas::environment::Entity& e = *entities[id];
+    for (std::unordered_map<utils::Uuid, mas::environment::EntityShPtr>::const_iterator it = entities.cbegin() ; it != entities.cend() ; ++it) {
+      const mas::environment::Entity& e = *it->second;
 
-      for (eiterator it = e.begin() ; it != e.end() ; ++it) {
-        if (it->type() != t) {
+      for (eiterator eit = e.begin() ; eit != e.end() ; ++eit) {
+        if (eit->type() != t) {
           continue;
         }
 
-        func(*it);
+        func(*eit);
       }
     }
   }
@@ -55,11 +55,34 @@ namespace mas {
 
   void
   Environment::simulate(const time::Manager& manager) {
-    log("Stepping simulation for " + std::to_string(manager.lastStepDuration(time::Unit::Second)) + "second(s)");
+    log("Stepping simulation for " + std::to_string(static_cast<int>(manager.lastStepDuration(time::Unit::Second))) + " second(s)");
 
     computePreAgentsStep(manager);
     computeAgentsStep(manager);
     computePostAgentsStep(manager);
+  }
+
+  utils::Uuid
+  Environment::createEntity() noexcept {
+    environment::EntityShPtr ent = std::make_shared<environment::Entity>();
+    m_entities[ent->uuid()] = ent;
+
+    return ent->uuid();
+  }
+
+  void
+  Environment::registerComponent(const utils::Uuid& ent, environment::ComponentShPtr comp) {
+    Entities::iterator it = m_entities.find(ent);
+    if (it == m_entities.end()) {
+      warn(
+        "Failed to register component for " + ent.toString(),
+        "No such entity"
+      );
+
+      return;
+    }
+
+    it->second->add(comp);
   }
 
   void

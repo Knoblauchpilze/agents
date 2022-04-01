@@ -15,32 +15,9 @@ int
 main(int /*argc*/, char** /*argv*/) {
   // Create the logger.
   utils::StdLogger raw;
-  raw.setLevel(utils::Level::Debug);
+  raw.setLevel(utils::Level::Verbose);
   utils::PrefixedLogger logger("pge", "main");
   utils::LoggerLocator::provide(&raw);
-
-  /// TODO: Restore old code.
-  /*
-  application::sdl::SdlApplication app("Agents watcher", "65px-Stop_hand.svg[1].BMP", argc, argv);
-
-  environment::Environment env;
-  environment::drawable::EnvironmentDrawer drawable(env, utils::sdl::Area(0.0, 0.0, 13.47, 10.0), utils::sdl::Area(10.0, 10.0, 620, 460.0));
-  environment::launcher::EnvironmentLauncher launcher(10.0, 1.0 / 1.0, environment::time::Unit::Second);
-  environment::EnvironmentInitializer init(0u, 2u, utils::sdl::Area(0.0, 0.0, 10.0, 0.0));
-
-  env.addListener(&drawable);
-  app.addDrawable(&drawable);
-  app.addListener(&drawable);
-  app.addListener(&launcher);
-  app.addListener(&env.getDrawablesUpdater());
-  launcher.addRunnable(&env);
-  env.create(init);
-  launcher.start();
-
-  app.run();
-
-  launcher.stop();
-  */
 
   try {
     logger.logMessage(utils::Level::Notice, "Starting application");

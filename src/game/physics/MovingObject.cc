@@ -64,6 +64,8 @@ namespace mas {
 
       m_area.x() += tr.x();
       m_area.y() += tr.y();
+
+      log("Moving object at " + m_area.toString(), utils::Level::Verbose);
     }
 
     void

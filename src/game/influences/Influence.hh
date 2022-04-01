@@ -55,7 +55,7 @@ namespace mas {
          * @param obj - the new emitter.
          */
         void
-        setEmitter(AgentShPtr obj);
+        setEmitter(Agent* obj);
 
         /**
          * @brief - Defines a new receiver for the influence. In case
@@ -63,7 +63,7 @@ namespace mas {
          * @param obj - the new receiver.
          */
         void
-        setReceiver(MovingObjectShPtr obj);
+        setReceiver(MovingObject* obj);
 
         /**
          * @brief - Interface method to apply the influence to both the
@@ -77,12 +77,12 @@ namespace mas {
         /**
          * @brief - The emitter of the influence.
          */
-        AgentShPtr m_emitter;
+        Agent* m_emitter;
 
         /**
          * @brief - The receiver of the influence.
          */
-        MovingObjectShPtr m_receiver;
+        MovingObject* m_receiver;
     };
 
     /// @brief - A shared pointer on an influence object.

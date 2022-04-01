@@ -1,7 +1,7 @@
 #ifndef    ENVIRONMENT_HH
 # define   ENVIRONMENT_HH
 
-# include <vector>
+# include <unordered_map>
 # include <core_utils/Uuid.hh>
 # include <core_utils/CoreObject.hh>
 # include "Entity.hh"
@@ -32,6 +32,24 @@ namespace mas {
       void
       simulate(const time::Manager& manager);
 
+      /**
+       * @brief - Create a new entity and returns its identifier.
+       *          No component is attached just yet.
+       * @return - the identifier of the entity.
+       */
+      utils::Uuid
+      createEntity() noexcept;
+
+      /**
+       * @brief - Register a new component to the entity specified
+       *          by the identifier.
+       * @param ent - the identifier of the entity to which the
+       *              component will be added.
+       * @param comp - the component to add to the entity.
+       */
+      void
+      registerComponent(const utils::Uuid& ent, environment::ComponentShPtr comp);
+
     private:
 
       /**
@@ -61,7 +79,7 @@ namespace mas {
     private:
 
       /// @brief - The list of entities registered in the environment.
-      using Entities = std::vector<environment::EntityShPtr>;
+      using Entities = std::unordered_map<utils::Uuid, environment::EntityShPtr>;
 
       /**
        * @brief - The list of entities registered in the world.

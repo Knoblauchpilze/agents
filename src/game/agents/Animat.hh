@@ -20,16 +20,16 @@ namespace mas {
          * @brief - Create a new animat from the input moving object.
          * @param obj - the moving object attached to this animat.
          */
-        Animat(MovingObjectShPtr obj);
+        Animat(MovingObject* obj);
 
         /**
-         * @brief - Used to generate the agent that will be used by
-         *          this animat to think. Calling this method more
-         *          than one will return the same agent.
-         * @return - the created agent.
+         * @brief - Used to plug the input agent and attached it to
+         *          this animat as a brain. Calling this method more
+         *          than one will override any existing agent.
+         * @param agent - the agent to attach to the animat.
          */
-        AgentShPtr
-        spawnAgent();
+        void
+        plug(Agent* agent);
 
         /**
          * @brief - Return the frustum attached to this animat. This
@@ -79,13 +79,13 @@ namespace mas {
          * @brief - The agent attached to this animat. This is the
          *          brain of the animat.
          */
-        AgentShPtr m_agent;
+        Agent* m_agent;
 
         /**
          * @brief - The moving object attached to this animat. This
          *          is the body of the animat.
          */
-        MovingObjectShPtr m_body;
+        MovingObject* m_body;
 
         /**
          * @brief - The view frustum for this agent.

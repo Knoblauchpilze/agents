@@ -4,7 +4,7 @@
 namespace mas {
   namespace environment {
 
-    Animat::Animat(MovingObjectShPtr obj):
+    Animat::Animat(MovingObject* obj):
       Component(Type::Animat),
 
       m_agent(nullptr),
@@ -18,13 +18,9 @@ namespace mas {
       setService("mas");
     }
 
-    AgentShPtr
-    Animat::spawnAgent() {
-      if (m_agent == nullptr) {
-        m_agent = std::make_shared<Agent>(*this);
-      }
-
-      return m_agent;
+    void
+    Animat::plug(Agent* agent) {
+      m_agent = agent;
     }
 
     const Frustum&

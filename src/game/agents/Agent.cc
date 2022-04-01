@@ -39,6 +39,7 @@ namespace mas {
     void
     Agent::think() {
       /// TODO: Create a new behavior.
+      log("Agent is thinking very hard...", utils::Level::Verbose);
     }
 
   }

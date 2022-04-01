@@ -27,12 +27,12 @@ namespace mas {
     }
 
     void
-    Influence::setEmitter(AgentShPtr obj) {
+    Influence::setEmitter(Agent* obj) {
       m_emitter = obj;
     }
 
     void
-    Influence::setReceiver(MovingObjectShPtr obj) {
+    Influence::setReceiver(MovingObject* obj) {
       m_receiver = obj;
     }
 
