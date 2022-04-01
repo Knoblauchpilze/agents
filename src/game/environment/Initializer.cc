@@ -24,6 +24,8 @@ namespace mas {
       // Create a RNG.
       utils::RNG rng = utils::RNG::createRandomRNG();
 
+      log("Generating elements within " + m_area.toString(), utils::Level::Info);
+
       unsigned id = 0u;
       while (id < AGENTS_COUNT) {
         // Pick a position.

@@ -4,6 +4,8 @@
 # include <memory>
 # include "Component.hh"
 # include "MovingObject.hh"
+# include "olcEngine.hh"
+# include "CoordinateFrame.hh"
 
 namespace mas {
   namespace environment {
@@ -17,12 +19,28 @@ namespace mas {
          */
         Renderer(const MovingObject& obj);
 
+        /**
+         * @brief - Perform the rendering of this component using
+         *          the input engine.
+         * @param pge - the engine to use to perform the rendering.
+         * @param cf - the coordinate frame allowing to convert the
+         *             internal positions to pixel coordinates.
+         */
+        void
+        draw(olc::PixelGameEngine* pge,
+             const pge::CoordinateFrame& cf) const noexcept;
+
       private:
 
         /**
          * @brief - The moving object attached to this renderer.
          */
         const MovingObject& m_obj;
+
+        /**
+         * @brief - The color for this renderer.
+         */
+        olc::Pixel m_color;
     };
 
   }

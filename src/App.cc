@@ -227,16 +227,13 @@ namespace pge {
     while (it != env.cend()) {
       mas::environment::ComponentShPtr rd = it->get(mas::environment::Type::Renderer);
       if (rd != nullptr) {
-        drawEntity(res, *rd->as<mas::environment::Renderer>());
+        // Convert the renderer and draw it.
+        mas::environment::Renderer* rdr = rd->as<mas::environment::Renderer>();
+        rdr->draw(this, res.cf);
       }
 
       ++it;
     }
-  }
-
-  void
-  App::drawEntity(const RenderDesc& /*res*/, const mas::environment::Renderer& /*rdr*/) noexcept {
-    /// TODO: Handle rendering.
   }
 
   void

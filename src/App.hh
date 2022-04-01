@@ -119,9 +119,6 @@ namespace pge {
       drawWorld(const RenderDesc& res) noexcept;
 
       void
-      drawEntity(const RenderDesc& res, const mas::environment::Renderer& rdr) noexcept;
-
-      void
       drawGrid(const RenderDesc& res) noexcept;
 
     private:
