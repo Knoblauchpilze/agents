@@ -42,6 +42,26 @@ namespace {
 namespace mas {
   namespace time {
 
+    std::string
+    unitToString(const Unit& unit) noexcept {
+      switch (unit) {
+        case Unit::Nanosecond:
+          return "nanosecond";
+        case Unit::Millisecond:
+          return "millisecond";
+        case Unit::Second:
+          return "second";
+        case Unit::Minute:
+          return "minute";
+        case Unit::Hour:
+          return "hour";
+        case Unit::Day:
+          return "day";
+        default:
+          return "unknown";
+      }
+    }
+
     Manager::Manager(float origin, const Unit& unit):
       utils::CoreObject("time"),
 

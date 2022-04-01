@@ -17,6 +17,14 @@ namespace mas {
       Day
     };
 
+    /**
+     * @brief - Convert a time unit to a human readable string.
+     * @param unit - the unit to convert.
+     * @return - the string representing the unit.
+     */
+    std::string
+    unitToString(const Unit& unit) noexcept;
+
     class Manager: public utils::CoreObject {
       public:
 
