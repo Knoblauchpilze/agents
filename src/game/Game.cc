@@ -16,7 +16,10 @@ namespace pge {
       }
     ),
 
-    m_menus()
+    m_menus(),
+
+    m_env(),
+    m_launcher(&m_env, 1.0f, 1.0f, mas::time::Unit::Second)
   {
     setService("game");
   }
@@ -47,7 +50,7 @@ namespace pge {
       return true;
     }
 
-    log("Perform step method of the game", utils::Level::Info);
+    /// TODO: Handle step of game.
 
     updateUI();
 
@@ -67,6 +70,31 @@ namespace pge {
   }
 
   void
+  Game::startSimulation() {
+    m_launcher.start();
+  }
+
+  void
+  Game::pauseSimulation() {
+    m_launcher.pause();
+  }
+
+  void
+  Game::resumeSimulation() {
+    m_launcher.resume();
+  }
+
+  void
+  Game::stopSimulation() {
+    m_launcher.stop();
+  }
+
+  void
+  Game::stepSimulation() {
+    m_launcher.step();
+  }
+
+  void
   Game::enable(bool enable) {
     m_state.disabled = !enable;
 
@@ -80,7 +108,7 @@ namespace pge {
 
   void
   Game::updateUI() {
-    log("Perform update of UI menus", utils::Level::Info);
+    /// TODO: Handle update of UI.
   }
 
   bool

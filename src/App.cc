@@ -64,8 +64,24 @@ namespace pge {
       m_game->performAction(tp.x + it.x, tp.y + it.y);
     }
 
+    if (c.keys[controls::keys::G]) {
+      m_game->startSimulation();
+    }
+
     if (c.keys[controls::keys::P]) {
-      m_game->togglePause();
+      m_game->pauseSimulation();
+    }
+
+    if (c.keys[controls::keys::R]) {
+      m_game->resumeSimulation();
+    }
+
+    if (c.keys[controls::keys::S]) {
+      m_game->stopSimulation();
+    }
+
+    if (c.keys[controls::keys::N]) {
+      m_game->stepSimulation();
     }
   }
 
@@ -98,7 +114,7 @@ namespace pge {
     // Generate the game state.
     m_state = std::make_shared<GameState>(
       olc::vi2d(ScreenWidth(), ScreenHeight()),
-      Screen::Home
+      Screen::Game
     );
 
     m_menus = m_game->generateMenus(ScreenWidth(), ScreenHeight());

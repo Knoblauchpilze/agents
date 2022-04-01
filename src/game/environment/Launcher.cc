@@ -92,7 +92,9 @@ namespace mas {
     m_simThreadLocker.lock();
 
     if (m_simThread == nullptr) {
-      // Bad state
+      m_simThreadLocker.unlock();
+
+      // Bad state.
       if (m_state != State::None && m_state != State::Stopped) {
         m_simThread.reset();
         error(
@@ -117,6 +119,23 @@ namespace mas {
         "Reached unexpected state " + stateToString(m_state)
       );
     }
+  }
+
+  void
+  Launcher::step() {
+    Guard guard(m_simThreadLocker);
+
+    // Can't step if the simulation is running.
+    if (m_state != State::Paused && m_state != State::Stopped && m_state != State::None) {
+      warn(
+        "Failed to simulate a single step",
+        "Unexpected simulation state " + stateToString(m_state)
+      );
+      return;
+    }
+
+    log("Performing single simulation step", utils::Level::Info);
+    simulate(false);
   }
 
   void
@@ -152,7 +171,7 @@ namespace mas {
           break;
         case State::Running:
           m_simThreadLocker.unlock();
-          step();
+          simulate(true);
           break;
         default:
           // Not handled or nothing to do (e.g. Paused).
@@ -163,7 +182,7 @@ namespace mas {
   }
 
   void
-  Launcher::step() {
+  Launcher::simulate(bool sleep) {
     // Update the time manager by one increment.
     m_time.increment(m_step, m_stepUnit);
 
@@ -178,9 +197,9 @@ namespace mas {
       return;
     }
 
-    // Wait for a bit.
+    // Wait for a bit if needed.
     utils::Duration remaining = expected - d;
-    if (remaining > utils::toMilliseconds(MINIMUM_SLEEP_TIME)) {
+    if (sleep && remaining > utils::toMilliseconds(MINIMUM_SLEEP_TIME)) {
       std::this_thread::sleep_for(remaining);
     }
   }

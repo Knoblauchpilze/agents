@@ -79,6 +79,14 @@ namespace mas {
       void
       stop();
 
+      /**
+       * @brief - Perform a single simulation step. Nothing happens
+       *          in case the simulation is running. Otherwise the
+       *          state is restored to its previous state.
+       */
+      void
+      step();
+
     private:
 
       /**
@@ -90,10 +98,15 @@ namespace mas {
       asynchronousRunningLoop();
 
       /**
-       * @brief - Used to run a single simulation step.
+       * @brief - Used to run a single simulation step. The input
+       *          boolean indicates whether the method should make
+       *          the current thread sleep in order to maintain
+       *          the desired FPS or not.
+       * @param sleep - `true` if the FPS should be considered or
+       *                not.
        */
       void
-      step();
+      simulate(bool sleep);
 
     private:
 

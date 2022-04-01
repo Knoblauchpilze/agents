@@ -5,6 +5,8 @@
 # include <memory>
 # include <core_utils/CoreObject.hh>
 # include <core_utils/TimeUtils.hh>
+# include "Environment.hh"
+# include "Launcher.hh"
 
 namespace pge {
 
@@ -109,6 +111,36 @@ namespace pge {
       void
       resume();
 
+      /**
+       * @brief - Request the simulation to start.
+       */
+      void
+      startSimulation();
+
+      /**
+       * @brief - Request the simulation to pause.
+       */
+      void
+      pauseSimulation();
+
+      /**
+       * @brief - Request the simulation to resume.
+       */
+      void
+      resumeSimulation();
+
+      /**
+       * @brief - Request the simulation to stop.
+       */
+      void
+      stopSimulation();
+
+      /**
+       * @brief - Request the simulation to advance a single step.
+       */
+      void
+      stepSimulation();
+
     private:
 
       /**
@@ -195,6 +227,16 @@ namespace pge {
        *          current state of the simulation.
        */
       Menus m_menus;
+
+      /**
+       * @brief - The environment simulated by the game.
+       */
+      mas::Environment m_env;
+
+      /**
+       * @brief - The launcher used to simuate the environment.
+       */
+      mas::Launcher m_launcher;
   };
 
   using GameShPtr = std::shared_ptr<Game>;

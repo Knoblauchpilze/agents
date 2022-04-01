@@ -23,6 +23,8 @@ namespace mas {
 
   void
   Environment::simulate(const time::Manager& manager) {
+    log("Stepping simulation for " + std::to_string(manager.lastStepDuration(time::Unit::Second)) + "second(s)");
+
     computePreAgentsStep(manager);
     computeAgentsStep(manager);
     computePostAgentsStep(manager);
