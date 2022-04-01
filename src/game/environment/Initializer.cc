@@ -3,6 +3,7 @@
 # include <core_utils/RNG.hh>
 # include "Environment.hh"
 # include "Animat.hh"
+# include "Renderer.hh"
 
 /// @brief - How many objects are spawned at the beginning.
 # define AGENTS_COUNT 1u
@@ -34,7 +35,7 @@ namespace mas {
         log("Spawning agent at " + std::to_string(x) + "x" + std::to_string(y));
 
         // An agent should be assigned a moving object, an
-        // animat and its brain.
+        // animat, its brain, and a renderer.
         utils::Boxf area(x, y, 1.0f, 1.0f);
         RigidBody rb(1.0f, 1.0f, area);
 
@@ -47,6 +48,9 @@ namespace mas {
         ComponentShPtr ag = std::make_shared<Agent>(*ani->as<Animat>());
         ani->as<Animat>()->plug(ag->as<Agent>());
         env.registerComponent(uuid, ag);
+
+        ComponentShPtr rend = std::make_shared<Renderer>(*mo->as<MovingObject>());
+        env.registerComponent(uuid, rend);
 
         ++id;
       }

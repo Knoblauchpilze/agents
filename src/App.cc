@@ -1,6 +1,5 @@
 
 # include "App.hh"
-# include <maths_utils/ComparisonUtils.hh>
 
 namespace pge {
 
@@ -218,8 +217,26 @@ namespace pge {
   }
 
   void
-  App::drawWorld(const RenderDesc& /*res*/) noexcept {
-    /// TODO: Handle this.
+  App::drawWorld(const RenderDesc& res) noexcept {
+    // Retrieve an iterator on the entities registered in the
+    // environment. We will iterate and render all the ones
+    // which have a renderer component.
+    const mas::Environment& env = m_game->environment();
+    mas::Environment::const_iterator it = env.cbegin();
+
+    while (it != env.cend()) {
+      mas::environment::ComponentShPtr rd = it->get(mas::environment::Type::Renderer);
+      if (rd != nullptr) {
+        drawEntity(res, *rd->as<mas::environment::Renderer>());
+      }
+
+      ++it;
+    }
+  }
+
+  void
+  App::drawEntity(const RenderDesc& /*res*/, const mas::environment::Renderer& /*rdr*/) noexcept {
+    /// TODO: Handle rendering.
   }
 
   void

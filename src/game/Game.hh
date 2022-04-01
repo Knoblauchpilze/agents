@@ -141,6 +141,13 @@ namespace pge {
       void
       stepSimulation();
 
+      /**
+       * @brief - Return the environment managed by this game.
+       * @return - a reference to the environment.
+       */
+      const mas::Environment&
+      environment() const noexcept;
+
     private:
 
       /**

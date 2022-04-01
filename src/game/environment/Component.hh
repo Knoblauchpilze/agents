@@ -12,6 +12,7 @@ namespace mas {
       MovingObject,
       Agent,
       Animat,
+      Renderer,
     };
 
     /**

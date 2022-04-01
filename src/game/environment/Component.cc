@@ -13,6 +13,8 @@ namespace mas {
           return "agent";
         case Type::Animat:
           return "animat";
+        case Type::Renderer:
+          return "renderer";
         default:
           return "unknown";
       }

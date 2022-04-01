@@ -42,6 +42,12 @@ namespace pge {
     m_state.paused = false;
   }
 
+  inline
+  const mas::Environment&
+  Game::environment() const noexcept {
+    return m_env;
+  }
+
 }
 
 #endif    /* GAME_HXX */

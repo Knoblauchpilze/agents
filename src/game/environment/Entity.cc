@@ -78,6 +78,20 @@ namespace mas {
       }
     }
 
+    ComponentShPtr
+    Entity::get(const Type& t) const noexcept {
+      unsigned id = 0u;
+
+      while (id < m_components.size()) {
+        if (m_components[id]->type() == t) {
+          return m_components[id];
+        }
+        ++id;
+      }
+
+      return nullptr;
+    }
+
     Entity::iterator
     Entity::begin() const noexcept {
       return iterator(this, 0u);
@@ -116,7 +130,7 @@ namespace mas {
     Entity::iterator&
     Entity::iterator::operator++() noexcept {
       ++m_current;
-	    return *this;
+      return *this;
     }
 
     Entity::iterator

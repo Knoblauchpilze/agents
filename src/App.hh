@@ -6,6 +6,7 @@
 # include "Menu.hh"
 # include "Game.hh"
 # include "GameState.hh"
+# include "Renderer.hh"
 
 namespace pge {
 
@@ -116,6 +117,9 @@ namespace pge {
 
       void
       drawWorld(const RenderDesc& res) noexcept;
+
+      void
+      drawEntity(const RenderDesc& res, const mas::environment::Renderer& rdr) noexcept;
 
       void
       drawGrid(const RenderDesc& res) noexcept;

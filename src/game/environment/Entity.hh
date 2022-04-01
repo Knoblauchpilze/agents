@@ -56,6 +56,18 @@ namespace mas {
         void
         erase(const Type& kind);
 
+        /**
+         * @brief - Attempt to fetch the component representing the input
+         *          type among the ones registered in the entity. In case
+         *          none can be found, a null pointer is returned.
+         *          Also note that the first component of the specified
+         *          kind is returned.
+         * @param t - the type of component to look for.
+         * @return - the corresponding component or null.
+         */
+        ComponentShPtr
+        get(const Type& t) const noexcept;
+
         /// @brief - An iterator to handle the components of an entity
         /// in a simple and intuitive way.
         class iterator {
@@ -138,8 +150,7 @@ namespace mas {
 
         /**
          * @brief - Return an iterator on the components attached to the
-         *          entity with the specified type.
-         * @param t - the type of components to iterate onto.
+         *          entity.
          * @return - an iterator for this entity.
          */
         iterator
@@ -147,8 +158,7 @@ namespace mas {
 
         /**
          * @brief - Return an iterator on the components attached to the
-         *          entity with the specified type but past the end.
-         * @param t - the type of components to iterate onto.
+         *          entity but past the end.
          * @return - an iterator for this entity.
          */
         iterator

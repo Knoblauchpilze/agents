@@ -146,4 +146,49 @@ namespace mas {
     );
   }
 
+  Environment::const_iterator
+  Environment::cbegin() const noexcept {
+    return const_iterator(m_entities.cbegin());
+  }
+
+  Environment::const_iterator
+  Environment::cend() const noexcept {
+    return const_iterator(m_entities.cend());
+  }
+
+  Environment::const_iterator::const_iterator(Entities::const_iterator it) noexcept:
+    m_current(it)
+  {}
+
+  bool
+  Environment::const_iterator::operator==(const const_iterator& rhs) const noexcept {
+    return m_current == rhs.m_current;
+  }
+
+  bool
+  Environment::const_iterator::operator!=(const const_iterator& rhs) const noexcept {
+    return !operator==(rhs);
+  }
+
+  const environment::Entity&
+  Environment::const_iterator::operator*() const noexcept {
+    return *m_current->second;
+  }
+
+  environment::EntityShPtr
+  Environment::const_iterator::operator->() const noexcept {
+    return m_current->second;
+  }
+
+  Environment::const_iterator&
+  Environment::const_iterator::operator++() noexcept {
+    ++m_current;
+    return *this;
+  }
+
+  Environment::const_iterator
+  Environment::const_iterator::operator++(int) noexcept {
+    return const_iterator(m_current++);
+  }
+
 }

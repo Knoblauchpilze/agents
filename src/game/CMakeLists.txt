@@ -26,11 +26,11 @@ add_subdirectory (
 	)
 
 add_subdirectory (
-	${CMAKE_CURRENT_SOURCE_DIR}/objects
+	${CMAKE_CURRENT_SOURCE_DIR}/physics
 	)
 
 add_subdirectory (
-	${CMAKE_CURRENT_SOURCE_DIR}/physics
+	${CMAKE_CURRENT_SOURCE_DIR}/rendering
 	)
 
 add_subdirectory (
