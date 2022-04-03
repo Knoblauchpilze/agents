@@ -92,6 +92,11 @@ namespace mas {
       return nullptr;
     }
 
+    bool
+    Entity::hasComponent(const Type& t) const noexcept {
+      return get(t) != nullptr;
+    }
+
     void
     Entity::update() {
       for (unsigned id = 0u ; id < m_components.size() ; ++id) {

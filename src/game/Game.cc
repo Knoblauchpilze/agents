@@ -196,8 +196,7 @@ namespace pge {
     int sp = static_cast<int>(std::round(m_state.speed));
     m_menus.speed->setText("Speed: x" + std::to_string(sp));
 
-    /// TODO: Handle agents count.
-    unsigned c = 0u;
+    unsigned c = m_env.agents();
     std::string str = std::to_string(c) + " agent";
     if (c != 1u) {
       str += "s";

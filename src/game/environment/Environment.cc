@@ -68,6 +68,22 @@ namespace mas {
     computePostAgentsStep(manager);
   }
 
+  unsigned
+  Environment::agents() const noexcept {
+    Entities::const_iterator it = m_entities.cbegin();
+    unsigned count = 0u;
+
+    while (it != m_entities.cend()) {
+      if (it->second->hasComponent(environment::Type::Agent)) {
+        ++count;
+      }
+
+      ++it;
+    }
+
+    return count;
+  }
+
   utils::Uuid
   Environment::createEntity() noexcept {
     environment::EntityShPtr ent = std::make_shared<environment::Entity>();

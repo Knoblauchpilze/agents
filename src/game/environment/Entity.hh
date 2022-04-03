@@ -69,6 +69,16 @@ namespace mas {
         get(const Type& t) const noexcept;
 
         /**
+         * @brief - Whether or not this entity has a component of the input
+         *          type.
+         * @param t - the type of the component to look for.
+         * @return - whether or not the entity defines at least a component
+         *           of a certain type.
+         */
+        bool
+        hasComponent(const Type& t) const noexcept;
+
+        /**
          * @brief - Update the components of the entity.
          */
         void

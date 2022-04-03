@@ -33,6 +33,15 @@ namespace mas {
       simulate(const time::Manager& manager);
 
       /**
+       * @brief - The number of agents currently registered in the
+       *          simulation. We consider every entity having at
+       *          least an agent component.
+       * @return - the number of agents.
+       */
+      unsigned
+      agents() const noexcept;
+
+      /**
        * @brief - Create a new entity and returns its identifier.
        *          No component is attached just yet.
        * @return - the identifier of the entity.
