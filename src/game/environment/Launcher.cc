@@ -59,6 +59,23 @@ namespace mas {
   }
 
   void
+  Launcher::setDesiredFramerate(float fps) {
+    if (fps <= 0.0f) {
+      warn(
+        "Failed to set desired framerate to " + std::to_string(fps),
+        "Invalid value"
+      );
+
+      return;
+    }
+
+    Guard guard(m_simThreadLocker);
+    m_desiredFPS = fps;
+
+    log("Setting desired framerate to " + std::to_string(static_cast<int>(m_desiredFPS)), utils::Level::Info);
+  }
+
+  void
   Launcher::start() {
     Guard guard(m_simThreadLocker);
     if (m_state != State::None && m_state != State::Stopped) {
@@ -135,7 +152,7 @@ namespace mas {
     }
 
     log("Performing single simulation step", utils::Level::Info);
-    simulate(false);
+    simulate(false, m_desiredFPS);
   }
 
   void
@@ -149,7 +166,11 @@ namespace mas {
     // Run simulation steps
     bool done = false;
     while (!done) {
-      // Handle stop, pause and resume request
+      // Handle stop, pause and resume requests. Note that
+      // we can't use a lock guard as we may potentially
+      // sleep for a bit in the `simulate` method so we
+      // release the lock to allow other processes to modify
+      // the internal values.
       m_simThreadLocker.lock();
 
       switch (m_state) {
@@ -169,10 +190,11 @@ namespace mas {
           m_simThreadLocker.unlock();
           done = true;
           break;
-        case State::Running:
+        case State::Running: {
+          float desiredFPS = m_desiredFPS;
           m_simThreadLocker.unlock();
-          simulate(true);
-          break;
+          simulate(true, desiredFPS);
+          } break;
         default:
           // Not handled or nothing to do (e.g. Paused).
           m_simThreadLocker.unlock();
@@ -182,7 +204,7 @@ namespace mas {
   }
 
   void
-  Launcher::simulate(bool sleep) {
+  Launcher::simulate(bool sleep, float desiredFPS) {
     // Update the time manager by one increment.
     m_time.increment(m_step, m_stepUnit);
 
@@ -191,7 +213,7 @@ namespace mas {
     m_env->simulate(m_time);
     utils::Duration d = utils::now() - s;
 
-    utils::Duration expected = utils::toMilliseconds(1000.0f / m_desiredFPS);
+    utils::Duration expected = utils::toMilliseconds(1000.0f / desiredFPS);
     if (d > expected) {
       warn("Took " + utils::durationToString(d) + "ms to compute frame, expected " + utils::durationToString(expected) + "ms");
       return;

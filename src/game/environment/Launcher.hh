@@ -52,6 +52,14 @@ namespace mas {
       ~Launcher();
 
       /**
+       * @brief - Define a new value for the desired FPS. Nothing
+       *          happens if te framerate is negative or zero.
+       * @param fps - the desired framerate.
+       */
+      void
+      setDesiredFramerate(float fps);
+
+      /**
        * @brief - Start the simulation. Nothing happens in case
        *          it is already running.
        */
@@ -102,11 +110,14 @@ namespace mas {
        *          boolean indicates whether the method should make
        *          the current thread sleep in order to maintain
        *          the desired FPS or not.
+       *          Note that we put the desired FPS in parameter to
+       *          have a state less function.
        * @param sleep - `true` if the FPS should be considered or
        *                not.
+       * @param desiredFPS - the desired framerate to maintain.
        */
       void
-      simulate(bool sleep);
+      simulate(bool sleep, float desiredFPS);
 
     private:
 

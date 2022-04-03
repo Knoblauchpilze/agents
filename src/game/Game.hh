@@ -112,6 +112,14 @@ namespace pge {
       resume();
 
       /**
+       * @brief - Used to change the speed of the simulation
+       *          or reduce it in case it is already at its
+       *          maximum value.
+       */
+      void
+      speedUpSimulation() noexcept;
+
+      /**
        * @brief - Request the simulation to start.
        */
       void
@@ -217,11 +225,19 @@ namespace pge {
         // be performed anymore and usually indicates that a
         // termination request has been received.
         bool terminated;
+
+        // The current speed of the simulation.
+        float speed;
       };
 
       /// @brief - Convenience structure allowing to regroup
       /// all info about the menu in a single struct.
       struct Menus {
+        // The number of agents in the simulation.
+        MenuShPtr count;
+
+        // The speed of the current simulation.
+        MenuShPtr speed;
       };
 
       /**
