@@ -92,6 +92,13 @@ namespace mas {
       return nullptr;
     }
 
+    void
+    Entity::update() {
+      for (unsigned id = 0u ; id < m_components.size() ; ++id) {
+        m_components[id]->update();
+      }
+    }
+
     Entity::iterator
     Entity::begin() const noexcept {
       return iterator(this, 0u);

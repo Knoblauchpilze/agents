@@ -16,6 +16,9 @@ namespace mas {
     }
 
     void
+    Agent::update() {}
+
+    void
     Agent::live() {
       // Check whether some behaviours are available.
       if (m_behavior == nullptr) {

@@ -31,7 +31,7 @@ namespace mas {
       // Detect whether each body is in collision with any
       // other body.
       for (unsigned id = 0u ; id < m_objects.size() ; ++id) {
-        MovingObjectShPtr lhs = m_objects[id];
+        MovingObject* lhs = m_objects[id];
 
         // We only traverse the end of the list as the bodies
         // that are before the current one have been processed
@@ -42,7 +42,7 @@ namespace mas {
             continue;
           }
 
-          MovingObjectShPtr rhs = m_objects[id2];
+          MovingObject* rhs = m_objects[id2];
           if (lhs->intersects(*rhs)) {
             out.push_back(Collision(lhs, rhs));
           }

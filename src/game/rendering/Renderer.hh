@@ -20,6 +20,14 @@ namespace mas {
         Renderer(const MovingObject& obj);
 
         /**
+         * @brief - Implementation of the interface method to handle
+         *          the update of this component with the underlying
+         *          data.
+         */
+        void
+        update() override;
+
+        /**
          * @brief - Perform the rendering of this component using
          *          the input engine.
          * @param pge - the engine to use to perform the rendering.

@@ -5,12 +5,12 @@
 namespace {
 
   intptr_t
-  generateKey(const mas::environment::MovingObjectShPtr& b) noexcept {
+  generateKey(const mas::environment::MovingObject* b) noexcept {
     if (b == nullptr) {
       return 0u;
     }
 
-    return reinterpret_cast<intptr_t>(b.get());
+    return reinterpret_cast<intptr_t>(b);
   }
 
 }
@@ -28,7 +28,7 @@ namespace mas {
     }
 
     void
-    PhysicEngine::registerObject(MovingObjectShPtr obj) {
+    PhysicEngine::registerObject(MovingObject* obj) {
       if (obj == nullptr) {
         return;
       }
@@ -44,7 +44,7 @@ namespace mas {
     }
 
     void
-    PhysicEngine::unregisterObject(MovingObjectShPtr obj) {
+    PhysicEngine::unregisterObject(MovingObject* obj) {
       if (obj == nullptr) {
         return;
       }
@@ -56,7 +56,7 @@ namespace mas {
       }
 
       Objects::iterator it = std::remove_if(m_objects.begin(), m_objects.end(),
-        [&k](const MovingObjectShPtr& o) {
+        [&k](const MovingObject* o) {
           return generateKey(o) == k;
         }
       );

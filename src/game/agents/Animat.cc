@@ -10,12 +10,16 @@ namespace mas {
       m_agent(nullptr),
       m_body(obj),
 
-      /// TODO: Update bbox for frustum.
       m_frustum(obj->bbox()),
       m_perceptions(),
       m_influences()
     {
       setService("mas");
+    }
+
+    void
+    Animat::update() {
+      m_frustum = Frustum(m_body->bbox());
     }
 
     void

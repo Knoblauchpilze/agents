@@ -18,6 +18,9 @@ namespace mas {
       setService("mas");
     }
 
+    void
+    MovingObject::update() {}
+
     const utils::Boxf&
     MovingObject::bbox() const noexcept {
       return m_area;

@@ -53,6 +53,16 @@ namespace mas {
         T*
         as() noexcept;
 
+        /**
+         * @brief - Perform the update of the component so that it is up
+         *          to date with the underlying data that it might be
+         *          using.
+         *          This method should be implemented by inheriting classes
+         *          so that a specific behavior is provided.
+         */
+        virtual void
+        update() = 0;
+
       protected:
 
         /**

@@ -22,6 +22,9 @@ namespace mas {
     }
 
     void
+    Renderer::update() {}
+
+    void
     Renderer::draw(olc::PixelGameEngine* pge,
                    const pge::CoordinateFrame& cf) const noexcept
     {

@@ -23,6 +23,14 @@ namespace mas {
         Animat(MovingObject* obj);
 
         /**
+         * @brief - Implementation of the interface method to handle
+         *          the update of this component with the underlying
+         *          data.
+         */
+        void
+        update() override;
+
+        /**
          * @brief - Used to plug the input agent and attached it to
          *          this animat as a brain. Calling this method more
          *          than one will override any existing agent.

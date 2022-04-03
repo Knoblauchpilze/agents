@@ -82,6 +82,13 @@ namespace mas {
       return;
     }
 
+    // Register the object in the physic engine if needed.
+    if (comp->type() == environment::Type::MovingObject) {
+      m_physic.registerObject(comp->as<environment::MovingObject>());
+    }
+    /// TODO: Register component in physic engine in case it is
+    /// a moving object.
+
     it->second->add(comp);
   }
 
@@ -144,6 +151,11 @@ namespace mas {
         c.as<environment::MovingObject>()->simulate(manager);
       }
     );
+
+    // Update all entities and their components.
+    for (Entities::iterator it = m_entities.begin() ; it != m_entities.end() ; ++it) {
+      it->second->update();
+    }
   }
 
   Environment::const_iterator

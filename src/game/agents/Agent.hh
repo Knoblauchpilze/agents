@@ -25,6 +25,14 @@ namespace mas {
         Agent(Animat& animat);
 
         /**
+         * @brief - Implementation of the interface method to handle
+         *          the update of this component with the underlying
+         *          data.
+         */
+        void
+        update() override;
+
+        /**
          * @brief - Evaluate the decisions to take for this agent.
          *          This uses the data propagated in the body of
          *          the agent (which is its representation in the

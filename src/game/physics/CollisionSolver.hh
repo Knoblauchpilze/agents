@@ -9,7 +9,7 @@ namespace mas {
   namespace environment {
 
     /// @brief - A collection of moving objects.
-    using Objects = std::vector<MovingObjectShPtr>;
+    using Objects = std::vector<MovingObject*>;
 
     class CollisionSolver: public utils::CoreObject {
       public:
@@ -33,7 +33,7 @@ namespace mas {
 
         /// @brief - A collision: this represents a pair of objects which
         /// are in collision.
-        using Collision = std::pair<MovingObjectShPtr, MovingObjectShPtr>;
+        using Collision = std::pair<MovingObject*, MovingObject*>;
 
         /// @brief - A list of potential collisions.
         using Collisions = std::vector<Collision>;

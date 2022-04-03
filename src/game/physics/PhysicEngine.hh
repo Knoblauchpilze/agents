@@ -25,7 +25,7 @@ namespace mas {
          * @param obj - the object to register.
          */
         void
-        registerObject(MovingObjectShPtr obj);
+        registerObject(MovingObject* obj);
 
         /**
          * @brief - Unregister the input objecr from the list of bodies
@@ -34,7 +34,7 @@ namespace mas {
          * @param obj - the object to unregister.
          */
         void
-        unregisterObject(MovingObjectShPtr obj);
+        unregisterObject(MovingObject* obj);
 
         /**
          * @brief - Simulate the objects managed by the engine by handling

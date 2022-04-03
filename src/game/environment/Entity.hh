@@ -68,6 +68,12 @@ namespace mas {
         ComponentShPtr
         get(const Type& t) const noexcept;
 
+        /**
+         * @brief - Update the components of the entity.
+         */
+        void
+        update();
+
         /// @brief - An iterator to handle the components of an entity
         /// in a simple and intuitive way.
         class iterator {

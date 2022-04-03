@@ -23,6 +23,14 @@ namespace mas {
                      const RigidBody& body);
 
         /**
+         * @brief - Implementation of the interface method to handle
+         *          the update of this component with the underlying
+         *          data.
+         */
+        void
+        update() override;
+
+        /**
          * @brief - The bounding box attached to this object.
          * @return - the bounding box of the object.
          */
