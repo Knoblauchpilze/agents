@@ -112,8 +112,6 @@ namespace pge {
       return true;
     }
 
-    /// TODO: Handle step of game.
-
     updateUI();
 
     return true;
