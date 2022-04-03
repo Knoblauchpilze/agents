@@ -86,8 +86,6 @@ namespace mas {
     if (comp->type() == environment::Type::MovingObject) {
       m_physic.registerObject(comp->as<environment::MovingObject>());
     }
-    /// TODO: Register component in physic engine in case it is
-    /// a moving object.
 
     it->second->add(comp);
   }
