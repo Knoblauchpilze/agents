@@ -4,6 +4,7 @@
 # include <unordered_map>
 # include <core_utils/Uuid.hh>
 # include <core_utils/CoreObject.hh>
+# include <core_utils/RNG.hh>
 # include "Entity.hh"
 # include "Manager.hh"
 # include "PhysicEngine.hh"
@@ -185,6 +186,13 @@ namespace mas {
 
       /// @brief - Allow the iterator class to access to this one.
       friend class const_iterator;
+
+      /**
+       * @brief - The random number generator associated to this
+       *          environment. Propagated to other components so
+       *          that we have a single source of randomness.
+       */
+      utils::RNG m_rng;
 
       /**
        * @brief - The list of entities registered in the world.

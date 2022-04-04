@@ -45,6 +45,8 @@ namespace mas {
   Environment::Environment():
     utils::CoreObject("environment"),
 
+    m_rng(),
+
     m_entities(),
     m_physic()
   {
@@ -57,10 +59,11 @@ namespace mas {
   Environment::simulate(const time::Manager& manager) {
     log(
       "Stepping simulation for " +
-      std::to_string(static_cast<int>(manager.lastStepDuration(time::Unit::Second))) +
-      " second(s)" +
-      " (elapsed: " + std::to_string(static_cast<int>(manager.elapsed(time::Unit::Second))) +
-      " second(s))"
+      std::to_string(static_cast<int>(manager.lastStepDuration(time::Unit::Millisecond))) +
+      " millisecond(s)" +
+      " (elapsed: " + std::to_string(static_cast<int>(manager.elapsed(time::Unit::Millisecond))) +
+      " millisecond(s))",
+      utils::Level::Verbose
     );
 
     computePreAgentsStep(manager);
@@ -125,6 +128,7 @@ namespace mas {
         iterate(m_entities, environment::Type::MovingObject,
           [&pps, &frustum](environment::Component& c) {
             environment::MovingObject* obj = c.as<environment::MovingObject>();
+            /// TODO: Ignore the body of the agent in the perceptions.
             if (obj != nullptr && frustum.visible(*obj)) {
               pps.push_back(environment::Perception(*obj));
             }
@@ -137,10 +141,10 @@ namespace mas {
   }
 
   void
-  Environment::computeAgentsStep(const time::Manager& /*manager*/) {
+  Environment::computeAgentsStep(const time::Manager& manager) {
     iterate(m_entities, environment::Type::Agent,
-      [](environment::Component& c) {
-        c.as<environment::Agent>()->live();
+      [&manager, this](environment::Component& c) {
+        c.as<environment::Agent>()->live(manager, m_rng);
       }
     );
   }

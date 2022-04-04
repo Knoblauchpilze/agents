@@ -6,6 +6,7 @@
 # include <maths_utils/Point2.hh>
 # include "Influence.hh"
 # include "Perception.hh"
+# include "AgentData.hh"
 
 namespace mas {
   namespace environment {
@@ -33,27 +34,18 @@ namespace mas {
          *          of perceptions. We expect any inheriting class
          *          to return a list of influences (which defines the
          *          set of actions to perform for the behavior).
+         * @param data - the data describing the agent.
          * @param perceptions - the list of perceptions.
+         * @param manager - information about the time at the moment
+         *                  of the execution of the behavior.
          * @return - the list of influences defining the output of
          *           this behavior.
          */
         virtual
         std::vector<InfluenceShPtr>
-        perform(const Perceptions& perceptions) = 0;
-
-      protected:
-
-        /**
-         * @brief - Return the nearest point from the input position
-         *          to the perception but still belonging to the
-         *          perception.
-         * @param p - the point from which the nearest point should
-         *            be computed.
-         * @param perception - the perception to compute.
-         * @return - a point representing the nearest position.
-         */
-        utils::Point2f
-        nearest(const utils::Point2f& p, const Perception& perception) const noexcept;
+        perform(const AgentData& data,
+                const Perceptions& perceptions,
+                const time::Manager& manager) = 0;
     };
 
     using BehaviorShPtr = std::shared_ptr<Behavior>;

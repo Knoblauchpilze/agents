@@ -56,7 +56,7 @@ namespace pge {
     m_menus(),
 
     m_env(),
-    m_launcher(&m_env, 1.0f, 1.0f, mas::time::Unit::Second)
+    m_launcher(&m_env, 10.0f, 100.0f, mas::time::Unit::Millisecond)
   {
     setService("game");
 

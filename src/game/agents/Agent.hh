@@ -2,7 +2,9 @@
 # define   AGENT_HH
 
 # include <memory>
+# include <core_utils/RNG.hh>
 # include "Component.hh"
+# include "Manager.hh"
 
 namespace mas {
   namespace environment {
@@ -37,18 +39,23 @@ namespace mas {
          *          This uses the data propagated in the body of
          *          the agent (which is its representation in the
          *          world) and output influences.
+         * @param manager - information about the time at the moment
+         *                  of the execution of this method.
+         * @param rng - a device to produce random number generator.
          */
         void
-        live();
+        live(const time::Manager& manager,
+             utils::RNG& rng);
 
       private:
 
         /**
          * @brief - Used to create a new behavior which will be then
          *          followed by the agent.
+         * @param rng - a source of randomness.
          */
         void
-        think();
+        think(utils::RNG& rng);
 
       private:
 

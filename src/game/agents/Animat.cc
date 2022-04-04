@@ -65,5 +65,14 @@ namespace mas {
       m_perceptions.swap(perceptions);
     }
 
+    AgentData
+    Animat::data() const noexcept {
+      return AgentData{
+        m_body->bbox(),        // area
+        m_body->speed(),       // speed
+        m_body->acceleration() // accel
+      };
+    }
+
   }
 }

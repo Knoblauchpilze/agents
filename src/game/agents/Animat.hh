@@ -9,6 +9,7 @@
 # include "Frustum.hh"
 # include "Agent.hh"
 # include "Component.hh"
+# include "AgentData.hh"
 
 namespace mas {
   namespace environment {
@@ -80,6 +81,14 @@ namespace mas {
          */
         void
         perceive(Perceptions& perceptions);
+
+        /**
+         * @brief - Retrieve the properties of the animat that can be
+         *          used for the behaviors processing.
+         * @return - the data related to the behavior.
+         */
+        AgentData
+        data() const noexcept;
 
       private:
 
