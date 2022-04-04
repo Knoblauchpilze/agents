@@ -8,14 +8,19 @@
 namespace mas {
   namespace environment {
 
+    /// @brief - A convenience define representing a callback for
+    /// the application of an influence on the receiver.
+    using InflucenceCallback = std::function<void(MovingObject&)>;
+
     class Influence {
       public:
 
         /**
          * @brief - Create a new empty influence. This will have
          *          no impact.
+         * @param cb - the callback defining this influence.
          */
-        Influence();
+        Influence(InflucenceCallback cb);
 
         /**
          * @brief - Destruction of the object to allow virtual
@@ -30,24 +35,6 @@ namespace mas {
          */
         bool
         valid() const noexcept;
-
-        /**
-         * @brief - Returns the emitter attached to the influence.
-         *          In case the influence doesn't have any UB will
-         *          occur.
-         * @return - the emitter of the influence.
-         */
-        const Agent&
-        emitter() const noexcept;
-
-        /**
-         * @brief - Returns the receiver attached to the influence.
-         *          In case the influence doesn't have any UB will
-         *          occur.
-         * @return - the receiver of the influence.
-         */
-        const MovingObject&
-        receiver() const noexcept;
 
         /**
          * @brief - Defines a new emitter for the influence. In case
@@ -69,8 +56,8 @@ namespace mas {
          * @brief - Interface method to apply the influence to both the
          *          emitter and receiver.
          */
-        virtual void
-        apply() const = 0;
+        void
+        apply() const;
 
       private:
 
@@ -83,6 +70,11 @@ namespace mas {
          * @brief - The receiver of the influence.
          */
         MovingObject* m_receiver;
+
+        /**
+         * @brief - The callback defining the effect of the influence.
+         */
+        InflucenceCallback m_callback;
     };
 
     /// @brief - A shared pointer on an influence object.

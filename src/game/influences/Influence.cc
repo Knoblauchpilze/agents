@@ -4,9 +4,11 @@
 namespace mas {
   namespace environment {
 
-    Influence::Influence():
+    Influence::Influence(InflucenceCallback cb):
       m_emitter(nullptr),
-      m_receiver(nullptr)
+      m_receiver(nullptr),
+
+      m_callback(cb)
     {}
 
     Influence::~Influence() {}
@@ -14,16 +16,6 @@ namespace mas {
     bool
     Influence::valid() const noexcept {
       return (m_emitter != nullptr && m_receiver != nullptr);
-    }
-
-    const Agent&
-    Influence::emitter() const noexcept {
-      return *m_emitter;
-    }
-
-    const MovingObject&
-    Influence::receiver() const noexcept {
-      return *m_receiver;
     }
 
     void
@@ -34,6 +26,11 @@ namespace mas {
     void
     Influence::setReceiver(MovingObject* obj) {
       m_receiver = obj;
+    }
+
+    void
+    Influence::apply() const {
+      m_callback(*m_receiver);
     }
 
   }
