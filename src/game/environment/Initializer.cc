@@ -51,7 +51,7 @@ namespace mas {
         ani->as<Animat>()->plug(ag->as<Agent>());
         env.registerComponent(uuid, ag);
 
-        ComponentShPtr rend = std::make_shared<Renderer>(*mo->as<MovingObject>());
+        ComponentShPtr rend = std::make_shared<Renderer>(*mo->as<MovingObject>(), RenderingMode::Square);
         env.registerComponent(uuid, rend);
 
         ++id;

@@ -10,14 +10,22 @@
 namespace mas {
   namespace environment {
 
+    /// @brief - The rendering mode for agents.
+    enum class RenderingMode {
+      Square,
+      Circle
+    };
+
     class Renderer: public Component {
       public:
 
         /**
          * @brief - Create a new renderer with the specified moving
          *          object.
+         * @param obj - the object attached to this renderer.
+         * @param mode - the rendering mode.
          */
-        Renderer(const MovingObject& obj);
+        Renderer(const MovingObject& obj, const RenderingMode& mode);
 
         /**
          * @brief - Implementation of the interface method to handle
@@ -44,6 +52,11 @@ namespace mas {
          * @brief - The moving object attached to this renderer.
          */
         const MovingObject& m_obj;
+
+        /**
+         * @brief - The rendering mode for the attached object.
+         */
+        RenderingMode m_mode;
 
         /**
          * @brief - The color for this renderer.
