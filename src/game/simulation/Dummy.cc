@@ -14,7 +14,7 @@ namespace mas {
         return !d.moving();
       };
 
-      brain::BehaviorSelection bs = [](const AgentData& /*d*/, utils::RNG& rng) {
+      brain::BehaviorSelection bs = [](const AgentData& /*d*/, const Perceptions& /*perceptions*/, utils::RNG& rng) {
         float m = rng.rndFloat(0.0f, 20.0f);
         float a = rng.rndAngle();
 

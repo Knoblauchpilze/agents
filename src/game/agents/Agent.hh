@@ -6,6 +6,7 @@
 # include "Component.hh"
 # include "Manager.hh"
 # include "AgentData.hh"
+# include "Perception.hh"
 
 namespace mas {
   namespace environment {
@@ -29,7 +30,7 @@ namespace mas {
       /// @brief - Define a function used to create a new behavior
       /// for the agent when the previous one is not applicable
       /// or it was determined that a new behavior was needed.
-      using BehaviorSelection = std::function<BehaviorShPtr(const AgentData&, utils::RNG&)>;
+      using BehaviorSelection = std::function<BehaviorShPtr(const AgentData&, const Perceptions&, utils::RNG&)>;
 
       /// @brief - Define a function to be called when the agent
       /// finished its current behavior.

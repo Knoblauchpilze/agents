@@ -35,7 +35,7 @@ namespace mas {
       // Check whether some behaviors are available.
       if (m_behavior == nullptr && m_bUpdate(d)) {
         log("Agent is thinking very hard...", utils::Level::Verbose);
-        m_behavior = m_bSelection(d, rng);
+        m_behavior = m_bSelection(d, m_animat.perceptions(), rng);
       }
 
       if (m_behavior == nullptr) {
