@@ -41,6 +41,16 @@ namespace mas {
         plug(Agent* agent);
 
         /**
+         * @brief - Determine whether the input moving object is the
+         *          body of the animat.
+         * @param obj - the object which potentially is the body of
+         *              this animat.
+         * @return - `true` if the moving object is this animat's body.
+         */
+        bool
+        isBody(MovingObject* obj) const noexcept;
+
+        /**
          * @brief - Return the frustum attached to this animat. This
          *          helps defining the perceptions that are visible
          *          to it.

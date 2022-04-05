@@ -128,15 +128,17 @@ namespace mas {
     // an animat component.
     iterate(m_entities, environment::Type::Animat,
       [this](environment::Component& c) {
-        const environment::Frustum& frustum = c.as<environment::Animat>()->frustum();
+        // Convert to animat.
+        environment::Animat* a = c.as<environment::Animat>();
 
+        // Compute perceptions.
+        const environment::Frustum& frustum = a->frustum();
         environment::Perceptions pps;
 
         iterate(m_entities, environment::Type::MovingObject,
-          [&pps, &frustum](environment::Component& c) {
+          [a, &pps, &frustum](environment::Component& c) {
             environment::MovingObject* obj = c.as<environment::MovingObject>();
-            /// TODO: Ignore the body of the agent in the perceptions.
-            if (obj != nullptr && frustum.visible(*obj)) {
+            if (obj != nullptr && !a->isBody(obj) && frustum.visible(*obj)) {
               pps.push_back(environment::Perception(*obj));
             }
           }

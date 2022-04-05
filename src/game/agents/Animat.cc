@@ -27,6 +27,13 @@ namespace mas {
       m_agent = agent;
     }
 
+    bool
+    Animat::isBody(MovingObject* obj) const noexcept {
+      // We want a null object to never be considered as
+      // a valid animat's body.
+      return obj != nullptr && m_body == obj;
+    }
+
     const Frustum&
     Animat::frustum() const noexcept {
       return m_frustum;
