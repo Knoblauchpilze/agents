@@ -1,11 +1,6 @@
 
 # include "MovingObject.hh"
 
-/// @brief - The decrease in speed due to friction and other
-/// processing at each frame. This value is expressed in m/s2.
-/// This correspond to an acceleration.
-# define FRICTION_ACCELERATION 0.9f
-
 namespace mas {
   namespace environment {
 
@@ -48,10 +43,7 @@ namespace mas {
 
     void
     MovingObject::applyForce(const utils::Vector2f& f) {
-      utils::Vector2f fo = f;
-      clampForce(fo);
-
-      m_force += fo;
+      m_force += f;
     }
 
     void
@@ -68,7 +60,7 @@ namespace mas {
       m_speed += (m_acceleration * d);
 
       // Account for friction.
-      m_speed *= (1.0f - FRICTION_ACCELERATION * d);
+      m_speed *= (1.0f - m_body.friction() * d);
 
       // Apply speed to modify position.
       utils::Vector2f tr = m_speed * d;
@@ -81,18 +73,13 @@ namespace mas {
         " (f: " + m_force.toString() +
         ", acc: " + m_acceleration.toString() +
         ", speed: " + m_speed.toString() +
-        ", friction: " + std::to_string((1.0f - FRICTION_ACCELERATION) * d) + ")",
+        ", friction: " + std::to_string((1.0f - m_body.friction()) * d) + ")",
         utils::Level::Verbose
       );
 
       // Reset the force: if it is applied continuously we
       // leave the other processes to reapply it.
       m_force = utils::Vector2f();
-    }
-
-    void
-    MovingObject::clampForce(utils::Vector2f& /*force*/) const noexcept {
-      // No clamping at this level.
     }
 
   }

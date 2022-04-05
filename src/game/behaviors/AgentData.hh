@@ -16,6 +16,11 @@ namespace mas {
       // The current speed of the agent.
       const utils::Vector2f& speed;
 
+      // The threshold to declare that this object is moving.
+      // This value is not usually used directly but accessed
+      // through the moving method of this structure.
+      float speedMotionThreshold;
+
       // The current acceleration of the agent.
       const utils::Vector2f& accel;
 

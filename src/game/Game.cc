@@ -3,16 +3,13 @@
 # include <cxxabi.h>
 # include "Menu.hh"
 # include "Initializer.hh"
-# include "EntityFactory.hh"
+# include "Initialization.hh"
 
 /// @brief - The height of the status menu in pixels.
 # define STATUS_MENU_HEIGHT 50
 
 /// @brief - The maximum speed for the simulation.
 # define MAX_SIMULATION_SPEED 8.0f
-
-/// @brief - The desired number of FPS.
-# define DESIRED_FPS 10.0f
 
 namespace {
 
@@ -60,17 +57,12 @@ namespace pge {
     m_menus(),
 
     m_env(),
-    m_launcher(&m_env, DESIRED_FPS, 1000.0f / DESIRED_FPS, mas::time::Unit::Millisecond)
+    m_launcher(mas::environment::createLauncher(m_env))
   {
     setService("game");
 
     // Initialize the environment.
-    mas::environment::Initializer init(
-      utils::Boxf(0.0f, 0.0f, 10.0f, 5.0f),
-      mas::environment::createFactory()
-    );
-
-    init(m_env);
+    mas::environment::initialize(m_env);
   }
 
   Game::~Game() {}
@@ -151,8 +143,11 @@ namespace pge {
       m_state.speed = 1.0f;
     }
 
-    // Update the desired FPS for the simulation.
-    m_launcher.setDesiredFramerate(DESIRED_FPS * m_state.speed);
+    // Update the desired FPS for the simulation. Note
+    // that the current framerate already includes the
+    // current speed.
+    float baseFPS = m_launcher.desiredFPS() / s;
+    m_launcher.setDesiredFramerate(baseFPS * m_state.speed);
 
     log(
       "Simulation speed updated from " + std::to_string(s) +

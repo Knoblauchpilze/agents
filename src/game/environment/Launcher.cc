@@ -58,6 +58,12 @@ namespace mas {
     stop();
   }
 
+  float
+  Launcher::desiredFPS() const noexcept {
+    Guard guard(m_simThreadLocker);
+    return m_desiredFPS;
+  }
+
   void
   Launcher::setDesiredFramerate(float fps) {
     if (fps <= 0.0f) {

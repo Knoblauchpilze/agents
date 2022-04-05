@@ -76,16 +76,6 @@ namespace mas {
         void
         simulate(const time::Manager& manager);
 
-      protected:
-
-        /**
-         * @brief - Clamp the input force to stay within the limits
-         *          that this object can handle.
-         * @param force - the force to clamp.
-         */
-        void
-        clampForce(utils::Vector2f& force) const noexcept;
-
       private:
 
         /**

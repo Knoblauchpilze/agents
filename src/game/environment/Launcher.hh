@@ -52,8 +52,16 @@ namespace mas {
       ~Launcher();
 
       /**
+       * @brief - Return the current desired framerate that this
+       *          launcher tries to maintain.
+       * @return - the desired framerate.
+       */
+      float
+      desiredFPS() const noexcept;
+
+      /**
        * @brief - Define a new value for the desired FPS. Nothing
-       *          happens if te framerate is negative or zero.
+       *          happens if the framerate is negative or zero.
        * @param fps - the desired framerate.
        */
       void
@@ -133,7 +141,7 @@ namespace mas {
        * @brief - A mutex to protect the access to the simulation
        *          thread.
        */
-      std::mutex m_simThreadLocker;
+      mutable std::mutex m_simThreadLocker;
 
       /**
        * @brief - The thread used to handle the simulation. This

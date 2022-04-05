@@ -1,10 +1,6 @@
 
 # include "Manager.hh"
 
-/// @brief - Defines the number of frames that are kept
-/// internally by the manager before popping a value.
-# define MAX_SAVED_FRAMES 10
-
 namespace {
 
   float
@@ -62,12 +58,13 @@ namespace mas {
       }
     }
 
-    Manager::Manager(float origin, const Unit& unit):
+    Manager::Manager(float origin, const Unit& unit, unsigned frames):
       utils::CoreObject("time"),
 
       m_unit(unit),
       m_time(origin),
 
+      m_maxFrames(frames),
       m_frames()
     {
       setService("mas");
@@ -108,7 +105,7 @@ namespace mas {
 
       // Add the step to the buffer
       m_frames.push_back(std::make_pair(d, unit));
-      if (m_frames.size() > MAX_SAVED_FRAMES) {
+      if (m_frames.size() > m_maxFrames) {
         m_frames.pop_front();
       }
     }

@@ -20,8 +20,11 @@ namespace mas {
         /**
          * @brief - Create a new animat from the input moving object.
          * @param obj - the moving object attached to this animat.
+         * @param speedMotionThreshold - the threshold to declare that
+         *                               this animat is moving or not.
          */
-        Animat(MovingObject* obj);
+        Animat(MovingObject* obj,
+               float speedMotionThreshold);
 
         /**
          * @brief - Implementation of the interface method to handle
@@ -113,6 +116,13 @@ namespace mas {
          *          is the body of the animat.
          */
         MovingObject* m_body;
+
+        /**
+         * @brief - A threshold defining the minimum speed that the
+         *          body attached to this animat should reach to be
+         *          considered as moving.
+         */
+        float m_speedMotionThreshold;
 
         /**
          * @brief - The view frustum for this agent.

@@ -4,12 +4,14 @@
 namespace mas {
   namespace environment {
 
-    Animat::Animat(MovingObject* obj):
+    Animat::Animat(MovingObject* obj,
+                   float speedMotionThreshold):
       Component(Type::Animat),
 
       m_agent(nullptr),
       m_body(obj),
 
+      m_speedMotionThreshold(speedMotionThreshold),
       m_frustum(obj->bbox()),
       m_perceptions(),
       m_influences()
@@ -75,9 +77,10 @@ namespace mas {
     AgentData
     Animat::data() const noexcept {
       return AgentData{
-        m_body->bbox(),        // area
-        m_body->speed(),       // speed
-        m_body->acceleration() // accel
+        m_body->bbox(),         // area
+        m_body->speed(),        // speed
+        m_speedMotionThreshold, // speed motion threshold
+        m_body->acceleration()  // accel
       };
     }
 

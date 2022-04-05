@@ -33,9 +33,11 @@ namespace mas {
          *          origin and the unit used to interpret it.
          * @param origin - the initial timestamp.
          * @param unit - the unit of the origin timestamp.
+         * @param frames - define how many frames will be saved internally.
          */
         Manager(float origin = 0.0f,
-                const Unit& unit = Unit::Second);
+                const Unit& unit = Unit::Second,
+                unsigned frames = 10u);
 
         /**
          * @brief - Increment the duration elapsed since the origin by
@@ -102,6 +104,12 @@ namespace mas {
          *          elapsed since the origin of time.
          */
         float m_time;
+
+        /**
+         * @brief - How many frames are allowed to be saved in the
+         *          internal list of frames we save.
+         */
+        unsigned m_maxFrames;
 
         /**
          * @brief - The last frames.

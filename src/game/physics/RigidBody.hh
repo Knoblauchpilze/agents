@@ -17,10 +17,13 @@ namespace mas {
          *          create an infinitely massive rigid body.
          * @param mass - the mass of the rigid body.
          * @param elasticity - the elasticity of the rigid body.
+         * @param friction - the friction applied to the rigid body.
+         *                   Clamped to be  in the range `[0; 1]`.
          * @param area - the area of the body.
          */
         RigidBody(float mass,
                   float elasticity,
+                  float friction,
                   const utils::Boxf& area) noexcept;
 
         /**
@@ -44,6 +47,13 @@ namespace mas {
         float
         elasticity() const noexcept;
 
+        /**
+         * @brief - The friction of the rigid body.
+         * @return - the friction of the rigid body.
+         */
+        float
+        friction() const noexcept;
+
       private:
 
         /**
@@ -60,6 +70,13 @@ namespace mas {
          * @brief - The elasticity of the rigid body.
          */
         float m_elasticity;
+
+        /**
+         * @brief - The friction this rigid body is subject
+         *          to. This corresponds to an accleration
+         *          in the oppostie direction of any speed.
+         */
+        float m_friction;
     };
 
   }
