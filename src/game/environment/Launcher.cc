@@ -157,6 +157,13 @@ namespace mas {
       return;
     }
 
+    // If the simulation is already running, do
+    // not step on top of that.
+    if (m_state == State::Running) {
+      warn("Simulation is already running, stepping ignored");
+      return;
+    }
+
     log("Performing single simulation step", utils::Level::Info);
     simulate(false, m_desiredFPS);
   }
