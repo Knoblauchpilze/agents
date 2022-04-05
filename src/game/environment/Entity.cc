@@ -38,7 +38,9 @@ namespace mas {
         return;
       }
 
-      log("Registering " + typeToString(comp->type()) + " component to entity", utils::Level::Info);
+      comp->attach(*this);
+
+      log("Registering " + typeToString(comp->type()) + " component to entity");
       m_components.push_back(comp);
     }
 

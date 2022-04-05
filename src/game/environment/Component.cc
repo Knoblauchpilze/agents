@@ -1,5 +1,6 @@
 
 # include "Component.hh"
+# include "Entity.hh"
 
 namespace mas {
   namespace environment {
@@ -31,6 +32,13 @@ namespace mas {
     const Type&
     Component::type() const noexcept {
       return m_type;
+    }
+
+    void
+    Component::attach(const Entity& ent) noexcept {
+      // Define a new name for the component so that it matches
+      // the name of the entity.
+      setName(ent.uuid().toString());
     }
 
   }

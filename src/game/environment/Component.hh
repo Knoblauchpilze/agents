@@ -7,6 +7,9 @@
 namespace mas {
   namespace environment {
 
+    /// @brief - Forward declaration of the entity class.
+    class Entity;
+
     /// @brief - The various type of components.
     enum class Type {
       MovingObject,
@@ -62,6 +65,14 @@ namespace mas {
          */
         virtual void
         update() = 0;
+
+        /**
+         * @brief - Used to configure the component as attached to a
+         *          certain entity.
+         * @param ent - the entity to which this component is attached.
+         */
+        void
+        attach(const Entity& ent) noexcept;
 
       protected:
 
