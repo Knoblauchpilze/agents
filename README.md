@@ -1,1 +1,374 @@
 # Agents project
+
+Implementation of a multi-agent simulation along with an application allowing to visualize the evolution of the system. The project provides a basis with simple behaviors and handling of the external processes needed to execute the simulation. The goal being that the user can then easily extend it and add its own behavior to model a certain behavior.
+
+# Installation
+
+- Clone the repo: `git clone git@github.com:Knoblauchpilze/agents.git`.
+- Clone dependencies:
+    * [core_utils](https://github.com/Knoblauchpilze/core_utils)
+    * [maths_utils](https://github.com/Knoblauchpilze/maths_utils)
+- Go to the project's directory `cd ~/path/to/the/repo`.
+- Compile: `make run`.
+
+Don't forget to add `/usr/local/lib` to your `LD_LIBRARY_PATH` to be able to load shared libraries at runtime. This is handled automatically when using the `make run` target (which internally uses the [run.sh](https://github.com/Knoblauchpilze/agents/blob/master/data/run.sh) script).
+
+# General principle
+
+A multi-agents system is a system where simple agents have a limited knowledge about their environment and are allowed to take decisions to act in the world regularly.
+
+The concept is to isolate as much as possible the agent so that it does not have any more control on the world as desired by the user.
+
+We use a mechanism where agents can only see the world through perceptions and send influences to change it. Whether or not the perceptions are accurate or if the influences are coming through is not under the control of the agent.
+
+This mechanism is quite powerful in the sense that it allows to design agnostic behaviors which only rely on a pure abstraction of how thinking work. The locality of the decisions are also interesting as there's no top-level AI that make the agents move and yet we can still see some collective intelligence emerge.
+
+# The environment
+
+The system is structured around a base building block which is called the environment. This provides the framework to execute the agents and apply the result of their thinking process.
+
+## Entity-component system
+
+### Genesis
+
+There are numerous ways to describe the hierarchy of elements represented in the environment. In the past we relied on an inheritance system where we would start from a base `EnvironmentalObject` class which would then be specialized multiple times like so:
+
+```cpp
+class EnvironmentalObject {
+  private:
+    utils::Vector2f m_position;
+};
+
+class MovingObject: public EnvironmentalObject {
+  private:
+    utils::Vector2f m_speed;
+};
+
+class AgentBody: public EnvironmentalObject {
+  private:
+    Frustum m_frustum;
+}
+```
+
+This led to a rather deep class structure where the more up the hierarchy a component was the more abstract it was and the harder it was to modify its behavior.
+
+In a nutshell, [this](https://cowboyprogramming.com/2007/01/05/evolve-your-heirachy/) article explains very well what was going on.
+
+### What do to about it ?
+
+In order to make it more viable, we decided to use this time an [Entity-Component system](https://en.wikipedia.org/wiki/Entity_component_system). This kind of system is used by Unity for example and revolves around having a lightweight `Entity` class which can then be associated various behaviors or `Component` which provide a specific aspect to it.
+
+A single component is an atomic piece of behavior which handles for example moving an object around, or the laying out of pheromons, or anything else.
+
+It is much easier to extend such a system because as components are designed to be independent, we don't have any side effect when adding something to its processing: as other components don't have access to any of the property managed by another component it can't have ripple effects.
+
+### Implementation
+
+There are also countless ways to implement a component entity system. It seems like a popular library is the [entt][https://github.com/skypjack/entt) library, which is very efficient.
+
+We decided to go for an in-house implementation (of course) which is most likely much simpler and less thought-through.
+
+The system is based on the [Entity](https://github.com/KnoblauchPilze/agents/blob/master/src/game/environment/Entity.hh) class which provides a smart container for a set of containers with common operations:
+
+```cpp
+class Entity: public utils::CoreObject {
+  public:
+
+    Entity();
+
+    void
+    add(ComponentShPtr comp);
+
+    void
+    erase(ComponentShPtr comp);
+
+    void
+    update();
+
+    iterator
+    begin() const noexcept;
+
+    iterator
+    end() const noexcept;
+
+    /* ... */
+
+  private:
+
+    /* ... */
+};
+```
+
+The entity is attached an identifier and the user can iterate on the components attached to it. An `update` method also allows to keep the components up-to-date with each other and is be scheduled by the environment once per frame.
+
+A component is an interface which can be refined to add more capabilities to the entities of the world:
+
+```cpp
+enum class Type {
+  MovingObject,
+  Agent,
+  Animat,
+  Renderer,
+};
+
+class Component: public utils::CoreObject {
+  public:
+
+    /**
+     * @brief - Return the type of this component.
+     * @return - the type of the component.
+     */
+    const Type&
+    type() const noexcept;
+
+    /**
+     * @brief - Convert the component as the requested pointer type.
+     *          In case the component is not the correct type, then
+     *          the return value will be null.
+     * @return - the component as a pointer to the dedicated type.
+     */
+    template <typename T>
+    const T*
+    as() const noexcept;
+
+    /**
+     * @brief - Convert the component as the requested pointer type.
+     *          In case the component is not the correct type, then
+     *          the return value will be null.
+     * @return - the component as a pointer to the dedicated type.
+     */
+    template <typename T>
+    T*
+    as() noexcept;
+
+    /**
+     * @brief - Perform the update of the component so that it is up
+     *          to date with the underlying data that it might be
+     *          using.
+     *          This method should be implemented by inheriting classes
+     *          so that a specific behavior is provided.
+     */
+    virtual void
+    update() = 0;
+
+    /**
+     * @brief - Used to configure the component as attached to a
+     *          certain entity.
+     * @param ent - the entity to which this component is attached.
+     */
+    void
+    attach(const Entity& ent) noexcept;
+
+  protected:
+
+    Component(const Type& type);
+
+  private:
+
+    Type m_type;
+};
+```
+
+Each component has a type which can be used by the environment to determine if a specific entity should be considered for a certain process (say rendering, or update of forces, etc.).
+
+In case a new component should be added the user can register the corresponding type and implement the class.
+
+## Objects in the world
+
+Using the entity component system, objects in the world are merely a collection of components. The environment doesn't have to know the exact components registered for each entity and only apply processes to the ones that present the right facet.
+
+## Processing
+
+The environment is executed through a [Launcher](https://github.com/KnoblauchPilze/agents/blob/master/src/game/environment/Launcher.hh) class which allows to process asynchronously the operations needed to render the components and entities.
+
+Every frame, the environment is communicated a certain amount of time that passed through a helper class which manages time and can proceed to update the components like so:
+
+```cpp
+void
+  Environment::simulate(const time::Manager& manager) {
+  computePreAgentsStep(manager);
+  computeAgentsStep(manager);
+  computePostAgentsStep(manager);
+}
+```
+
+The `pre-agents step` involves making everything ready so that the agents can be correctly executed.
+
+Then comes the execution of the agents in and of itself.
+
+And finally the `post-agents step` where only the result of the execution of the agents are applied to the environment.
+
+## Agents
+
+An agent is a special kind of `Component` which can be attached to an entity and allows it to think and interact in the world.
+
+### What is an agent
+
+Each agent does not work alone and needs a handful of other companion components to allow its execution in a correct way.
+
+First, an agent needs a vehicle to move through the world and perceive things. This object might or might not be visible but it is required to represent it in the world.
+
+Second, the agent needs a way to be communicated what the body perceives and then influence the world around him. We provide another kind of component for this purpose, called an `Animat`. The animat makes the connection between the physical part of the agent (its body) and its brain (the `Agent`) class.
+
+### Animats
+
+An animat is responsible for providing a frustum (which is basically the view persepctive of the agent). It also receives the perceptions (i.e. what is perceived through the frustum) and collect the influences that the agent might emit during its thinking process.
+
+### Agent
+
+The agent class is meant as the brain part of any element that has a complex behavior in the environment. This class is structured around two main methods
+
+```cpp
+class Agent: public Component {
+  public:
+
+    /**
+     * @brief - Create a new agent with the specified animat.
+     * @param animat - a reference to the animat attached to the
+     *                 agent. It is the way the agent has to be
+     *                 in touch with the world and influence it.
+     * @param bUpdate - the callback to define when the behavior
+     *                  of the agent should be updated.
+     * @param bSelection - the callback to pick a new behavior.
+     * @param bTermination - the callback to handle the behavior
+     *                       once it is completed.
+     */
+    Agent(Animat& animat,
+          brain::BehaviorUpdate bUpdate,
+          brain::BehaviorSelection bSelection,
+          brain::BehaviorTermination bTermination);
+
+    /**
+     * @brief - Implementation of the interface method to handle
+     *          the update of this component with the underlying
+     *          data.
+     */
+    void
+    update() override;
+
+    /**
+     * @brief - Evaluate the decisions to take for this agent.
+     *          This uses the data propagated in the body of
+     *          the agent (which is its representation in the
+     *          world) and output influences.
+     * @param manager - information about the time at the moment
+     *                  of the execution of this method.
+     * @param rng - a device to produce random number generator.
+     */
+    void
+    live(const time::Manager& manager,
+          utils::RNG& rng);
+};
+```
+
+The interface can be customized by providing callbacks to use to determine whether a new behavior should be defined, what to do with a completed one and how to pick a new behavior.
+
+The `live` method is called during the agents step at each frame of the environment.
+
+It is usually not necessary to specialize this class as the behavior is meant to be changed through the callbacks to provide to the constructor.
+
+### Behavior
+
+A behavior is a specialized process that allows to update the position and internal state of an agent. It can be anything and can have various degrees of complexity. It is structured around two different methods.
+
+```cpp
+class Behavior: public utils::CoreObject {
+  public:
+
+    virtual bool
+    completed() const noexcept = 0;
+
+    virtual
+    std::vector<InfluenceShPtr>
+    perform(const AgentData& data,
+            const Perceptions& perceptions,
+            const time::Manager& manager) = 0;
+};
+```
+
+The `completed` method allows for the agent to determine whether this behavior is completed (meaning that it performs its duty). When it is the case, the agent will trigger a callback to pick a new one.
+
+The `perform` method is called as long as the behavior is not completed and allows to produce influences which can be used to change properties of the agent and its state in the world.
+
+The behavior is provided with the perceptions at the time of the call (which provides the most up-to-date representation of the surroundings of the agent) and a collection of data representing the current state of the body of the agent. This can be used to adapt the processing based on certain internal properties (think of searching for food in case the agent is hungry or so).
+
+## Launching the simulation
+
+The environment defines a framework to execute the processing of agents but doesn't really allow to simulate their executions. This can be accomplished through a dedicated class: the [Launcher](https://github.com/KnoblauchPilze/agents/blob/master/src/game/environment/Launcher.hh).
+
+The `Launcher` defines method to start, pause, resume or stop the simulation. The simulation in and of itself is managed in a dedicated thread which allows to smoothly perform it while not preventing the other processes of the application (typically a rendering routine) to work.
+
+It is possible for the user to specify how many frame per second the `Launcher` should try to maintain, and how much time elapses in the simulation for each call to the `simulate` method:
+
+```cpp
+void
+Launcher::simulate(bool sleep, float desiredFPS) {
+  // Update the time manager by one increment.
+  m_time.increment(m_step, m_stepUnit);
+
+  // Simulate the current step.
+  utils::TimeStamp s = utils::now();
+  m_env->simulate(m_time);
+  utils::Duration d = utils::now() - s;
+
+  utils::Duration expected = utils::toMilliseconds(1000.0f / desiredFPS);
+  if (d > expected) {
+    warn("Took " + utils::durationToString(d) + "ms to compute frame, expected " + utils::durationToString(expected) + "ms");
+    return;
+  }
+
+  // Wait for a bit if needed.
+  utils::Duration remaining = expected - d;
+  if (sleep && remaining > utils::toMilliseconds(MINIMUM_SLEEP_TIME)) {
+    std::this_thread::sleep_for(remaining);
+  }
+}
+```
+
+The process is always the same: the `Manager` handling the time is incremented, and the environment is requested to step the simulation one step forward with the manager as information. When the scheduling is done the simulation thread will sleep for the remaning frame duration (which can be quite long) so as not to overload the CPU.
+
+The `Manager` allows to completely decouple the time passing in the simulation from the hardware onto which the environment is executed: we can control very precisely the speed at which the simulation runs and possibly speed up time or slow it down as needed.
+
+## Specialize the simulation
+
+TODO: Handle README about specialization.
+
+### Create new agents
+
+### Create new behaviors
+
+### Initialization of the simulation
+
+### Passage of time
+
+# The application
+
+TODO: Handle README about the application.
+
+## Top banner
+
+## Environment view
+
+The main view (here presented with the `Debug` option active) allows to visualize the current state of the simulation.
+
+![Environment view](resources/world_view.png)
+
+By default a grid is displayed allowing to better visualize the coordinates at which agents are.
+
+The agents are displayed using colored squares and the user can pan and zoom in and out of the view as they see fit. Zooming is done by scrolling the mouse wheel and panning by dragging the mouse while holding the right mouse button.
+
+## Controls
+
+In order to control the simulation it is possible to use a combination of UI elements and hot keys.
+
+The `G` key starts the simulation. Nothing happens in case it is already running.
+
+The `P` key pauses the simulation, preventing other frames to be computed. Nothing happens in case the simulation is already paused or stopped.
+
+The `R` key resumes the simulation, automatically computing next steps for as long as the `P` or `S` key is not hit. Nothing happens if the simulation is stopped or already running.
+
+The `S` key stops the simulation, prevening other steps to be executed. Compared to a pause operation the thread executing the simulation is destroyed and it can take a bit of time to complete. Nothing happens if the simulation is already stopped.
+
+The `N` key allows to perform the computation of a single step of the simulation and leave the simulation in its current state. Only available in case the simulation is paused or stopped, otherwise a no op.
+
+The user can also use the button on the top banner to speed-up the simulation's speed. Possible values include `1`, `2`, `4` or `8` and will multiply the initial desired framerate by this value. This effectively allows to crank more steps in a single time frame and allows to speed up the passage of time in the simulation.
