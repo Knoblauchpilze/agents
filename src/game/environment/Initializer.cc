@@ -7,15 +7,17 @@
 # include "Dummy.hh"
 
 /// @brief - How many objects are spawned at the beginning.
-# define AGENTS_COUNT 5u
+# define AGENTS_COUNT 1u
 
 namespace mas {
  namespace environment {
 
-    Initializer::Initializer(const utils::Boxf& area):
+    Initializer::Initializer(const utils::Boxf& area,
+                             EntityFactory factory):
       utils::CoreObject("initializer"),
 
-      m_area(area)
+      m_area(area),
+      m_factory(factory)
     {
       setService("mas");
     }
@@ -23,36 +25,24 @@ namespace mas {
     void
     Initializer::operator()(Environment& env) {
       // Create a RNG.
-      utils::RNG rng = utils::RNG::createRandomRNG();
+      utils::RNG& rng = env.rng();
 
-      log("Generating elements within " + m_area.toString(), utils::Level::Info);
+      log("Generating " + std::to_string(AGENTS_COUNT) + " element(s) within " + m_area.toString(), utils::Level::Info);
 
       unsigned id = 0u;
       while (id < AGENTS_COUNT) {
-        // Pick a position.
-        float x = rng.rndFloat(m_area.getLeftBound(), m_area.getRightBound());
-        float y = rng.rndFloat(m_area.getBottomBound(), m_area.getTopBound());
+        // Create the entity and use the factory to attach the
+        // corresponding component. We pick the position here
+        // as we know the area where entities should be spawned.
+        utils::Point2f p;
+        p.x() = rng.rndFloat(m_area.getLeftBound(), m_area.getRightBound());
+        p.y() = rng.rndFloat(m_area.getBottomBound(), m_area.getTopBound());
+
+        log("Spawning agent at " + p.toString(), utils::Level::Info);
 
         utils::Uuid uuid = env.createEntity();
 
-        log("Spawning agent at " + std::to_string(x) + "x" + std::to_string(y));
-
-        // An agent should be assigned a moving object, an
-        // animat, its brain, and a renderer.
-        utils::Boxf area(x, y, 1.0f, 1.0f);
-        RigidBody rb(1.0f, 1.0f, area);
-
-        ComponentShPtr mo = std::make_shared<MovingObject>(area, rb);
-        env.registerComponent(uuid, mo);
-
-        ComponentShPtr ani = std::make_shared<Animat>(mo->as<MovingObject>());
-        env.registerComponent(uuid, ani);
-
-        ComponentShPtr ag = createDummy(*ani->as<Animat>());
-        env.registerComponent(uuid, ag);
-
-        ComponentShPtr rend = std::make_shared<Renderer>(*mo->as<MovingObject>(), RenderingMode::Square);
-        env.registerComponent(uuid, rend);
+        m_factory(uuid, p, rng, env);
 
         ++id;
       }

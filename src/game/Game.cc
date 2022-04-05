@@ -3,6 +3,7 @@
 # include <cxxabi.h>
 # include "Menu.hh"
 # include "Initializer.hh"
+# include "EntityFactory.hh"
 
 /// @brief - The height of the status menu in pixels.
 # define STATUS_MENU_HEIGHT 50
@@ -64,7 +65,11 @@ namespace pge {
     setService("game");
 
     // Initialize the environment.
-    mas::environment::Initializer init(utils::Boxf(0.0f, 0.0f, 10.0f, 5.0f));
+    mas::environment::Initializer init(
+      utils::Boxf(0.0f, 0.0f, 10.0f, 5.0f),
+      mas::environment::createFactory()
+    );
+
     init(m_env);
   }
 

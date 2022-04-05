@@ -25,6 +25,14 @@ namespace mas {
       ~Environment();
 
       /**
+       * @brief - Return the random number generator associated
+       *          to this environment.
+       * @return - the randomness source for this environment.
+       */
+      utils::RNG&
+      rng() noexcept;
+
+      /**
        * @brief - Simulate the environment with the data defined
        *          in the time manager.
        * @param manager - information about the time data of the

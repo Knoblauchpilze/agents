@@ -55,8 +55,14 @@ namespace mas {
 
   Environment::~Environment() {}
 
+  utils::RNG&
+  Environment::rng() noexcept {
+    return m_rng;
+  }
+
   void
   Environment::simulate(const time::Manager& manager) {
+# ifdef LOG_STEP
     log(
       "Stepping simulation for " +
       std::to_string(static_cast<int>(manager.lastStepDuration(time::Unit::Millisecond))) +
@@ -65,6 +71,7 @@ namespace mas {
       " millisecond(s))",
       utils::Level::Verbose
     );
+# endif
 
     computePreAgentsStep(manager);
     computeAgentsStep(manager);

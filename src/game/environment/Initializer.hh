@@ -2,6 +2,9 @@
 # define   INITIALIZER_HH
 
 # include <core_utils/CoreObject.hh>
+# include <core_utils/Uuid.hh>
+# include <core_utils/RNG.hh>
+# include <maths_utils/Point2.hh>
 # include <maths_utils/Box.hh>
 
 namespace mas {
@@ -11,14 +14,21 @@ namespace mas {
 
   namespace environment {
 
+    /// @brief - A callback used to generate a random entity with a set
+    /// of components.
+    using EntityFactory = std::function<void(const utils::Uuid&, const utils::Point2f&, utils::RNG&, Environment&)>;
+
     class Initializer: public utils::CoreObject {
       public:
 
         /**
          * @brief - Create a new initializer to generate the environment.
          * @param area - the spawn radius for elements.
+         * @param factory - the factory associated to the initializer to
+         *                  generate entities.
          */
-        Initializer(const utils::Boxf& area);
+        Initializer(const utils::Boxf& area,
+                    EntityFactory factory);
 
         /**
          * @brief - Performs the initialization of the input environment.
@@ -33,6 +43,11 @@ namespace mas {
          * @brief - The spawn area for this initializer.
          */
         utils::Boxf m_area;
+
+        /**
+         * @brief - The callback used to generate entities.
+         */
+        EntityFactory m_factory;
     };
 
   }
