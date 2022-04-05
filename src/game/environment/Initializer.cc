@@ -4,9 +4,10 @@
 # include "Environment.hh"
 # include "Animat.hh"
 # include "Renderer.hh"
+# include "Dummy.hh"
 
 /// @brief - How many objects are spawned at the beginning.
-# define AGENTS_COUNT 1u
+# define AGENTS_COUNT 5u
 
 namespace mas {
  namespace environment {
@@ -47,8 +48,7 @@ namespace mas {
         ComponentShPtr ani = std::make_shared<Animat>(mo->as<MovingObject>());
         env.registerComponent(uuid, ani);
 
-        ComponentShPtr ag = std::make_shared<Agent>(*ani->as<Animat>());
-        ani->as<Animat>()->plug(ag->as<Agent>());
+        ComponentShPtr ag = createDummy(*ani->as<Animat>());
         env.registerComponent(uuid, ag);
 
         ComponentShPtr rend = std::make_shared<Renderer>(*mo->as<MovingObject>(), RenderingMode::Square);

@@ -10,6 +10,9 @@
 /// @brief - The maximum speed for the simulation.
 # define MAX_SIMULATION_SPEED 8.0f
 
+/// @brief - The desired number of FPS.
+# define DESIRED_FPS 10.0f
+
 namespace {
 
   pge::MenuShPtr
@@ -46,17 +49,17 @@ namespace pge {
 
     m_state(
       State{
-        true,  // paused
-        true,  // disabled
-        false, // terminated
-        1.0f,  // speed
+        true,   // paused
+        true,   // disabled
+        false,  // terminated
+        1.0f,   // speed
       }
     ),
 
     m_menus(),
 
     m_env(),
-    m_launcher(&m_env, 10.0f, 100.0f, mas::time::Unit::Millisecond)
+    m_launcher(&m_env, DESIRED_FPS, 1000.0f / DESIRED_FPS, mas::time::Unit::Millisecond)
   {
     setService("game");
 
@@ -144,7 +147,7 @@ namespace pge {
     }
 
     // Update the desired FPS for the simulation.
-    m_launcher.setDesiredFramerate(m_state.speed);
+    m_launcher.setDesiredFramerate(DESIRED_FPS * m_state.speed);
 
     log(
       "Simulation speed updated from " + std::to_string(s) +

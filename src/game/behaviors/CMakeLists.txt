@@ -7,7 +7,6 @@ target_sources (main-app_lib PRIVATE
 	${CMAKE_CURRENT_SOURCE_DIR}/AgentData.cc
 
 	${CMAKE_CURRENT_SOURCE_DIR}/Behavior.cc
-	${CMAKE_CURRENT_SOURCE_DIR}/Impulse.cc
 	)
 
 target_include_directories (main-app_lib PUBLIC
