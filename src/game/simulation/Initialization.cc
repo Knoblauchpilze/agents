@@ -21,10 +21,6 @@
 /// @brief - How many objects are spawned at the beginning.
 # define AGENTS_COUNT 1u
 
-namespace {
-
-}
-
 namespace mas {
   namespace environment {
 
