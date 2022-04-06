@@ -80,15 +80,18 @@ namespace mas {
 
       private:
 
+        /// @brief - A list of behaviors.
+        using Behaviors = std::vector<BehaviorShPtr>;
+
         /**
          * @brief - The animat attached to this agent.
          */
         Animat& m_animat;
 
         /**
-         * @brief - The current behavior followed by this agent.
+         * @brief - The current behaviors followed by this agent.
          */
-        BehaviorShPtr m_behavior;
+        Behaviors m_behaviors;
 
         /**
          * @brief - The callback to determine whether or not the
