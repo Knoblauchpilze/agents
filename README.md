@@ -15,7 +15,7 @@ Don't forget to add `/usr/local/lib` to your `LD_LIBRARY_PATH` to be able to loa
 
 # General principle
 
-A multi-agents system is a system where simple agents have a limited knowledge about their environment and are allowed to take decisions to act in the world regularly.
+A multi-agents system is a system where simple agents have a limited knowledge about their environment and are allowed to take decisions to act in the world accordingly.
 
 The concept is to isolate as much as possible the agent so that it does not have any more control on the world as desired by the user.
 
@@ -25,7 +25,7 @@ This mechanism is quite powerful in the sense that it allows to design agnostic 
 
 # The environment
 
-The system is structured around a base building block which is called the environment. This provides the framework to execute the agents and apply the result of their thinking process.
+The system is structured around a base building block which is called the [environment](src/game/environment/Environment.hh). This provides the framework to execute the agents and apply the result of their thinking process.
 
 ## Entity-component system
 
@@ -64,11 +64,11 @@ It is much easier to extend such a system because as components are designed to 
 
 ### Implementation
 
-There are also countless ways to implement a component entity system. It seems like a popular library is the [entt][https://github.com/skypjack/entt) library, which is very efficient.
+There are also countless ways to implement a entity component system. It seems like a popular library is the [entt](https://github.com/skypjack/entt) library, which is very efficient.
 
 We decided to go for an in-house implementation (of course) which is most likely much simpler and less thought-through.
 
-The system is based on the [Entity](src/game/environment/Entity.hh) class which provides a smart container for a set of containers with common operations:
+The system is based on the [Entity](src/game/environment/Entity.hh) class which provides a smart container for a set of components with common operations:
 
 ```cpp
 class Entity: public utils::CoreObject {
@@ -99,7 +99,7 @@ class Entity: public utils::CoreObject {
 };
 ```
 
-The entity is attached an identifier and the user can iterate on the components attached to it. An `update` method also allows to keep the components up-to-date with each other and is be scheduled by the environment once per frame.
+The entity is attached an identifier and the user can iterate on the components attached to it. An `update` method also allows to keep the components up-to-date with each other and is scheduled by the environment once per frame.
 
 A component is an interface which can be refined to add more capabilities to the entities of the world:
 
@@ -216,7 +216,7 @@ An animat is responsible for providing a frustum (which is basically the view pe
 
 ### Agent
 
-The agent class is meant as the brain part of any element that has a complex behavior in the environment. This class is structured around two main methods
+The agent class is meant as the brain part of any element that has a collection of more or less complex behaviors in the environment. This class is structured around two main methods
 
 ```cpp
 class Agent: public Component {
@@ -265,7 +265,11 @@ The interface can be customized by providing callbacks to use to determine wheth
 
 The `live` method is called during the agents step at each frame of the environment.
 
-It is usually not necessary to specialize this class as the behavior is meant to be changed through the callbacks to provide to the constructor.
+It is usually not necessary to specialize this class as the behavior is meant to be changed through the callbacks to provide to the constructor. The agent can have more than one active behavior at any time and each completed behavior is then recycled or kept depending on the callback's result.
+
+### Perceptions
+
+TODO: Handle perceptions.
 
 ### Behavior
 
@@ -291,6 +295,10 @@ The `completed` method allows for the agent to determine whether this behavior i
 The `perform` method is called as long as the behavior is not completed and allows to produce influences which can be used to change properties of the agent and its state in the world.
 
 The behavior is provided with the perceptions at the time of the call (which provides the most up-to-date representation of the surroundings of the agent) and a collection of data representing the current state of the body of the agent. This can be used to adapt the processing based on certain internal properties (think of searching for food in case the agent is hungry or so).
+
+### Influences
+
+TODO: Handle this.
 
 ## Launching the simulation
 
@@ -360,7 +368,7 @@ createLauncher(Environment& env) noexcept {
   );
 }
 ```
-It is up to the user to define time parameters consistent with what is expected and required for the simulation at hand. The create launcher will be used by the application to schedule the environment's execution.
+It is up to the user to define time parameters consistent with what is expected and required for the simulation at hand. The `createLauncher` method will be used by the application to schedule the environment's execution.
 
 The `initialize` method is structure like so:
 ```cpp
@@ -388,7 +396,7 @@ initialize(Environment& env) noexcept {
   init.setup(env);
 }
 ```
-This method aims at creating an initializer object and apply it to the input environment. The definition of agents can happen in several steps and it is totally possible to apply multiple spawner/factory methods one after the other to create multiple agents type.
+This method aims at creating an initializer object and apply it to the input environment. The definition of agents can happen in several steps and it is totally possible to apply multiple spawner/factory methods one after the other to create multiple agent types.
 
 ### Create new agents
 
@@ -420,7 +428,7 @@ createAgent(Animat& animat) {
 }
 ```
 
-The precise definition of the behavior methods can and should be updated to handle more complex behaviors. The methods created there can be used as part of the initialization code and also in the definition of new behaviors or influences.
+The precise definition of the behavior methods can and should be updated to handle more complex behaviors. The methods created there can be used as part of the initialization code and also in the definition of new behaviors or influences needing to spawn new agents.
 
 As we're using an entity component system and we chose to make the semantic of the Agent to be more based on callbacks rather than specializing a class, we don't have to create code in the 'engine' but only customize the behaviors that are already called by the base environment.
 
@@ -447,7 +455,7 @@ NewBehavior::perform(const AgentData& data,
 }
 ```
 
-Each agent is able to execute more than one behavior in parallel so it is encourage to keep them very simple. For example for an ant, it makes sense to have a pheromon spawning behavior and another responsible to analyze the pheromons to generate a position to go to.
+Each agent is able to execute more than one behavior in parallel so it is encouraged to keep them very simple. For example for an ant, it makes sense to have a pheromon spawning behavior and another responsible to analyze the pheromons to generate a position to go to.
 
 Whenever a behavior is created, it can be linked to agents by providing a behavior selection method that takes it into account.
 
