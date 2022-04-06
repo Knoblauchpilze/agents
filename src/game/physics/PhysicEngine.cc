@@ -55,13 +55,19 @@ namespace mas {
         return;
       }
 
+      unsigned s = m_objects.size();
+
       Objects::iterator it = std::remove_if(m_objects.begin(), m_objects.end(),
         [&k](const MovingObject* o) {
           return generateKey(o) == k;
         }
       );
-      m_objects.erase(it);
+      m_objects.erase(it, m_objects.end());
       m_keys.erase(k);
+
+      if (s > 0u && m_objects.size() != s - 1u) {
+        warn("Removed " + std::to_string(s - m_objects.size()) + " object(s) when removing object " + obj->getName());
+      }
     }
 
     void

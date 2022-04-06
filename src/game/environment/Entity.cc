@@ -55,7 +55,7 @@ namespace mas {
         }
       );
 
-      m_components.erase(newEnd);
+      m_components.erase(newEnd, m_components.end());
 
       if (components() != s) {
         log("Removed component with kind " + typeToString(comp->type()));
@@ -73,7 +73,7 @@ namespace mas {
         }
       );
 
-      m_components.erase(newEnd);
+      m_components.erase(newEnd, m_components.end());
 
       if (components() != s) {
         log("Removed " + std::to_string(s - components()) + " component(s) with kind " + typeToString(kind));
