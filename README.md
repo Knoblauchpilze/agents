@@ -11,7 +11,7 @@ Implementation of a multi-agent simulation along with an application allowing to
 - Go to the project's directory `cd ~/path/to/the/repo`.
 - Compile: `make run`.
 
-Don't forget to add `/usr/local/lib` to your `LD_LIBRARY_PATH` to be able to load shared libraries at runtime. This is handled automatically when using the `make run` target (which internally uses the [run.sh](https://github.com/Knoblauchpilze/agents/blob/master/data/run.sh) script).
+Don't forget to add `/usr/local/lib` to your `LD_LIBRARY_PATH` to be able to load shared libraries at runtime. This is handled automatically when using the `make run` target (which internally uses the [run.sh](data/run.sh) script).
 
 # General principle
 
@@ -68,7 +68,7 @@ There are also countless ways to implement a component entity system. It seems l
 
 We decided to go for an in-house implementation (of course) which is most likely much simpler and less thought-through.
 
-The system is based on the [Entity](https://github.com/KnoblauchPilze/agents/blob/master/src/game/environment/Entity.hh) class which provides a smart container for a set of containers with common operations:
+The system is based on the [Entity](src/game/environment/Entity.hh) class which provides a smart container for a set of containers with common operations:
 
 ```cpp
 class Entity: public utils::CoreObject {
@@ -179,7 +179,7 @@ Using the entity component system, objects in the world are merely a collection 
 
 ## Processing
 
-The environment is executed through a [Launcher](https://github.com/KnoblauchPilze/agents/blob/master/src/game/environment/Launcher.hh) class which allows to process asynchronously the operations needed to render the components and entities.
+The environment is executed through a [Launcher](src/game/environment/Launcher.hh) class which allows to process asynchronously the operations needed to render the components and entities.
 
 Every frame, the environment is communicated a certain amount of time that passed through a helper class which manages time and can proceed to update the components like so:
 
@@ -294,7 +294,7 @@ The behavior is provided with the perceptions at the time of the call (which pro
 
 ## Launching the simulation
 
-The environment defines a framework to execute the processing of agents but doesn't really allow to simulate their executions. This can be accomplished through a dedicated class: the [Launcher](https://github.com/KnoblauchPilze/agents/blob/master/src/game/environment/Launcher.hh).
+The environment defines a framework to execute the processing of agents but doesn't really allow to simulate their executions. This can be accomplished through a dedicated class: the [Launcher](src/game/environment/Launcher.hh).
 
 The `Launcher` defines method to start, pause, resume or stop the simulation. The simulation in and of itself is managed in a dedicated thread which allows to smoothly perform it while not preventing the other processes of the application (typically a rendering routine) to work.
 
@@ -331,15 +331,125 @@ The `Manager` allows to completely decouple the time passing in the simulation f
 
 ## Specialize the simulation
 
-TODO: Handle README about specialization.
+The application provides a simple framework where no real agent or behavior exists. It is intended as a base for exploring the capabilities or the model of certain agents in a dedicated process.
 
-### Create new agents
+### Create new components
 
-### Create new behaviors
+In order to allow agents to modify and interact with their environment, it might be needed to create new type of components.
+TODO: Handle this.
 
 ### Initialization of the simulation
 
-### Passage of time
+Before starting a new simulation it is important to initialize the environment with relevant data and schedule the execution of the living processes.
+
+This can be done using the [initialization](src/game/simulation/Initialization.cc) template provided in the application. This file define two methods:
+* `createLauncher` allows to define the properties to execute the simulation by returning a `Launcher` object used to control the simulation.
+* `initialize` defines a way to create objects in the simulation before it starts.
+
+Both these methods are called before starting the execution and the application is made visible to the user. This guarantees that any simulation has the opportunity to prepare everything before starting the processing.
+
+The `createLauncher` method is structured like this in the default example:
+```cpp
+Launcher
+createLauncher(Environment& env) noexcept {
+  return Launcher(
+    &env,
+    /** FIXME: Define desired FPS **/,
+    1000.0f / /** FIXME: Use desired FPS **/,
+    mas::time::Unit::Millisecond
+  );
+}
+```
+It is up to the user to define time parameters consistent with what is expected and required for the simulation at hand. The create launcher will be used by the application to schedule the environment's execution.
+
+The `initialize` method is structure like so:
+```cpp
+void
+initialize(Environment& env) noexcept {
+  // Create the spawner function.
+  utils::Boxf area(0.0f, 0.0f, 10.0f, 5.0f);
+
+  auto spawner = [area](utils::RNG& rng) {
+    /** FIXME: Handle spawning code **/
+  };
+
+  // Create the entity factory function.
+  auto factory = [](const utils::Uuid& uuid, const utils::Point2f& p, utils::RNG& /*rng*/, Environment& env) {
+    RigidBody rb = /** FIXME: Create a rigid body **/;
+
+    ComponentShPtr mo = std::make_shared<MovingObject>(area, rb);
+    env.registerComponent(uuid, mo);
+
+    /** FIXME: Register other components. **/
+  };
+
+  // Generate the initializer.
+  Initializer init(/** FIXME: Define a number of agents to spawn **/, spawner, factory);
+  init.setup(env);
+}
+```
+This method aims at creating an initializer object and apply it to the input environment. The definition of agents can happen in several steps and it is totally possible to apply multiple spawner/factory methods one after the other to create multiple agents type.
+
+### Create new agents
+
+Another important aspect to specialize the simulation is to create agents and their respective behaviors. In this context, the agent in and of itself is more the description of the entity and its attached component.
+
+The base framework is provided in the [Dummy](src/game/simulation/Dummy.cc) file where a skeleton for the creation of an agent is provided. More than one method can be defined here and the skeleton should be similar to the following:
+
+```cpp
+AgentShPtr
+createAgent(Animat& animat) {
+  // Generate callbacks.
+  brain::BehaviorUpdate bu = [](const AgentData& d) {
+    /** FIXME: Define the behavior update. **/
+  };
+
+  brain::BehaviorSelection bs = [](const AgentData& /*d*/, const Perceptions& /*perceptions*/, utils::RNG& rng) {
+    /** FIXME: Define the behavior selection. **/
+  };
+
+  brain::BehaviorTermination bt = [](BehaviorShPtr b) {
+    /** FIXME: Define the behavior termination. **/
+  };
+
+  // Create the agent and plug it to the animat.
+  AgentShPtr out = std::make_shared<Agent>(animat, bu, bs, bt);
+  animat.plug(out.get());
+
+  return out;
+}
+```
+
+The precise definition of the behavior methods can and should be updated to handle more complex behaviors. The methods created there can be used as part of the initialization code and also in the definition of new behaviors or influences.
+
+As we're using an entity component system and we chose to make the semantic of the Agent to be more based on callbacks rather than specializing a class, we don't have to create code in the 'engine' but only customize the behaviors that are already called by the base environment.
+
+### Create new behaviors
+
+Along with the agents, it might be needed to create new behaviors. These behaviors will allow to make an agent search for food, or lay out pheromons, and so on.
+
+As there's potentially a huge variety of behaviors that can be created depending on the purpose of the simulation and they could take into consideration a great deal of information in their decision-making process it didn't seem like a good plan to aso use callbacks here and so we preferred to let the user specialize the base [Behavior](src/game/behaviors/Behavior.hh) class.
+
+As described in the [behavior](###behavior) section the only thing to consider when implementing a new behavior is to provide the two interface methods. So the general idea is like so:
+```cpp
+bool
+NewBehavior::completed() const noexcept {
+  return /** FIXME: Determine completion conditions. **/;
+}
+
+std::vector<InfluenceShPtr>
+NewBehavior::perform(const AgentData& data,
+                     const Perceptions& perceptions,
+                     const time::Manager& manager)
+{
+  /** FIXME: Use perceptions to generate influences. **/
+  return std::vector<InfluenceShPtr>();
+}
+```
+
+Each agent is able to execute more than one behavior in parallel so it is encourage to keep them very simple. For example for an ant, it makes sense to have a pheromon spawning behavior and another responsible to analyze the pheromons to generate a position to go to.
+
+Whenever a behavior is created, it can be linked to agents by providing a behavior selection method that takes it into account.
 
 # The application
 
