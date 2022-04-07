@@ -10,7 +10,31 @@ namespace mas {
 
     /// @brief - A convenience define representing a callback for
     /// the application of an influence on the receiver.
-    using InflucenceCallback = std::function<void(MovingObject&)>;
+    using ReceiverCallback = std::function<void(MovingObject&)>;
+
+    /// @brief - A convenience define representing a callback for
+    /// the application of an influence on the emitter.
+    using EmitterCallback = std::function<void(Agent&)>;
+
+    namespace influence {
+
+      /**
+       * @brief - A convenience define for a callback that has no
+       *          effect on the emitter
+       * @return - a no-op callback.
+       */
+      EmitterCallback
+      noOpEmitter() noexcept;
+
+      /**
+       * @brief - A convenience define for a callback that has no
+       *          effect on the receiver.
+       * @retrun - a no-op callback.
+       */
+      ReceiverCallback
+      noOpReceiver() noexcept;
+
+    }
 
     class Influence {
       public:
@@ -18,9 +42,13 @@ namespace mas {
         /**
          * @brief - Create a new empty influence. This will have
          *          no impact.
-         * @param cb - the callback defining this influence.
+         * @param eCB - the callback defining the effect of this
+         *              influence on the emitter.
+         * @param rCB - the callback defining the effect of this
+         *              influence on the receiver.
          */
-        Influence(InflucenceCallback cb);
+        Influence(EmitterCallback eCB,
+                  ReceiverCallback rCB);
 
         /**
          * @brief - Destruction of the object to allow virtual
@@ -72,9 +100,16 @@ namespace mas {
         MovingObject* m_receiver;
 
         /**
-         * @brief - The callback defining the effect of the influence.
+         * @brief - The callback defining the effect of the influence
+         *          on the emitter.
          */
-        InflucenceCallback m_callback;
+        EmitterCallback m_eCallback;
+
+        /**
+         * @brief - The callback defining the effect of the influence
+         *          on the receiver.
+         */
+        ReceiverCallback m_rCallback;
     };
 
     /// @brief - A shared pointer on an influence object.

@@ -298,7 +298,56 @@ The behavior is provided with the perceptions at the time of the call (which pro
 
 ### Influences
 
-TODO: Handle this.
+Influence are the main way agents can interact and change their world. The influences are produced by the behaviors and are then processed by the environment to try to apply them as best as possible.
+
+An influence can have a variety of impacts: it can change the position of an object, decrease the amount of a certain substance, etc. However, it is always the result of the application of a change on some object from another object.
+
+In order to make the whole concept rather flexible for the user, we chose to have the following interface for an influence:
+
+```cpp
+/// @brief - A convenience define representing a callback for
+/// the application of an influence on the receiver.
+using ReceiverCallback = std::function<void(MovingObject&)>;
+
+/// @brief - A convenience define representing a callback for
+/// the application of an influence on the emitter.
+using EmitterCallback = std::function<void(Agent&)>;
+
+class Influence {
+  public:
+
+    Influence(EmitterCallback eCB,
+              ReceiverCallback rCB);
+
+    void
+    setEmitter(Agent* obj);
+
+    void
+    setReceiver(MovingObject* obj);
+
+    void
+    apply() const {
+      // Apply callbacks.
+      m_rCallback(*m_receiver);
+      m_eCallback(*m_emitter);
+    }
+};
+```
+
+The idea is that the influence has two callbacks that act on the emitter and receiver and trigger some process on them. We also define convenience generators which perform the creation of an empty callback that has no impact on the emitter or receiver.
+
+Typically one can generate a linear motion influence like so:
+```cpp
+utils::Vector2f i(1.0f, 0.0f);
+InfluenceShPtr inf = std::make_shared<Influence>(
+  influence::noOpEmitter(),
+  [i](MovingObject& obj) {
+    obj.applyForce(i);
+  }
+);
+```
+
+This will create an influence which apply a force along the `x` axis to the moving object receiving it. It is theoretically possible to extend this behavior to applying any effect on the receiver.
 
 ## Launching the simulation
 

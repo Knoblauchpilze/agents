@@ -36,6 +36,7 @@ namespace mas {
         // Create the influence representing the impulse.
         utils::Vector2f i = m_impulse;
         InfluenceShPtr inf = std::make_shared<Influence>(
+          influence::noOpEmitter(),
           [i](MovingObject& obj) {
             obj.applyForce(i);
           }

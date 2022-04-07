@@ -3,12 +3,26 @@
 
 namespace mas {
   namespace environment {
+    namespace influence {
 
-    Influence::Influence(InflucenceCallback cb):
+      EmitterCallback
+      noOpEmitter() noexcept {
+        return [](Agent& /*agent*/) {};
+      }
+
+      ReceiverCallback
+      noOpReceiver() noexcept {
+        return [](MovingObject& /*obj*/) {};
+      }
+    }
+
+    Influence::Influence(EmitterCallback eCB,
+                         ReceiverCallback rCB):
       m_emitter(nullptr),
       m_receiver(nullptr),
 
-      m_callback(cb)
+      m_eCallback(eCB),
+      m_rCallback(rCB)
     {}
 
     Influence::~Influence() {}
@@ -30,7 +44,8 @@ namespace mas {
 
     void
     Influence::apply() const {
-      m_callback(*m_receiver);
+      m_rCallback(*m_receiver);
+      m_eCallback(*m_emitter);
     }
 
   }
