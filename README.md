@@ -114,29 +114,16 @@ enum class Type {
 class Component: public utils::CoreObject {
   public:
 
-    /**
-     * @brief - Return the type of this component.
-     * @return - the type of the component.
-     */
     const Type&
     type() const noexcept;
 
-    /**
-     * @brief - Convert the component as the requested pointer type.
-     *          In case the component is not the correct type, then
-     *          the return value will be null.
-     * @return - the component as a pointer to the dedicated type.
-     */
+    bool
+    markedForDeletion() const noexcept;
+
     template <typename T>
     const T*
     as() const noexcept;
 
-    /**
-     * @brief - Convert the component as the requested pointer type.
-     *          In case the component is not the correct type, then
-     *          the return value will be null.
-     * @return - the component as a pointer to the dedicated type.
-     */
     template <typename T>
     T*
     as() noexcept;
@@ -151,11 +138,6 @@ class Component: public utils::CoreObject {
     virtual void
     update() = 0;
 
-    /**
-     * @brief - Used to configure the component as attached to a
-     *          certain entity.
-     * @param ent - the entity to which this component is attached.
-     */
     void
     attach(const Entity& ent) noexcept;
 
@@ -166,12 +148,15 @@ class Component: public utils::CoreObject {
   private:
 
     Type m_type;
+    bool m_toBeDeleted;
 };
 ```
 
-Each component has a type which can be used by the environment to determine if a specific entity should be considered for a certain process (say rendering, or update of forces, etc.).
+Each component has a type which can be used by the environment to determine if a specific entity should be considered for a certain process (say rendering, or update of forces, etc.). In case a new component should be added the user can register the corresponding type and implement the class.
 
-In case a new component should be added the user can register the corresponding type and implement the class.
+Each component also defines a boolean indicating whether it should be deleted or not. This can be the case when an entity loses a certain capacity in which case the component can be removed. By default all components are not marked to be deleted.
+
+The environment performs a check at each frame to remove the components from entities when they are to be deleted, and then proceeds to delete the entities that don't have any component anymore.
 
 ## Objects in the world
 

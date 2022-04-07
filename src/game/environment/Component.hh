@@ -37,6 +37,13 @@ namespace mas {
         type() const noexcept;
 
         /**
+         * @brief - Whether this component needs to be deleted.
+         * @return - `true` if the component needs to be deleted.
+         */
+        bool
+        markedForDeletion() const noexcept;
+
+        /**
          * @brief - Convert the component as the requested pointer type.
          *          In case the component is not the correct type, then
          *          the return value will be null.
@@ -83,12 +90,25 @@ namespace mas {
          */
         Component(const Type& type);
 
+        /**
+         * @brief - Update the deletion status to the input value.
+         * @param mark - whether or not the component should be marked
+         *               for deletion (default is `true`).
+         */
+        void
+        markForDeletion(bool mark = true) noexcept;
+
       private:
 
         /**
          * @brief - The type of the component.
          */
         Type m_type;
+
+        /**
+         * @brief - Whether or not the component should be deleted.
+         */
+        bool m_toBeDeleted;
     };
 
     using ComponentShPtr = std::shared_ptr<Component>;

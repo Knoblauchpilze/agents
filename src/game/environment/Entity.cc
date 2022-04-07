@@ -101,8 +101,25 @@ namespace mas {
 
     void
     Entity::update() {
+      // Update components.
       for (unsigned id = 0u ; id < m_components.size() ; ++id) {
         m_components[id]->update();
+      }
+
+      // And remove the ones that are marked for deletion.
+      std::size_t s = components();
+
+      Components::iterator newEnd = std::remove_if(
+        m_components.begin(), m_components.end(),
+        [](ComponentShPtr c) {
+          return c->markedForDeletion();
+        }
+      );
+
+      m_components.erase(newEnd, m_components.end());
+
+      if (components() != s) {
+        log("Removed " + std::to_string(s - components()) + " component(s) marked for deletion");
       }
     }
 

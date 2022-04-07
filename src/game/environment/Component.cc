@@ -24,7 +24,8 @@ namespace mas {
     Component::Component(const Type& type):
       utils::CoreObject(typeToString(type)),
 
-      m_type(type)
+      m_type(type),
+      m_toBeDeleted(false)
     {
       setService("mas");
     }
@@ -34,11 +35,21 @@ namespace mas {
       return m_type;
     }
 
+    bool
+    Component::markedForDeletion() const noexcept {
+      return m_toBeDeleted;
+    }
+
     void
     Component::attach(const Entity& ent) noexcept {
       // Define a new name for the component so that it matches
       // the name of the entity.
       setName(ent.uuid().toString());
+    }
+
+    void
+    Component::markForDeletion(bool mark) noexcept {
+      m_toBeDeleted = mark;
     }
 
   }
