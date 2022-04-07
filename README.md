@@ -392,8 +392,28 @@ The application provides a simple framework where no real agent or behavior exis
 
 ### Create new components
 
-In order to allow agents to modify and interact with their environment, it might be needed to create new type of components.
-TODO: Handle this.
+In order to allow agents to modify and interact with their environment, it might be needed to create new types of components.
+
+As described in the [implementation](###implementation) section, a component is just a wrapper which define a type and a set of properties. By default the simulation defines the following kinds:
+```cpp
+enum class Type {
+  MovingObject,
+  Agent,
+  Animat,
+  Renderer,
+};
+
+std::string
+typeToString(const Type& t) noexcept;
+```
+
+Each type correspond to a facet of the behavior of an entity and is simulated and accessed in a different way by the environment. For example the `MovingObject` facet mainly defines how the object is perceived by other elements and how it can move in the environment whereas the `Renderer` facet is used by the application to display the component on screen.
+
+Whenever the user needs to refine the simulation and generate new components, it is needed to register a new value in the enumeration, and add the corresponding case in the `typeToString` method (in order to obtain a human readable descrption of the component type).
+
+It is possible to then register the component to the entities that are created when initializing the simulation (see the [following](###initialization-of-the-simulation) section) or when spawning new agents.
+
+Note that by default the environment only consider the `MovingObject` component as valid elements for perceptions: if the new component kind should be perceivable, it might be required to update this behavior. See the [perception](###create-new-perceptions) section for more details.
 
 ### Initialization of the simulation
 
@@ -507,6 +527,14 @@ NewBehavior::perform(const AgentData& data,
 Each agent is able to execute more than one behavior in parallel so it is encouraged to keep them very simple. For example for an ant, it makes sense to have a pheromon spawning behavior and another responsible to analyze the pheromons to generate a position to go to.
 
 Whenever a behavior is created, it can be linked to agents by providing a behavior selection method that takes it into account.
+
+### Spawn new agents
+
+TODO: Handle spawning agents.
+
+### Create new perceptions
+
+TODO: Handle creation of new perceptions.
 
 # The application
 
