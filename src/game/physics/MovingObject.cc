@@ -19,34 +19,6 @@ namespace mas {
     }
 
     void
-    MovingObject::update() {}
-
-    const utils::Boxf&
-    MovingObject::bbox() const noexcept {
-      return m_area;
-    }
-
-    const utils::Vector2f&
-    MovingObject::acceleration() const noexcept {
-      return m_acceleration;
-    }
-
-    const utils::Vector2f&
-    MovingObject::speed() const noexcept {
-      return m_speed;
-    }
-
-    bool
-    MovingObject::intersects(const MovingObject& rhs) const noexcept {
-      return m_area.intersects(rhs.m_area);
-    }
-
-    void
-    MovingObject::applyForce(const utils::Vector2f& f) {
-      m_force += f;
-    }
-
-    void
     MovingObject::simulate(const time::Manager& manager) {
       // Retrieve time delta in seconds.
       float d = manager.lastStepDuration(time::Unit::Second);
@@ -80,6 +52,31 @@ namespace mas {
       // Reset the force: if it is applied continuously we
       // leave the other processes to reapply it.
       m_force = utils::Vector2f();
+    }
+
+    const utils::Boxf&
+    MovingObject::bbox() const noexcept {
+      return m_area;
+    }
+
+    const utils::Vector2f&
+    MovingObject::acceleration() const noexcept {
+      return m_acceleration;
+    }
+
+    const utils::Vector2f&
+    MovingObject::speed() const noexcept {
+      return m_speed;
+    }
+
+    bool
+    MovingObject::intersects(const MovingObject& rhs) const noexcept {
+      return m_area.intersects(rhs.m_area);
+    }
+
+    void
+    MovingObject::applyForce(const utils::Vector2f& f) {
+      m_force += f;
     }
 
   }

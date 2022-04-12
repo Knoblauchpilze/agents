@@ -71,7 +71,7 @@ namespace mas {
     }
 
     void
-    Renderer::update() {}
+    Renderer::simulate(const time::Manager& /*manager*/) {}
 
     void
     Renderer::draw(olc::PixelGameEngine* pge,

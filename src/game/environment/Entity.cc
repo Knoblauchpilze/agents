@@ -100,10 +100,10 @@ namespace mas {
     }
 
     void
-    Entity::update() {
+    Entity::simulate(const time::Manager& manager) {
       // Update components.
       for (unsigned id = 0u ; id < m_components.size() ; ++id) {
-        m_components[id]->update();
+        m_components[id]->simulate(manager);
       }
 
       // And remove the ones that are marked for deletion.

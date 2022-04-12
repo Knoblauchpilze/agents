@@ -3,6 +3,7 @@
 
 # include <memory>
 # include <core_utils/CoreObject.hh>
+# include "Manager.hh"
 
 namespace mas {
   namespace environment {
@@ -16,6 +17,7 @@ namespace mas {
       Agent,
       Animat,
       Renderer,
+      UserData,
     };
 
     /**
@@ -69,9 +71,11 @@ namespace mas {
          *          using.
          *          This method should be implemented by inheriting classes
          *          so that a specific behavior is provided.
+         * @param manager - the time information at the moment of the
+         *                  update.
          */
         virtual void
-        update() = 0;
+        simulate(const time::Manager& manager) = 0;
 
         /**
          * @brief - Used to configure the component as attached to a

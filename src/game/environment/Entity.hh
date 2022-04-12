@@ -80,9 +80,10 @@ namespace mas {
 
         /**
          * @brief - Update the components of the entity.
+         * @param manager - information about the current timestamp.
          */
         void
-        update();
+        simulate(const time::Manager& manager);
 
         /// @brief - An iterator to handle the components of an entity
         /// in a simple and intuitive way.

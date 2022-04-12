@@ -61,9 +61,10 @@ namespace mas {
          * @brief - Implementation of the interface method to handle
          *          the update of this component with the underlying
          *          data.
+         * @param manager - information about the current timestamp.
          */
         void
-        update() override;
+        simulate(const time::Manager& manager) override;
 
         /**
          * @brief - Evaluate the decisions to take for this agent.

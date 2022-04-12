@@ -24,7 +24,7 @@ namespace mas {
     }
 
     void
-    Agent::update() {}
+    Agent::simulate(const time::Manager& /*manager*/) {}
 
     void
     Agent::live(const time::Manager& manager,

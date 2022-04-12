@@ -23,12 +23,12 @@ namespace mas {
                      const RigidBody& body);
 
         /**
-         * @brief - Implementation of the interface method to handle
-         *          the update of this component with the underlying
-         *          data.
+         * @brief - Simulate the dynamic processes attached to the
+         *          moving object.
+         * @param manager - information about the current timestamp.
          */
         void
-        update() override;
+        simulate(const time::Manager& manager);
 
         /**
          * @brief - The bounding box attached to this object.
@@ -67,14 +67,6 @@ namespace mas {
          */
         void
         applyForce(const utils::Vector2f& f);
-
-        /**
-         * @brief - Simulate the dynamic processes attached to the
-         *          moving object.
-         * @param manager - the time manager.
-         */
-        void
-        simulate(const time::Manager& manager);
 
       private:
 

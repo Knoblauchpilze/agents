@@ -16,6 +16,8 @@ namespace mas {
           return "animat";
         case Type::Renderer:
           return "renderer";
+        case Type::UserData:
+          return "user-data";
         default:
           return "unknown";
       }

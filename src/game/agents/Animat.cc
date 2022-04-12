@@ -20,7 +20,7 @@ namespace mas {
     }
 
     void
-    Animat::update() {
+    Animat::simulate(const time::Manager& /*manager*/) {
       m_frustum = Frustum(m_body->bbox());
     }
 
