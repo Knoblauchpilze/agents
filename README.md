@@ -109,6 +109,7 @@ enum class Type {
   Agent,
   Animat,
   Renderer,
+  UserData,
 };
 
 class Component: public utils::CoreObject {
@@ -254,7 +255,33 @@ It is usually not necessary to specialize this class as the behavior is meant to
 
 ### Perceptions
 
-TODO: Handle perceptions.
+An important subsystem of the simulation is the concept of perceptions. A perception is what any agent can use to perceive the world around it. A perception is composed of two main facets:
+* a moving object interface, allowing to perceive the agent in the world. We consider that if an entity does not have a moving object as a component, it is invisible and thus cannot be perceived by other agents.
+* a user data segment, which can hold anything the user decides to put in the object.
+
+This translates in the code in this form:
+```cpp
+class Perception {
+  public:
+
+    Perception(const MovingObject& object, const UserData* data = nullptr);
+
+    /// @brief - The bounding box of the moving object facet.
+    const utils::Boxf&
+    bbox() const noexcept;
+
+    /// @brief - Whether or not some user data is available.
+    bool
+    hasUserData() const noexcept;
+
+    /// @brief - Fetch the user data as a certain type.
+    template <typename T>
+    const T*
+    as() const noexcept;
+};
+```
+
+The environment populates the perceptions for each agent by scanning for other entites that have a `MovingObject` component attached to them and then fetching the user-data that might be attached to the entity as well. The content is then bundled into a `Perception` object which is provided to the agents.
 
 ### Behavior
 
@@ -386,6 +413,7 @@ enum class Type {
   Agent,
   Animat,
   Renderer,
+  UserData,
 };
 
 std::string
@@ -399,6 +427,8 @@ Whenever the user needs to refine the simulation and generate new components, it
 It is possible to then register the component to the entities that are created when initializing the simulation (see the [following](###initialization-of-the-simulation) section) or when spawning new agents.
 
 Note that by default the environment only consider the `MovingObject` component as valid elements for perceptions: if the new component kind should be perceivable, it might be required to update this behavior. See the [perception](###create-new-perceptions) section for more details.
+
+Finally, note that most of the component created by the user are encouraged to use the `UserData` type: the environment will associate the component with this type to the perceptions provided to the other agents. Note that we actually only handle a single component with the type `UserData`. Note as well that the agents will be given access to the components through the perceptions: this could mean that the agents could call the `simulate` method or any other public member of the interface of the component. We of course **STRONGLY ADVISE AGAINST THAT**.
 
 ### Initialization of the simulation
 
@@ -442,7 +472,9 @@ initialize(Environment& env) noexcept {
     ComponentShPtr mo = std::make_shared<MovingObject>(area, rb);
     env.registerComponent(uuid, mo);
 
-    /** FIXME: Register other components. **/
+    /** FIXME: Register other components, such as one for user-data **/
+    ComponentShPtr ud = std::make_shared<UserDataType>(/* ... */);
+    env.registerComponent(uuid, ud);
   };
 
   // Generate the initializer.
@@ -519,7 +551,7 @@ TODO: Handle spawning agents.
 
 ### Create new perceptions
 
-TODO: Handle creation of new perceptions.
+Creation of new perceptions is generally not something necessary for agents. As discussed in the [perceptions](###perceptions) section, the user should derive a new component with the `UserData` kind so that it is automatically transmitted to the base perception class. This will allow agents to access some of the properties available for the component without having to change anything to the rest of the simulation.
 
 # The application
 
