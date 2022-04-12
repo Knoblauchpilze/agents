@@ -23,7 +23,7 @@ namespace details {
   void
   iterate(const std::unordered_map<utils::Uuid, mas::environment::EntityShPtr>& entities,
           const mas::environment::Type& t,
-          std::function<void(mas::environment::Component&)> func) noexcept
+          std::function<void(mas::environment::Component&, const mas::environment::Entity&)> func) noexcept
   {
     for (std::unordered_map<utils::Uuid, mas::environment::EntityShPtr>::const_iterator it = entities.cbegin() ; it != entities.cend() ; ++it) {
       const mas::environment::Entity& e = *it->second;
@@ -33,7 +33,7 @@ namespace details {
           continue;
         }
 
-        func(*eit);
+        func(*eit, e);
       }
     }
   }
@@ -146,7 +146,7 @@ namespace mas {
     // Traverse the list of entities and check ones that have
     // an animat component.
     details::iterate(m_entities, environment::Type::Animat,
-      [this](environment::Component& c) {
+      [this](environment::Component& c, const environment::Entity& /*e*/) {
         // Convert to animat.
         environment::Animat* a = c.as<environment::Animat>();
 
@@ -155,10 +155,14 @@ namespace mas {
         environment::Perceptions pps;
 
         details::iterate(m_entities, environment::Type::MovingObject,
-          [a, &pps, &frustum](environment::Component& c) {
+          [a, &pps, &frustum](environment::Component& c, const environment::Entity& e) {
             environment::MovingObject* obj = c.as<environment::MovingObject>();
             if (obj != nullptr && !a->isBody(obj) && frustum.visible(*obj)) {
-              pps.push_back(environment::Perception(*obj));
+              // Build a perception with the corresponding user data.
+              environment::ComponentShPtr ud = e.get(environment::Type::UserData);
+
+              environment::Perception p(*obj, ud == nullptr ? nullptr : ud->as<environment::UserData>());
+              pps.push_back(p);
             }
           }
         );
@@ -171,7 +175,7 @@ namespace mas {
   void
   Environment::computeAgentsStep(const time::Manager& manager) {
     details::iterate(m_entities, environment::Type::Agent,
-      [&manager, this](environment::Component& c) {
+      [&manager, this](environment::Component& c, const environment::Entity& /*e*/) {
         c.as<environment::Agent>()->live(manager, m_rng);
       }
     );
@@ -183,7 +187,7 @@ namespace mas {
     std::vector<environment::InfluenceShPtr> infs;
 
     details::iterate(m_entities, environment::Type::Animat,
-      [&infs](environment::Component& c) {
+      [&infs](environment::Component& c, const environment::Entity& /*e*/) {
         std::vector<environment::InfluenceShPtr> bInfs = c.as<environment::Animat>()->consumeInfluences();
         infs.insert(infs.end(), bInfs.begin(), bInfs.end());
       }
@@ -197,16 +201,10 @@ namespace mas {
       infs[id]->apply();
     }
 
-    // Apply endogenous processes.
-    details::iterate(m_entities, environment::Type::MovingObject,
-      [&manager](environment::Component& c) {
-        c.as<environment::MovingObject>()->simulate(manager);
-      }
-    );
-
-    // Update all entities and their components.
+    // Apply endogenous processes by updating entities and
+    // their components.
     for (Entities::iterator it = m_entities.begin() ; it != m_entities.end() ; ++it) {
-      it->second->update();
+      it->second->simulate(manager);
     }
 
     // Delete entities with no components.
