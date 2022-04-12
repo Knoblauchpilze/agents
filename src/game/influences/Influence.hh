@@ -6,6 +6,10 @@
 # include "Agent.hh"
 
 namespace mas {
+
+  /// @brief - Forward declaration of the environment class.
+  class Environment;
+
   namespace environment {
 
     /// @brief - A convenience define representing a callback for
@@ -15,6 +19,10 @@ namespace mas {
     /// @brief - A convenience define representing a callback for
     /// the application of an influence on the emitter.
     using EmitterCallback = std::function<void(Agent&)>;
+
+    /// @brief - A convenience define representing a callback for
+    /// the application of an influence on the environment.
+    using EnvironmentCallback = std::function<void(Environment&)>;
 
     namespace influence {
 
@@ -29,10 +37,18 @@ namespace mas {
       /**
        * @brief - A convenience define for a callback that has no
        *          effect on the receiver.
-       * @retrun - a no-op callback.
+       * @return - a no-op callback.
        */
       ReceiverCallback
       noOpReceiver() noexcept;
+
+      /**
+       * @brief - A convenience define for a callback that has no
+       *          effect on the environment.
+       * @return - a no-op callback.
+       */
+      EnvironmentCallback
+      noOpEnvironment() noexcept;
 
     }
 
@@ -46,9 +62,13 @@ namespace mas {
          *              influence on the emitter.
          * @param rCB - the callback defining the effect of this
          *              influence on the receiver.
+         * @param envCB - the callback defining the effect of this
+         *                influence on the environment. The default
+         *                behavior is to not have any effect.
          */
         Influence(EmitterCallback eCB,
-                  ReceiverCallback rCB);
+                  ReceiverCallback rCB,
+                  EnvironmentCallback envCB = influence::noOpEnvironment());
 
         /**
          * @brief - Destruction of the object to allow virtual
@@ -82,10 +102,10 @@ namespace mas {
 
         /**
          * @brief - Interface method to apply the influence to both the
-         *          emitter and receiver.
+         *          emitter and receiver and its environmental effect.
          */
         void
-        apply() const;
+        apply(Environment& env) const;
 
       private:
 
@@ -110,6 +130,12 @@ namespace mas {
          *          on the receiver.
          */
         ReceiverCallback m_rCallback;
+
+        /**
+         * @brief - The callback defining the effect of the influence
+         *          on the environment.
+         */
+        EnvironmentCallback m_envCallback;
     };
 
     /// @brief - A shared pointer on an influence object.

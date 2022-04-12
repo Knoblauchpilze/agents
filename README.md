@@ -325,11 +325,16 @@ using ReceiverCallback = std::function<void(MovingObject&)>;
 /// the application of an influence on the emitter.
 using EmitterCallback = std::function<void(Agent&)>;
 
+/// @brief - A convenience define representing a callback for
+/// the application of an influence on the environment.
+using EnvironmentCallback = std::function<void(Environment&)>;
+
 class Influence {
   public:
 
     Influence(EmitterCallback eCB,
-              ReceiverCallback rCB);
+              ReceiverCallback rCB,
+              EnvironmentCallback envCB = influence::noOpEnvironment());
 
     void
     setEmitter(Agent* obj);
@@ -338,15 +343,17 @@ class Influence {
     setReceiver(MovingObject* obj);
 
     void
-    apply() const {
+    apply(Environment& env) const {
       // Apply callbacks.
       m_rCallback(*m_receiver);
       m_eCallback(*m_emitter);
+
+      m_envCallback(env);
     }
 };
 ```
 
-The idea is that the influence has two callbacks that act on the emitter and receiver and trigger some process on them. We also define convenience generators which perform the creation of an empty callback that has no impact on the emitter or receiver.
+The idea is that the influence has two callbacks that act on the emitter and receiver and trigger some process on them. We also define convenience generators which perform the creation of an empty callback that has no impact on the emitter or receiver. In addition, a third callback is available to interact on the environment.
 
 Typically one can generate a linear motion influence like so:
 ```cpp
@@ -355,11 +362,28 @@ InfluenceShPtr inf = std::make_shared<Influence>(
   influence::noOpEmitter(),
   [i](MovingObject& obj) {
     obj.applyForce(i);
-  }
+  },
+  influence::noOpEnvironment()
 );
 ```
 
 This will create an influence which apply a force along the `x` axis to the moving object receiving it. It is theoretically possible to extend this behavior to applying any effect on the receiver.
+
+Another possibility is to use the environment callback to spawn new objects or agents into the world like so:
+```cpp
+utils::Vector2f i(1.0f, 0.0f);
+InfluenceShPtr inf = std::make_shared<Influence>(
+  influence::noOpEmitter(),
+  influence::noOpReceiver(),
+  [](Environment& env) {
+    utils::Uuid e = env.createEntity();
+
+    env.registerComponent(e, /** FIXME: Create component. **/);
+  }
+);
+```
+
+By combining the three callbacks it is possible to create complex influences which will modify the emitter and receiver but also the environment. It is of course not mandatory to have all three callbacks active for a single influence.
 
 ## Launching the simulation
 
@@ -547,7 +571,44 @@ Whenever a behavior is created, it can be linked to agents by providing a behavi
 
 ### Spawn new agents
 
-TODO: Handle spawning agents.
+As described in the [influence](###influences) section, a simple way to allow spawning new agents in the world is to use the environment callback provided in the `Influence` interface.
+
+A new agent is a collection of `Components` attached to an `Entity`. The only constraint is that the entity should have at least one component to not be recycled automatically by the environment.
+
+When one wants to spawn agents, it is possible to use a similar mechanism used for initializing the simulation but wrapped in a dedicated callback. Typically the spawning function in the initialization process looked like so:
+
+```cpp
+// Create the entity factory function.
+auto factory = [](const utils::Uuid& uuid, const utils::Point2f& p, utils::RNG& /*rng*/, Environment& env) {
+  RigidBody rb = /** FIXME: Create a rigid body **/;
+
+  ComponentShPtr mo = std::make_shared<MovingObject>(area, rb);
+  env.registerComponent(uuid, mo);
+
+  /** FIXME: Register other components, such as one for user-data **/
+  ComponentShPtr ud = std::make_shared<UserDataType>(/* ... */);
+  env.registerComponent(uuid, ud);
+};
+```
+
+This is very similar to the callback expected by the influence. By adapting it a bit we end up with the following code:
+```cpp
+// Create the entity factory function.
+auto envCallback = [](Environment& env) {
+  utils::Uuid ent = env.createEntity();
+
+  RigidBody rb = /** FIXME: Create a rigid body **/;
+
+  ComponentShPtr mo = std::make_shared<MovingObject>(area, rb);
+  env.registerComponent(ent, mo);
+
+  /** FIXME: Register other components, such as one for user-data **/
+  ComponentShPtr ud = std::make_shared<UserDataType>(/* ... */);
+  env.registerComponent(ent, ud);
+};
+```
+
+When giving this callback to an influence created by a behavior we are able to spawn new fully initialized agents.
 
 ### Create new perceptions
 

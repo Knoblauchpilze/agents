@@ -14,15 +14,22 @@ namespace mas {
       noOpReceiver() noexcept {
         return [](MovingObject& /*obj*/) {};
       }
+
+      EnvironmentCallback
+      noOpEnvironment() noexcept {
+        return [](Environment& /*env*/) {};
+      }
     }
 
     Influence::Influence(EmitterCallback eCB,
-                         ReceiverCallback rCB):
+                         ReceiverCallback rCB,
+                         EnvironmentCallback envCB):
       m_emitter(nullptr),
       m_receiver(nullptr),
 
       m_eCallback(eCB),
-      m_rCallback(rCB)
+      m_rCallback(rCB),
+      m_envCallback(envCB)
     {}
 
     Influence::~Influence() {}
@@ -43,9 +50,11 @@ namespace mas {
     }
 
     void
-    Influence::apply() const {
+    Influence::apply(Environment& env) const {
       m_rCallback(*m_receiver);
       m_eCallback(*m_emitter);
+
+      m_envCallback(env);
     }
 
   }

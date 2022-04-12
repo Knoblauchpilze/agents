@@ -198,7 +198,7 @@ namespace mas {
 
     // Apply influences.
     for (unsigned id = 0u ; id < infs.size() ; ++id) {
-      infs[id]->apply();
+      infs[id]->apply(*this);
     }
 
     // Apply endogenous processes by updating entities and
@@ -213,6 +213,7 @@ namespace mas {
     Entities::iterator eit = m_entities.end();
     while (it != eit) {
       if (it->second->components() == 0u) {
+        log("Erasing entity " + it->second->uuid().toString(), utils::Level::Verbose);
         it = m_entities.erase(it);
       }
       else {
