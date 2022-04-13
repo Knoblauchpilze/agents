@@ -2,7 +2,7 @@
 # include "Game.hh"
 # include <cxxabi.h>
 # include "Menu.hh"
-# include "Initialization.hh"
+# include "Simulation.hh"
 
 /// @brief - The height of the status menu in pixels.
 # define STATUS_MENU_HEIGHT 50
@@ -96,12 +96,28 @@ namespace pge {
   }
 
   void
-  Game::performAction(float /*x*/, float /*y*/) {
+  Game::performAction(float x, float y) {
     // Only handle actions when the game is not disabled.
     if (m_state.disabled) {
       log("Ignoring action while menu is disabled");
       return;
     }
+
+    // Note that the input coords are expressed for the
+    // top left corner of the cell in which the attractor
+    // should be spawned, so we need to account for that.
+    utils::Point2f p(x + 0.5f, y + 0.5f);
+
+    // Only available when the simulation is paused.
+    mas::State s = m_launcher.state();
+    if (s != mas::State::Paused && s != mas::State::Stopped && s != mas::State::None) {
+      warn("Can only create object at " + p.toString() + " when simulation is not running");
+      return;
+    }
+
+    // Handle the creation of a new object.
+    log("Creating new attractor at " + p.toString(), utils::Level::Info);
+    mas::environment::spawnAttractor(m_env, p);
   }
 
   bool

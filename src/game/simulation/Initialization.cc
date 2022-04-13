@@ -2,8 +2,8 @@
 # include "Initialization.hh"
 # include "Component.hh"
 # include "Environment.hh"
+# include "Agents.hh"
 # include "Renderer.hh"
-# include "Fish.hh"
 
 /// @brief - The desired number of FPS for the launcher that
 /// will simulate the environment.
@@ -23,7 +23,7 @@
 # define FRUSTUM_TO_BODY_RATIO 3.0f
 
 /// @brief - How many objects are spawned at the beginning.
-# define AGENTS_COUNT 50u
+# define AGENTS_COUNT 10u
 
 namespace mas {
   namespace environment {
@@ -41,7 +41,7 @@ namespace mas {
     void
     initialize(Environment& env) noexcept {
       // Create the spawner function.
-      utils::Boxf area(0.0f, 0.0f, 30.0f, 20.0f);
+      utils::Boxf area(0.0f, 0.0f, 10.0f, 5.0f);
 
       auto spawner = [area](utils::RNG& rng) {
         utils::Point2f p;
@@ -68,10 +68,14 @@ namespace mas {
         );
         env.registerComponent(uuid, ani);
 
-        ComponentShPtr ag = createFish(*ani->as<Animat>());
+        ComponentShPtr ag = spawnFish(*ani->as<Animat>());
         env.registerComponent(uuid, ag);
 
-        ComponentShPtr rend = std::make_shared<Renderer>(*mo->as<MovingObject>(), RenderingMode::Square);
+        ComponentShPtr rend = std::make_shared<Renderer>(
+          *mo->as<MovingObject>(),
+          RenderingMode::Square,
+          olc::ORANGE
+        );
         env.registerComponent(uuid, rend);
       };
 

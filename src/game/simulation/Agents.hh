@@ -16,7 +16,7 @@ namespace mas {
      * @return - the agent.
      */
     AgentShPtr
-    createFish(Animat& animat);
+    spawnFish(Animat& animat);
 
   }
 }

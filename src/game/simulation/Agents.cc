@@ -6,7 +6,7 @@ namespace mas {
   namespace environment {
 
     AgentShPtr
-    createFish(Animat& animat) {
+    spawnFish(Animat& animat) {
       // Generate callbacks.
       brain::BehaviorUpdate bu = [](const AgentData& d) {
         // Update the behavior is the agent is not moving

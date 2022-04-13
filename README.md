@@ -436,7 +436,13 @@ The `Manager` allows to completely decouple the time passing in the simulation f
 
 The application provides a simple framework where no real agent or behavior exists. It is intended as a base for exploring the capabilities or the model of certain agents in a dedicated process.
 
-The base code to do that is provided in the [simulation](src/game/simulation) folder.
+The base code to do that is provided in the [simulation](src/game/simulation) folder. The folder is structured in the following way:
+* The [Agents](src/game/simulation/Agents.hh) file defines the functions to create agents. It is recommended to add all the agents in this file.
+* The [Behaviors](src/game/simulation/Behaviors.hh) file defines the behaviors attached to the agents. It is recommended to add all the behaviors in this file.
+* The [Objects](src/game/simulation/Objects.hh) file defines the objects spawned in the environment, which are not agents. It is recommended to add all the objects in this file.
+* The [Initialization](src/game/simulation/Initialization.hh) defines the code to initialize the simulation. It reuses the agents, objects and behaviors defined in the other files to setup the initialization.
+
+Finally, the [simulation](src/game/simulation/Simulation.hh) header gather everything so that it is easy to include the entirety of the simulation in the [Game](src/game/Game.cc) file and register new actions.
 
 ### Create new components
 
@@ -647,6 +653,40 @@ When giving this callback to an influence created by a behavior we are able to s
 ### Create new perceptions
 
 Creation of new perceptions is generally not something necessary for agents. As discussed in the [perceptions](###perceptions) section, the user should derive a new component with the `UserData` kind so that it is automatically transmitted to the base perception class. This will allow agents to access some of the properties available for the component without having to change anything to the rest of the simulation.
+
+### Add behaviors triggered from the UI
+
+The application is already structured in a way where the `Game` class is notified whenever the user clicks somewhere in the simulation. This is handled by the `performAction` method in the `Game` class, as shown below:
+```cpp
+void
+Game::performAction(float x, float y) {
+  // Only handle actions when the game is not disabled.
+  if (m_state.disabled) {
+    log("Ignoring action while menu is disabled");
+    return;
+  }
+
+  // Note that the input coords are expressed for the
+  // top left corner of the cell in which the attractor
+  // should be spawned, so we need to account for that.
+  utils::Point2f p(x + 0.5f, y + 0.5f);
+
+  // Only available when the simulation is paused.
+  mas::State s = m_launcher.state();
+  if (s != mas::State::Paused && s != mas::State::Stopped && s != mas::State::None) {
+    warn("Can only create object at " + p.toString() + " when simulation is not running");
+    return;
+  }
+
+  /** FIXME: Handle custom behaviors. **/
+}
+```
+
+The code above can be adapted to spawn agents or objects in the `FIXME` part. For now, the simulation has to be paused has it is running in another thread and we don't have a mechanism to guarantee thread safety.
+
+The preferred way is to call at this point a method from the [Agents.hh](src/game/simulation/Agents.hh) file, or the [Objects.hh](src/game/simulation/Objects.hh) file depending on what needs to be spawned.
+
+It is also possible to add some features based on the key pressed or drag and drop, but it is not provided out of the box.
 
 # The application
 
