@@ -23,6 +23,12 @@ namespace mas {
         out += (toP.normalized() * repulsion);
       }
 
+      // Clamp with maximum acceleration.
+      float r = out.length() / maxAcceleration;
+      if (r > 1.0f) {
+        out /= r;
+      }
+
       return out;
     }
 

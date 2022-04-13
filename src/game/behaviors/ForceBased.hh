@@ -13,6 +13,10 @@ namespace mas {
       // The repulsion coefficient.
       float repulsion;
 
+      // The maximum acceleration possible. Used to clamp the output
+      // repulsion force to an acceptable value.
+      float maxAcceleration;
+
       /**
        * @brief - Compute the avoidance vector for the input position
        *          based on the input perceptions.
