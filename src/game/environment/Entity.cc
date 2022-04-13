@@ -12,9 +12,9 @@ namespace mas {
 
       m_components()
     {
-      // Update the name of the entity to be its identifier.
-      setName(m_uuid.toString());
       setService("mas");
+      // Register the identifier of the entity as a module.
+      addModule(m_uuid.toString());
     }
 
     const utils::Uuid&

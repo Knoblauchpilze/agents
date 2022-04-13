@@ -50,9 +50,9 @@ namespace mas {
 
     void
     Component::attach(const Entity& ent) noexcept {
-      // Define a new name for the component so that it matches
-      // the name of the entity.
-      setName(ent.uuid().toString());
+      // Define a new module for the component so that it matches
+      // the identifier of the entity.
+      addModule(ent.uuid().toString());
 
       // Assign the same identifier as the entity.
       m_uuid = ent.uuid();
