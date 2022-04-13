@@ -524,7 +524,7 @@ This method aims at creating an initializer object and apply it to the input env
 
 Another important aspect to specialize the simulation is to create agents and their respective behaviors. In this context, the agent in and of itself is more the description of the entity and its attached component.
 
-The base framework is provided in the [simulation](src/game/simulation) folder where a skeleton for the specialization of the simulation. To add a new agent, a new file called with the name of the `Agent` (say `Dummy` for example) including a single function like below:
+The base framework is provided in the [simulation](src/game/simulation) folder where a skeleton for the specialization of the simulation. To add a new agent, one can use the `Agents` file where custom agents functions can be added, like below:
 
 ```cpp
 AgentShPtr
