@@ -1,12 +1,12 @@
 
-# include "Dummy.hh"
-# include "Impulse.hh"
+# include "Fish.hh"
+# include "MoveTo.hh"
 
 namespace mas {
   namespace environment {
 
     AgentShPtr
-    createDummy(Animat& animat) {
+    createFish(Animat& animat) {
       // Generate callbacks.
       brain::BehaviorUpdate bu = [](const AgentData& d) {
         // Update the behavior is the agent is not moving
@@ -14,13 +14,8 @@ namespace mas {
         return !d.moving();
       };
 
-      brain::BehaviorSelection bs = [](const AgentData& /*d*/, const Perceptions& /*perceptions*/, utils::RNG& rng) {
-        float m = rng.rndFloat(0.0f, 20.0f);
-        float a = rng.rndAngle();
-
-        utils::Vector2f v(m * std::cos(a), m * std::sin(a));
-
-        return std::make_shared<ImpulseBehavior>(v, false);
+      brain::BehaviorSelection bs = [](const AgentData& /*d*/, const Perceptions& /*perceptions*/, utils::RNG& /*rng*/) {
+        return std::make_shared<MoveTo>();
       };
 
       brain::BehaviorTermination bt = [](BehaviorShPtr b) {
