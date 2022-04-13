@@ -426,6 +426,8 @@ The `Manager` allows to completely decouple the time passing in the simulation f
 
 The application provides a simple framework where no real agent or behavior exists. It is intended as a base for exploring the capabilities or the model of certain agents in a dedicated process.
 
+The base code to do that is provided in the [simulation](src/game/simulation) folder.
+
 ### Create new components
 
 In order to allow agents to modify and interact with their environment, it might be needed to create new types of components.
@@ -512,7 +514,7 @@ This method aims at creating an initializer object and apply it to the input env
 
 Another important aspect to specialize the simulation is to create agents and their respective behaviors. In this context, the agent in and of itself is more the description of the entity and its attached component.
 
-The base framework is provided in the [Dummy](src/game/simulation/Dummy.cc) file where a skeleton for the creation of an agent is provided. More than one method can be defined here and the skeleton should be similar to the following:
+The base framework is provided in the [simulation](src/game/simulation) folder where a skeleton for the specialization of the simulation. To add a new agent, a new file called with the name of the `Agent` (say `Dummy` for example) including a single function like below:
 
 ```cpp
 AgentShPtr
@@ -539,6 +541,28 @@ createAgent(Animat& animat) {
 ```
 
 The precise definition of the behavior methods can and should be updated to handle more complex behaviors. The methods created there can be used as part of the initialization code and also in the definition of new behaviors or influences needing to spawn new agents.
+
+Once this is done, the user can either create a new influence to spawn the agents (see the [influences](###spawn-new-agents) section) or use the initialize mechanism. More specifically, it might be useful to use a skeleton code like below in the `EntityFactory`:
+```cpp
+auto factory = [](const utils::Uuid& uuid, const utils::Point2f& p, utils::RNG& /*rng*/, Environment& env) {
+  /// FIXME: Generate a rigid body with updated parameters.
+  utils::Boxf area(p.x(), p.y(), 1.0f, 1.0f);
+  RigidBody rb(1.0f, 1.0f, 0.9f, area);
+
+  ComponentShPtr mo = std::make_shared<MovingObject>(area, rb);
+  env.registerComponent(uuid, mo);
+
+  ComponentShPtr ani = std::make_shared<Animat>(mo->as<MovingObject>(), 0.01f);
+  env.registerComponent(uuid, ani);
+
+  // Using the `createAgent` method as defined before.
+  ComponentShPtr ag = createAgent(*ani->as<Animat>());
+  env.registerComponent(uuid, ag);
+
+  ComponentShPtr rend = std::make_shared<Renderer>(*mo->as<MovingObject>(), RenderingMode::Square);
+  env.registerComponent(uuid, rend);
+};
+```
 
 As we're using an entity component system and we chose to make the semantic of the Agent to be more based on callbacks rather than specializing a class, we don't have to create code in the 'engine' but only customize the behaviors that are already called by the base environment.
 
