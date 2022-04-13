@@ -39,6 +39,7 @@ namespace mas {
           warn("Behavior selection created empty behavior");
         }
         else {
+          b->attach(uuid());
           m_behaviors.push_back(b);
         }
       }

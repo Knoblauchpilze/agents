@@ -22,6 +22,15 @@ namespace mas {
         virtual ~Behavior();
 
         /**
+         * @brief - Used to configure the behavior as attached to a
+         *          certain uuid.
+         * @param uuid - the identifier to which this behavior is
+         *               attached.
+         */
+        void
+        attach(const utils::Uuid& uuid) noexcept;
+
+        /**
          * @brief - Whether or not this behavior is complete, meaning
          *          that it reached its completion.
          * @return - `true` if the behavior is completed.

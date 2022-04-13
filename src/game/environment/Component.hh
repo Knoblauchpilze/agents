@@ -3,6 +3,7 @@
 
 # include <memory>
 # include <core_utils/CoreObject.hh>
+# include <core_utils/Uuid.hh>
 # include "Manager.hh"
 
 namespace mas {
@@ -37,6 +38,13 @@ namespace mas {
          */
         const Type&
         type() const noexcept;
+
+        /**
+         * @brief - Return the type of this component.
+         * @return - the type of the component.
+         */
+        const utils::Uuid&
+        uuid() const noexcept;
 
         /**
          * @brief - Whether this component needs to be deleted.
@@ -108,6 +116,11 @@ namespace mas {
          * @brief - The type of the component.
          */
         Type m_type;
+
+        /**
+         * @brief - The identifier of the component.
+         */
+        utils::Uuid m_uuid;
 
         /**
          * @brief - Whether or not the component should be deleted.

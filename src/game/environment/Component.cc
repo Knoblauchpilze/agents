@@ -27,6 +27,7 @@ namespace mas {
       utils::CoreObject(typeToString(type)),
 
       m_type(type),
+      m_uuid(),
       m_toBeDeleted(false)
     {
       setService("mas");
@@ -35,6 +36,11 @@ namespace mas {
     const Type&
     Component::type() const noexcept {
       return m_type;
+    }
+
+    const utils::Uuid&
+    Component::uuid() const noexcept {
+      return m_uuid;
     }
 
     bool
@@ -47,6 +53,9 @@ namespace mas {
       // Define a new name for the component so that it matches
       // the name of the entity.
       setName(ent.uuid().toString());
+
+      // Assign the same identifier as the entity.
+      m_uuid = ent.uuid();
     }
 
     void
