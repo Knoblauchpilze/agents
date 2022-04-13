@@ -616,9 +616,15 @@ Creation of new perceptions is generally not something necessary for agents. As 
 
 # The application
 
-TODO: Handle README about the application.
-
 ## Top banner
+
+The top part of the main view of the application presents a banner which allows to see at a glance how many agents are present in the simulation and to change the speed of the simulation.
+
+![Top banner](resources/top_banner.png)
+
+The number of agents is computed automatically and define how many entities having at least one `Agent` component registered.
+
+The speed controls how fast the runs: by default and as explained in the [initialization](###initialization-of-the-simulation) section the simulation is run with a certain step. The top button defines a multiplier applied to this initial step.
 
 ## Environment view
 
@@ -645,3 +651,7 @@ The `S` key stops the simulation, prevening other steps to be executed. Compared
 The `N` key allows to perform the computation of a single step of the simulation and leave the simulation in its current state. Only available in case the simulation is paused or stopped, otherwise a no op.
 
 The user can also use the button on the top banner to speed-up the simulation's speed. Possible values include `1`, `2`, `4` or `8` and will multiply the initial desired framerate by this value. This effectively allows to crank more steps in a single time frame and allows to speed up the passage of time in the simulation.
+
+## Save and load game
+
+TODO: Handle save and load game.
