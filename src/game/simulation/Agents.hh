@@ -1,5 +1,5 @@
-#ifndef    FISH_HH
-# define   FISH_HH
+#ifndef    AGENTS_HH
+# define   AGENTS_HH
 
 # include "Agent.hh"
 # include "Animat.hh"
@@ -21,4 +21,4 @@ namespace mas {
   }
 }
 
-#endif    /* FISH_HH */
+#endif    /* AGENTS_HH */

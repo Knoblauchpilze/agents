@@ -1,25 +1,25 @@
 
-# include "MoveTo.hh"
+# include "Behaviors.hh"
 # include "DirectedPath.hh"
 # include "ForceBased.hh"
 
 namespace mas {
   namespace environment {
 
-    MoveTo::MoveTo():
+    Swarm::Swarm():
       Behavior()
     {}
 
     bool
-    MoveTo::completed() const noexcept {
+    Swarm::completed() const noexcept {
       // This behavior is never finished.
       return false;
     }
 
     std::vector<InfluenceShPtr>
-    MoveTo::perform(const AgentData& data,
-                    const Perceptions& perceptions,
-                    const time::Manager& /*manager*/)
+    Swarm::perform(const AgentData& data,
+                   const Perceptions& perceptions,
+                   const time::Manager& /*manager*/)
     {
       // Scan perceptions and move towards the center of gravity
       // of the perceived objects.

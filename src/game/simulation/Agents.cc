@@ -1,6 +1,6 @@
 
-# include "Fish.hh"
-# include "MoveTo.hh"
+# include "Agents.hh"
+# include "Behaviors.hh"
 
 namespace mas {
   namespace environment {
@@ -15,7 +15,7 @@ namespace mas {
       };
 
       brain::BehaviorSelection bs = [](const AgentData& /*d*/, const Perceptions& /*perceptions*/, utils::RNG& /*rng*/) {
-        return std::make_shared<MoveTo>();
+        return std::make_shared<Swarm>();
       };
 
       brain::BehaviorTermination bt = [](BehaviorShPtr b) {

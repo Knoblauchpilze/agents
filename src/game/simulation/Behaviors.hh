@@ -1,18 +1,18 @@
-#ifndef    MOVE_TO_HH
-# define   MOVE_TO_HH
+#ifndef    BEHAVIORS_HH
+# define   BEHAVIORS_HH
 
 # include "Behavior.hh"
 
 namespace mas {
   namespace environment {
 
-    class MoveTo: public Behavior {
+    class Swarm: public Behavior {
       public:
 
         /**
-         * @brief - Create a new behavior to move to somewhere.
+         * @brief - Create a new behavior to create a swarm.
          */
-        MoveTo();
+        Swarm();
 
         /**
          * @brief - Implementation of the interface method to indicate
@@ -44,4 +44,4 @@ namespace mas {
   }
 }
 
-#endif    /* MOVE_TO_HH */
+#endif    /* BEHAVIORS_HH */
