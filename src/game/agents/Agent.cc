@@ -2,7 +2,6 @@
 # include "Agent.hh"
 # include "Animat.hh"
 # include "Behavior.hh"
-# include "Impulse.hh"
 
 namespace mas {
   namespace environment {

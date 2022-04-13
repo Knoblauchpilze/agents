@@ -4,7 +4,6 @@
 # include "Environment.hh"
 # include "Animat.hh"
 # include "Renderer.hh"
-# include "Dummy.hh"
 
 namespace mas {
  namespace environment {

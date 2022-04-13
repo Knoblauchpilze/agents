@@ -2,7 +2,6 @@
 # include "Game.hh"
 # include <cxxabi.h>
 # include "Menu.hh"
-# include "Initializer.hh"
 # include "Initialization.hh"
 
 /// @brief - The height of the status menu in pixels.
