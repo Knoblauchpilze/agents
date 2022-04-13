@@ -60,6 +60,15 @@ namespace mas {
       desiredFPS() const noexcept;
 
       /**
+       * @brief - Return the current state of the simulation. Note
+       *          that it only represent the state at the moment of
+       *          calling the method.
+       * @return - the current state of the simulation.
+       */
+      State
+      state() const noexcept;
+
+      /**
        * @brief - Define a new value for the desired FPS. Nothing
        *          happens if the framerate is negative or zero.
        * @param fps - the desired framerate.
