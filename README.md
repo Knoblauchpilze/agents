@@ -118,8 +118,14 @@ class Component: public utils::CoreObject {
     const Type&
     type() const noexcept;
 
+    const utils::Uuid&
+    uuid() const noexcept;
+
     bool
     markedForDeletion() const noexcept;
+
+    bool
+    obsolete() const noexcept;
 
     template <typename T>
     const T*
@@ -149,7 +155,9 @@ class Component: public utils::CoreObject {
   private:
 
     Type m_type;
+    utils::Uuid m_uuid;
     bool m_toBeDeleted;
+    bool m_obsolete;
 };
 ```
 
@@ -157,7 +165,9 @@ Each component has a type which can be used by the environment to determine if a
 
 Each component also defines a boolean indicating whether it should be deleted or not. This can be the case when an entity loses a certain capacity in which case the component can be removed. By default all components are not marked to be deleted.
 
-The environment performs a check at each frame to remove the components from entities when they are to be deleted, and then proceeds to delete the entities that don't have any component anymore.
+Finally, the component also defines a boolean defining whether the parent entity of the component should be deleted, along with all its component. This boolean can be activated by any component, and a single component is sufficient to destroy the entity.
+
+The environment performs a check at each frame to remove the components from entities when they are to be deleted, and then proceeds to delete the entities that don't have any component anymore or that are marked for deletion.
 
 ## Objects in the world
 

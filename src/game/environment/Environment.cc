@@ -212,7 +212,7 @@ namespace mas {
     Entities::iterator it = m_entities.begin();
     Entities::iterator eit = m_entities.end();
     while (it != eit) {
-      if (it->second->components() == 0u) {
+      if (it->second->components() == 0u || it->second->markedForDeletion()) {
         log("Erasing entity " + it->second->uuid().toString(), utils::Level::Verbose);
         it = m_entities.erase(it);
       }

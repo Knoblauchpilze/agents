@@ -10,6 +10,7 @@ namespace mas {
 
       m_uuid(utils::Uuid::create()),
 
+      m_toBeDeleted(false),
       m_components()
     {
       setService("mas");
@@ -20,6 +21,11 @@ namespace mas {
     const utils::Uuid&
     Entity::uuid() const noexcept {
       return m_uuid;
+    }
+
+    bool
+    Entity::markedForDeletion() const noexcept {
+      return m_toBeDeleted;
     }
 
     std::size_t
@@ -104,6 +110,14 @@ namespace mas {
       // Update components.
       for (unsigned id = 0u ; id < m_components.size() ; ++id) {
         m_components[id]->simulate(manager);
+      }
+
+      // Aggregate whether the entity needs to be deleted.
+      m_toBeDeleted = false;
+      for (unsigned id = 0u ; id < m_components.size() ; ++id) {
+        if (m_components[id]->obsolete()) {
+          m_toBeDeleted = true;
+        }
       }
 
       // And remove the ones that are marked for deletion.

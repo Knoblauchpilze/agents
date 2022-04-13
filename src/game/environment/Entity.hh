@@ -26,6 +26,13 @@ namespace mas {
         uuid() const noexcept;
 
         /**
+         * @brief - Whether this entity needs to be deleted.
+         * @return - `true` if the entity needs to be deleted.
+         */
+        bool
+        markedForDeletion() const noexcept;
+
+        /**
          * @brief - The number of components attached to this entity.
          * @return - the number of components.
          */
@@ -193,6 +200,11 @@ namespace mas {
          * @brief - The uuid of the entity.
          */
         utils::Uuid m_uuid;
+
+        /**
+         * @brief - Whether or not the entity should be deleted.
+         */
+        bool m_toBeDeleted;
 
         /**
          * @brief - The list of components registered for this entity.

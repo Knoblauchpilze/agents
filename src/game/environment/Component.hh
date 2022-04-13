@@ -54,6 +54,15 @@ namespace mas {
         markedForDeletion() const noexcept;
 
         /**
+         * @brief - Whether this component request the parent entity
+         *          to be deleted.
+         * @return - `true` if the component requests the deletion
+         *           of its parent entity.
+         */
+        bool
+        obsolete() const noexcept;
+
+        /**
          * @brief - Convert the component as the requested pointer type.
          *          In case the component is not the correct type, then
          *          the return value will be null.
@@ -110,6 +119,15 @@ namespace mas {
         void
         markForDeletion(bool mark = true) noexcept;
 
+        /**
+         * @brief - Request the parent entity of this component to
+         *          be deleted.
+         * @param mark - whether or not the parent entity should be
+         *               deleted.
+         */
+        void
+        destroyEntity(bool mark = true) noexcept;
+
       private:
 
         /**
@@ -126,6 +144,12 @@ namespace mas {
          * @brief - Whether or not the component should be deleted.
          */
         bool m_toBeDeleted;
+
+        /**
+         * @brief - Whether or not the component requests its parent
+         *          entity to be deleted.
+         */
+        bool m_obsolete;
     };
 
     using ComponentShPtr = std::shared_ptr<Component>;

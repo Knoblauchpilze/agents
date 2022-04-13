@@ -28,7 +28,8 @@ namespace mas {
 
       m_type(type),
       m_uuid(),
-      m_toBeDeleted(false)
+      m_toBeDeleted(false),
+      m_obsolete(false)
     {
       setService("mas");
     }
@@ -48,6 +49,11 @@ namespace mas {
       return m_toBeDeleted;
     }
 
+    bool
+    Component::obsolete() const noexcept {
+      return m_obsolete;
+    }
+
     void
     Component::attach(const Entity& ent) noexcept {
       // Define a new module for the component so that it matches
@@ -61,6 +67,11 @@ namespace mas {
     void
     Component::markForDeletion(bool mark) noexcept {
       m_toBeDeleted = mark;
+    }
+
+    void
+    Component::destroyEntity(bool mark) noexcept  {
+      m_obsolete = mark;
     }
 
   }
