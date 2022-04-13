@@ -12,9 +12,11 @@ namespace {
   {
     // Convert the position of the area. As it is a
     // centered based area, we need to convert the
-    // position of the top left corner.
-    float x = area.getTopLeftCorner().x();
-    float y = area.getTopLeftCorner().y();
+    // position of the top left corner. However, as
+    // we have an inverted rendering frame, we will
+    // use the **bottom** left corner.
+    float x = area.getBottomLeftCorner().x();
+    float y = area.getBottomLeftCorner().y();
 
     olc::vf2d p = cf.tileCoordsToPixels(x, y, pge::RelativePosition::Center, 1.0f);
 
@@ -53,7 +55,8 @@ namespace {
 namespace mas {
   namespace environment {
 
-    Renderer::Renderer(const MovingObject& obj, const RenderingMode& mode):
+    Renderer::Renderer(const MovingObject& obj,
+                       const RenderingMode& mode):
       Component(Type::Renderer),
 
       m_obj(obj),
@@ -68,6 +71,19 @@ namespace mas {
       m_color.r = rng.rndInt(0, 255);
       m_color.g = rng.rndInt(0, 255);
       m_color.b = rng.rndInt(0, 255);
+    }
+
+    Renderer::Renderer(const MovingObject& obj,
+                       const RenderingMode& mode,
+                       const olc::Pixel& color):
+      Component(Type::Renderer),
+
+      m_obj(obj),
+
+      m_mode(mode),
+      m_color(color)
+    {
+      setService("mas");
     }
 
     void

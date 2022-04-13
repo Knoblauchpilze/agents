@@ -25,7 +25,19 @@ namespace mas {
          * @param obj - the object attached to this renderer.
          * @param mode - the rendering mode.
          */
-        Renderer(const MovingObject& obj, const RenderingMode& mode);
+        Renderer(const MovingObject& obj,
+                 const RenderingMode& mode);
+
+        /**
+         * @brief - Create a new renderer with the specified moving
+         *          object and color.
+         * @param obj - the object attached to this renderer.
+         * @param mode - the rendering mode.
+         * @param color - the color of the element.
+         */
+        Renderer(const MovingObject& obj,
+                 const RenderingMode& mode,
+                 const olc::Pixel& color);
 
         /**
          * @brief - Implementation of the interface method to handle
