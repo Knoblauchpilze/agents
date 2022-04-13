@@ -17,8 +17,13 @@ namespace mas {
       }
 
       // Apply a certain force based on the maximum
-      // speed we can reach.
-      return maxSpeed * toTarget;
+      // acceleration we can reach.
+      return maxAcceleration * toTarget;
+    }
+
+    utils::Vector2f
+    DirectedPath::motionToTarget(float x, float y) const noexcept {
+      return motionToTarget(utils::Point2f(x, y));
     }
 
   }

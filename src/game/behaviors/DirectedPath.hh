@@ -17,8 +17,8 @@ namespace mas {
       // we already reached it.
       float arrivalRadius;
 
-      // The maximum speed possible.
-      float maxSpeed;
+      // The maximum acceleration possible.
+      float maxAcceleration;
 
       /**
        * @brief - Compute a force to apply to reach the target.
@@ -27,6 +27,15 @@ namespace mas {
        */
       utils::Vector2f
       motionToTarget(const utils::Point2f& p) const noexcept;
+
+      /**
+       * @brief - Compute a force to apply to reach the target.
+       * @param x - the current position along the x axis.
+       * @param y - the current position along the y axis.
+       * @return - the force to apply to reach the target.
+       */
+      utils::Vector2f
+      motionToTarget(float x, float y) const noexcept;
     };
 
   }
