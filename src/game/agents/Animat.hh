@@ -22,9 +22,13 @@ namespace mas {
          * @param obj - the moving object attached to this animat.
          * @param speedMotionThreshold - the threshold to declare that
          *                               this animat is moving or not.
+         * @param frustumToBodyRatio - the ratio defining how big the
+         *                             view frustum is compared to the
+         *                             body of the agent.
          */
         Animat(MovingObject* obj,
-               float speedMotionThreshold);
+               float speedMotionThreshold,
+               float frustumToBodyRatio);
 
         /**
          * @brief - Implementation of the interface method to handle
@@ -124,6 +128,16 @@ namespace mas {
          *          considered as moving.
          */
         float m_speedMotionThreshold;
+
+        /**
+         * @brief - A ratio defining how the size of the frustum is
+         *          compared to the szie of the body. A value larger
+         *          than `1` means a larger view frustum while any
+         *          value lower than `1` is a smaller view frustum
+         *          than the body. The value is clamped to be at
+         *          least `1`.
+         */
+        float m_frustumToBodyRatio;
 
         /**
          * @brief - The view frustum for this agent.

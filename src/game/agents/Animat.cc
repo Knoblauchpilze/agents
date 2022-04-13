@@ -5,14 +5,16 @@ namespace mas {
   namespace environment {
 
     Animat::Animat(MovingObject* obj,
-                   float speedMotionThreshold):
+                   float speedMotionThreshold,
+                   float frustumToBodyRatio):
       Component(Type::Animat),
 
       m_agent(nullptr),
       m_body(obj),
 
       m_speedMotionThreshold(speedMotionThreshold),
-      m_frustum(obj->bbox()),
+      m_frustumToBodyRatio(std::max(1.0f, frustumToBodyRatio)),
+      m_frustum(obj->bbox().scale(m_frustumToBodyRatio)),
       m_perceptions(),
       m_influences()
     {
@@ -21,7 +23,7 @@ namespace mas {
 
     void
     Animat::simulate(const time::Manager& /*manager*/) {
-      m_frustum = Frustum(m_body->bbox());
+      m_frustum = Frustum(m_body->bbox().scale(m_frustumToBodyRatio));
     }
 
     void
