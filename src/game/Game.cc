@@ -10,6 +10,9 @@
 /// @brief - The maximum speed for the simulation.
 # define MAX_SIMULATION_SPEED 8.0f
 
+/// @brief - The maximum attractiveness for any object.
+# define MAX_ATTRACTIVENESS 8.0f
+
 namespace {
 
   pge::MenuShPtr
@@ -50,6 +53,7 @@ namespace pge {
         true,   // disabled
         false,  // terminated
         1.0f,   // speed
+        1.0f,   // attractiveness
       }
     ),
 
@@ -76,10 +80,17 @@ namespace pge {
     olc::vi2d pos;
     olc::vi2d dims(50, STATUS_MENU_HEIGHT);
     m_menus.count = generateMenu(pos, dims, "N/A agent(s)", "count");
+    m_menus.attractiveness = generateMenu(pos, dims, "Force: 1", "force", true);
     m_menus.speed = generateMenu(pos, dims, "Speed: x1", "speed", true);
 
     // Register menus in the parent.
     status->addMenu(m_menus.count);
+    status->addMenu(m_menus.attractiveness);
+    m_menus.attractiveness->setSimpleAction(
+      [this](Game& g) {
+        g.toggleAttractiveness();
+      }
+    );
     status->addMenu(m_menus.speed);
     m_menus.speed->setSimpleAction(
       [this](Game& g) {
@@ -116,8 +127,9 @@ namespace pge {
     }
 
     // Handle the creation of a new object.
-    log("Creating new attractor at " + p.toString(), utils::Level::Info);
-    mas::environment::spawnAttractor(m_env, p);
+    float a = m_state.attractiveness / (MAX_ATTRACTIVENESS - 1.0f);
+    log("Creating new attractor at " + p.toString() + " with force " + std::to_string(a), utils::Level::Info);
+    mas::environment::spawnAttractor(m_env, p, a);
   }
 
   bool
@@ -172,6 +184,27 @@ namespace pge {
   }
 
   void
+  Game::toggleAttractiveness() noexcept {
+    // Only available when the game is not paused.
+    if (m_state.paused) {
+      return;
+    }
+
+    float a = m_state.attractiveness;
+
+    m_state.attractiveness += 2.0f;
+    if (m_state.attractiveness > MAX_ATTRACTIVENESS) {
+      m_state.attractiveness = -MAX_ATTRACTIVENESS + 1.0f;
+    }
+
+    log(
+      "Attractiveness updated from " + std::to_string(a) +
+      " to " + std::to_string(m_state.attractiveness),
+      utils::Level::Info
+    );
+  }
+
+  void
   Game::startSimulation() {
     m_launcher.start();
   }
@@ -213,6 +246,10 @@ namespace pge {
     // Update the speed of the simulation.
     int sp = static_cast<int>(std::round(m_state.speed));
     m_menus.speed->setText("Speed: x" + std::to_string(sp));
+
+    // Update the attractiveness of elements.
+    int at = static_cast<int>(std::round(m_state.attractiveness));
+    m_menus.attractiveness->setText("Force: " + std::to_string(at));
 
     unsigned c = m_env.agents();
     std::string str = std::to_string(c) + " agent";

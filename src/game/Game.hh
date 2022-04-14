@@ -120,6 +120,13 @@ namespace pge {
       speedUpSimulation() noexcept;
 
       /**
+       * @brief - Toggle the attractiveness of the attractors
+       *          spawned in the game.
+       */
+      void
+      toggleAttractiveness() noexcept;
+
+      /**
        * @brief - Request the simulation to start.
        */
       void
@@ -228,6 +235,10 @@ namespace pge {
 
         // The current speed of the simulation.
         float speed;
+
+        // The attractiveness of the elements spawned in the
+        // environment.
+        float attractiveness;
       };
 
       /// @brief - Convenience structure allowing to regroup
@@ -235,6 +246,9 @@ namespace pge {
       struct Menus {
         // The number of agents in the simulation.
         MenuShPtr count;
+
+        // The attractiveness of the attractors to spawn.
+        MenuShPtr attractiveness;
 
         // The speed of the current simulation.
         MenuShPtr speed;

@@ -7,7 +7,7 @@
 
 /// @brief - The desired number of FPS for the launcher that
 /// will simulate the environment.
-# define DESIRED_FPS 10.0f
+# define DESIRED_FPS 80.0f
 
 /// @brief - The decrease in speed due to friction and other
 /// processing at each frame. This value is expressed in m/s2.

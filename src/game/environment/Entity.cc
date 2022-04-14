@@ -46,7 +46,7 @@ namespace mas {
 
       comp->attach(*this);
 
-      log("Registering " + typeToString(comp->type()) + " component to entity");
+      log("Registering " + typeToString(comp->type()) + " component to entity", utils::Level::Verbose);
       m_components.push_back(comp);
     }
 

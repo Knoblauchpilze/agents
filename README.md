@@ -692,13 +692,15 @@ It is also possible to add some features based on the key pressed or drag and dr
 
 ## Top banner
 
-The top part of the main view of the application presents a banner which allows to see at a glance how many agents are present in the simulation and to change the speed of the simulation.
+The top part of the main view of the application presents a banner which allows to see at a glance how many agents are present in the simulation and to change things about the simulation.
 
 ![Top banner](resources/top_banner.png)
 
 The number of agents is computed automatically and define how many entities having at least one `Agent` component registered.
 
 The speed controls how fast the runs: by default and as explained in the [initialization](###initialization-of-the-simulation) section the simulation is run with a certain step. The top button defines a multiplier applied to this initial step.
+
+The force controls how attractive or repulsive the elements spawned in the world are to the agents. The value ranges in `[-7; 7]` and represents a scale where`-7` defines the most repulsive object in the world and `7` defines the most attractive object in the world. When the user clicks on the world and spawns an attractor, this value will be used for its attractiveness. The values loop back to the minimum when the maximum value is reached, in a similar pattern to the simulation speed.
 
 ## Environment view
 
@@ -709,6 +711,8 @@ The main view (here presented with the `Debug` option active) allows to visualiz
 By default a grid is displayed allowing to better visualize the coordinates at which agents are.
 
 The agents are displayed using colored squares and the user can pan and zoom in and out of the view as they see fit. Zooming is done by scrolling the mouse wheel and panning by dragging the mouse while holding the right mouse button.
+
+Whenever the user clicks with the left mouse in the world (and provided the simulation is paused or stopped), a new attractor will be spawned at the location of the mouse. This attractor will be considered by the agents to either be attracted or repulsed from the location.
 
 ## Controls
 

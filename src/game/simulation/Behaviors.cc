@@ -2,6 +2,7 @@
 # include "Behaviors.hh"
 # include "DirectedPath.hh"
 # include "ForceBased.hh"
+# include "Objects.hh"
 
 namespace mas {
   namespace environment {
@@ -25,20 +26,45 @@ namespace mas {
       // of the perceived objects.
       float cX = data.area.x();
       float cY = data.area.y();
-      unsigned count = 1u;
+      unsigned w = 1u;
 
       for (unsigned id = 0u ; id < perceptions.size() ; ++id) {
+        // Ignore elements with user data as they are most likely
+        // attractors.
+        if (perceptions[id].hasUserData()) {
+          continue;
+        }
+
         cX += perceptions[id].bbox().x();
         cY += perceptions[id].bbox().y();
+        ++w;
+      }
 
-        ++count;
+      // Handle attracting and repelling forces.
+      utils::Vector2f f;
+      for (unsigned id = 0u ; id < perceptions.size() ; ++id) {
+        if (!perceptions[id].hasUserData()) {
+          continue;
+        }
+
+        const Attractor* a = perceptions[id].as<Attractor>();
+
+        // Ignore unknown user data.
+        if (a == nullptr) {
+          continue;
+        }
+
+        utils::Vector2f toAttractor = perceptions[id].bbox().getCenter() - data.area.getCenter();
+        toAttractor.normalize();
+
+        f += a->attractiveness() * toAttractor;
       }
 
       // Compute the average position to reach and generate
       // the influence corresponding to that. We combine a
       // motion to the target and a force based repulsion.
       DirectedPath dp;
-      dp.target = utils::Vector2f(cX / count, cY / count);
+      dp.target = utils::Vector2f(cX / w, cY / w);
       dp.arrivalRadius = 0.01f;
       dp.maxAcceleration = 1.0f;
 
@@ -51,8 +77,8 @@ namespace mas {
 
       InfluenceShPtr inf = std::make_shared<Influence>(
         influence::noOpEmitter(),
-        [f1, f2](MovingObject& obj) {
-          obj.applyForce(f1 + f2);
+        [f, f1, f2](MovingObject& obj) {
+          obj.applyForce(f + f1 + f2);
         }
       );
 

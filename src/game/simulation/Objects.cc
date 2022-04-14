@@ -5,11 +5,37 @@
 /// @brief - The radius of an attractor.
 # define ATTRACTOR_RADIUS 0.5f
 
+/// @brief - The lifespan of the attractor in seconds.
+# define ATTRACTOR_LIFESPAN_SECOND 60.0f
+
+/// @brief - The scale to apply to the attractiveness.
+# define ATTRACTOR_ATTRACTIVENESS 8.0f
+
 namespace mas {
   namespace environment {
 
+    Attractor::Attractor(float lifespan, float attractiveness) noexcept:
+      m_lifespan(lifespan),
+      m_attractiveness(attractiveness)
+    {}
+
+    float
+    Attractor::attractiveness() const noexcept {
+      return m_attractiveness;
+    }
+
     void
-    spawnAttractor(Environment& env, const utils::Point2f& p) noexcept {
+    Attractor::simulate(const time::Manager& manager) {
+      m_lifespan -= manager.lastStepDuration(time::Unit::Second);
+
+      // In case the lifespan is expired, destroy the entity.
+      if (m_lifespan < 0.0f) {
+        destroyEntity(true);
+      }
+    }
+
+    void
+    spawnAttractor(Environment& env, const utils::Point2f& p, float attractiveness) noexcept {
       // Create the entity.
       utils::Uuid ent = env.createEntity();
 
@@ -23,9 +49,12 @@ namespace mas {
       ComponentShPtr rend = std::make_shared<Renderer>(
         *mo->as<MovingObject>(),
         RenderingMode::Square,
-        olc::BLUE
+        pge::colorGradient(olc::BLUE, olc::CYAN, 0.5f * (1.0f + attractiveness), pge::alpha::AlmostOpaque)
       );
       env.registerComponent(ent, rend);
+
+      ComponentShPtr at = std::make_shared<Attractor>(ATTRACTOR_LIFESPAN_SECOND, ATTRACTOR_ATTRACTIVENESS * attractiveness);
+      env.registerComponent(ent, at);
     }
 
   }
