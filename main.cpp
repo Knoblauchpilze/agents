@@ -15,14 +15,14 @@ int
 main(int /*argc*/, char** /*argv*/) {
   // Create the logger.
   utils::StdLogger raw;
-  raw.setLevel(utils::Level::Verbose);
+  raw.setLevel(utils::Level::Debug);
   utils::PrefixedLogger logger("pge", "main");
   utils::LoggerLocator::provide(&raw);
 
   try {
     logger.logMessage(utils::Level::Notice, "Starting application");
 
-    pge::Viewport tViewport = pge::Viewport(olc::vf2d(-7.0f, -7.0f), olc::vf2d(15.0f, 15.0f));
+    pge::Viewport tViewport = pge::Viewport(olc::vf2d(-18.0f, -19.0f), olc::vf2d(34.0f, 34.0f));
     pge::Viewport pViewport = pge::Viewport(olc::vf2d(0.0f, 0.0f), olc::vf2d(768.0f, 768.0f));
 
     pge::CoordinateFrameShPtr cf = std::make_shared<pge::TopViewFrame>(

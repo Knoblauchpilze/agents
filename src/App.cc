@@ -88,6 +88,9 @@ namespace pge {
   App::loadData() {
     // Create the game and its state.
     m_game = std::make_shared<Game>();
+    // Note: we toggle the pause as we start immediately on the
+    // game view.
+    m_game->togglePause();
   }
 
   void
@@ -113,6 +116,7 @@ namespace pge {
     // Generate the game state.
     m_state = std::make_shared<GameState>(
       olc::vi2d(ScreenWidth(), ScreenHeight()),
+      // Note: start immediately on the game view.
       Screen::Game
     );
 

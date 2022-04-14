@@ -416,7 +416,7 @@ Launcher::simulate(bool sleep, float desiredFPS) {
 
   utils::Duration expected = utils::toMilliseconds(1000.0f / desiredFPS);
   if (d > expected) {
-    warn("Took " + utils::durationToString(d) + "ms to compute frame, expected " + utils::durationToString(expected) + "ms");
+    warn("Took " + utils::durationToString(d) + " to compute frame, expected " + utils::durationToString(expected));
     return;
   }
 
@@ -732,4 +732,4 @@ The user can also use the button on the top banner to speed-up the simulation's 
 
 ## Save and load game
 
-TODO: Handle save and load game.
+For now, no save and load of the game or environment is provided.

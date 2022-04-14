@@ -23,7 +23,7 @@
 # define FRUSTUM_TO_BODY_RATIO 3.0f
 
 /// @brief - How many objects are spawned at the beginning.
-# define AGENTS_COUNT 10u
+# define AGENTS_COUNT 100u
 
 namespace mas {
   namespace environment {
@@ -41,7 +41,7 @@ namespace mas {
     void
     initialize(Environment& env) noexcept {
       // Create the spawner function.
-      utils::Boxf area(0.0f, 0.0f, 10.0f, 5.0f);
+      utils::Boxf area(0.0f, 0.0f, 30.0f, 30.0f);
 
       auto spawner = [area](utils::RNG& rng) {
         utils::Point2f p;
