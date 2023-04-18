@@ -448,7 +448,7 @@ Finally, the [simulation](src/game/simulation/Simulation.hh) header gather every
 
 In order to allow agents to modify and interact with their environment, it might be needed to create new types of components.
 
-As described in the [implementation](###implementation) section, a component is just a wrapper which define a type and a set of properties. By default the simulation defines the following kinds:
+As described in the [implementation](#implementation) section, a component is just a wrapper which define a type and a set of properties. By default the simulation defines the following kinds:
 ```cpp
 enum class Type {
   MovingObject,
@@ -466,9 +466,9 @@ Each type correspond to a facet of the behavior of an entity and is simulated an
 
 Whenever the user needs to refine the simulation and generate new components, it is needed to register a new value in the enumeration, and add the corresponding case in the `typeToString` method (in order to obtain a human readable descrption of the component type).
 
-It is possible to then register the component to the entities that are created when initializing the simulation (see the [following](###initialization-of-the-simulation) section) or when spawning new agents.
+It is possible to then register the component to the entities that are created when initializing the simulation (see the [following](#initialization-of-the-simulation) section) or when spawning new agents.
 
-Note that by default the environment only consider the `MovingObject` component as valid elements for perceptions: if the new component kind should be perceivable, it might be required to update this behavior. See the [perception](###create-new-perceptions) section for more details.
+Note that by default the environment only consider the `MovingObject` component as valid elements for perceptions: if the new component kind should be perceivable, it might be required to update this behavior. See the [perception](#create-new-perceptions) section for more details.
 
 Finally, note that most of the component created by the user are encouraged to use the `UserData` type: the environment will associate the component with this type to the perceptions provided to the other agents. Note that we actually only handle a single component with the type `UserData`. Note as well that the agents will be given access to the components through the perceptions: this could mean that the agents could call the `simulate` method or any other public member of the interface of the component. We of course **STRONGLY ADVISE AGAINST THAT**.
 
@@ -558,7 +558,7 @@ createAgent(Animat& animat) {
 
 The precise definition of the behavior methods can and should be updated to handle more complex behaviors. The methods created there can be used as part of the initialization code and also in the definition of new behaviors or influences needing to spawn new agents.
 
-Once this is done, the user can either create a new influence to spawn the agents (see the [influences](###spawn-new-agents) section) or use the initialize mechanism. More specifically, it might be useful to use a skeleton code like below in the `EntityFactory`:
+Once this is done, the user can either create a new influence to spawn the agents (see the [influences](#spawn-new-agents) section) or use the initialize mechanism. More specifically, it might be useful to use a skeleton code like below in the `EntityFactory`:
 ```cpp
 auto factory = [](const utils::Uuid& uuid, const utils::Point2f& p, utils::RNG& /*rng*/, Environment& env) {
   /// FIXME: Generate a rigid body with updated parameters.
@@ -588,7 +588,7 @@ Along with the agents, it might be needed to create new behaviors. These behavio
 
 As there's potentially a huge variety of behaviors that can be created depending on the purpose of the simulation and they could take into consideration a great deal of information in their decision-making process it didn't seem like a good plan to aso use callbacks here and so we preferred to let the user specialize the base [Behavior](src/game/behaviors/Behavior.hh) class.
 
-As described in the [behavior](###behavior) section the only thing to consider when implementing a new behavior is to provide the two interface methods. So the general idea is like so:
+As described in the [behavior](#behavior) section the only thing to consider when implementing a new behavior is to provide the two interface methods. So the general idea is like so:
 ```cpp
 bool
 NewBehavior::completed() const noexcept {
@@ -611,7 +611,7 @@ Whenever a behavior is created, it can be linked to agents by providing a behavi
 
 ### Spawn new agents
 
-As described in the [influence](###influences) section, a simple way to allow spawning new agents in the world is to use the environment callback provided in the `Influence` interface.
+As described in the [influence](#influences) section, a simple way to allow spawning new agents in the world is to use the environment callback provided in the `Influence` interface.
 
 A new agent is a collection of `Components` attached to an `Entity`. The only constraint is that the entity should have at least one component to not be recycled automatically by the environment.
 
@@ -652,7 +652,7 @@ When giving this callback to an influence created by a behavior we are able to s
 
 ### Create new perceptions
 
-Creation of new perceptions is generally not something necessary for agents. As discussed in the [perceptions](###perceptions) section, the user should derive a new component with the `UserData` kind so that it is automatically transmitted to the base perception class. This will allow agents to access some of the properties available for the component without having to change anything to the rest of the simulation.
+Creation of new perceptions is generally not something necessary for agents. As discussed in the [perceptions](#perceptions) section, the user should derive a new component with the `UserData` kind so that it is automatically transmitted to the base perception class. This will allow agents to access some of the properties available for the component without having to change anything to the rest of the simulation.
 
 ### Add behaviors triggered from the UI
 
@@ -698,7 +698,7 @@ The top part of the main view of the application presents a banner which allows 
 
 The number of agents is computed automatically and define how many entities having at least one `Agent` component registered.
 
-The speed controls how fast the runs: by default and as explained in the [initialization](###initialization-of-the-simulation) section the simulation is run with a certain step. The top button defines a multiplier applied to this initial step.
+The speed controls how fast the runs: by default and as explained in the [initialization](#initialization-of-the-simulation) section the simulation is run with a certain step. The top button defines a multiplier applied to this initial step.
 
 The force controls how attractive or repulsive the elements spawned in the world are to the agents. The value ranges in `[-7; 7]` and represents a scale where`-7` defines the most repulsive object in the world and `7` defines the most attractive object in the world. When the user clicks on the world and spawns an attractor, this value will be used for its attractiveness. The values loop back to the minimum when the maximum value is reached, in a similar pattern to the simulation speed.
 
