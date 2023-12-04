@@ -234,7 +234,7 @@ namespace mas {
 
     utils::Duration expected = utils::toMilliseconds(1000.0f / desiredFPS);
     if (d > expected) {
-      warn("Took " + utils::durationToString(d) + " to compute frame, expected " + utils::durationToString(expected));
+      warn("Took " + utils::durationToMsString(d) + " to compute frame, expected " + utils::durationToMsString(expected));
       return;
     }
 
