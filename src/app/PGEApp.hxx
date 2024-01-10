@@ -83,9 +83,9 @@ namespace pge {
     olc::rcode c = Construct(dims.x, dims.y, pixRatio.x, pixRatio.y);
 
     if (c != olc::OK) {
-      throw utils::CoreException(
-        std::string("Could not build new frontiers application"),
-        std::string("Initialization failed")
+      error(
+        "Could not build new frontiers application",
+        "Initialization failed"
       );
     }
   }

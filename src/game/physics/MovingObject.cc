@@ -40,13 +40,12 @@ namespace mas {
       m_area.x() += tr.x();
       m_area.y() += tr.y();
 
-      log(
+      verbose(
         "Moving object at " + m_area.toString() +
         " (f: " + m_force.toString() +
         ", acc: " + m_acceleration.toString() +
         ", speed: " + m_speed.toString() +
-        ", friction: " + std::to_string((1.0f - m_body.friction()) * d) + ")",
-        utils::Level::Verbose
+        ", friction: " + std::to_string((1.0f - m_body.friction()) * d) + ")"
       );
 
       // Reset the force: if it is applied continuously we

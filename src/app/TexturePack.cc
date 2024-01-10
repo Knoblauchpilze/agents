@@ -55,11 +55,7 @@ namespace pge {
   {
     // Check whether the pack is valid.
     if (s.pack >= m_packs.size()) {
-      log(
-        "Unable to draw sprite from pack " + std::to_string(s.pack),
-        utils::Level::Error
-      );
-
+      warn("Unable to draw sprite from pack " + std::to_string(s.pack));
       return;
     }
 

@@ -33,7 +33,7 @@ namespace mas {
 
       // Check whether some behaviors are available.
       if (m_behaviors.empty() && m_bUpdate(d)) {
-        log("Agent is thinking very hard...", utils::Level::Verbose);
+        verbose("Agent is thinking very hard...");
         BehaviorShPtr b = m_bSelection(d, m_animat.perceptions(), rng);
         if (b == nullptr) {
           warn("Behavior selection created empty behavior");

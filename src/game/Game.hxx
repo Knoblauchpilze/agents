@@ -8,7 +8,7 @@ namespace pge {
   inline
   void
   Game::terminate() noexcept {
-    log("Game has been terminated", utils::Level::Info);
+    info("Game has been terminated");
     m_state.terminated = true;
   }
 
@@ -26,7 +26,7 @@ namespace pge {
       return;
     }
 
-    log("Game is now paused", utils::Level::Info);
+    info("Game is now paused");
     m_state.paused = true;
   }
 
@@ -38,7 +38,7 @@ namespace pge {
       return;
     }
 
-    log("Game is now resumed", utils::Level::Info);
+    info("Game is now resumed");
     m_state.paused = false;
   }
 

@@ -25,7 +25,7 @@ namespace mas {
       // Create a RNG.
       utils::RNG& rng = env.rng();
 
-      log("Seeding environment with " + std::to_string(m_agentsCount) + " agent(s)", utils::Level::Info);
+      info("Seeding environment with " + std::to_string(m_agentsCount) + " agent(s)");
 
       unsigned id = 0u;
       while (id < m_agentsCount) {
@@ -34,7 +34,7 @@ namespace mas {
         // as we know the area where entities should be spawned.
         utils::Point2f p = m_spawner(rng);
 
-        log("Spawning agent at " + p.toString(), utils::Level::Info);
+        info("Spawning agent at " + p.toString());
         utils::Uuid uuid = env.createEntity();
         m_factory(uuid, p, rng, env);
 

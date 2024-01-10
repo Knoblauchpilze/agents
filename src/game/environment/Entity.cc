@@ -46,7 +46,7 @@ namespace mas {
 
       comp->attach(*this);
 
-      log("Registering " + typeToString(comp->type()) + " component to entity", utils::Level::Verbose);
+      verbose("Registering " + typeToString(comp->type()) + " component to entity");
       m_components.push_back(comp);
     }
 
@@ -64,7 +64,7 @@ namespace mas {
       m_components.erase(newEnd, m_components.end());
 
       if (components() != s) {
-        log("Removed component with kind " + typeToString(comp->type()));
+        debug("Removed component with kind " + typeToString(comp->type()));
       }
     }
 
@@ -82,7 +82,7 @@ namespace mas {
       m_components.erase(newEnd, m_components.end());
 
       if (components() != s) {
-        log("Removed " + std::to_string(s - components()) + " component(s) with kind " + typeToString(kind));
+        debug("Removed " + std::to_string(s - components()) + " component(s) with kind " + typeToString(kind));
       }
     }
 
@@ -133,7 +133,7 @@ namespace mas {
       m_components.erase(newEnd, m_components.end());
 
       if (components() != s) {
-        log("Removed " + std::to_string(s - components()) + " component(s) marked for deletion");
+        debug("Removed " + std::to_string(s - components()) + " component(s) marked for deletion");
       }
     }
 

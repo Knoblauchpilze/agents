@@ -82,13 +82,12 @@ namespace mas {
   void
   Environment::simulate(const time::Manager& manager) {
 # ifdef LOG_STEP
-    log(
+    verbose(
       "Stepping simulation for " +
       std::to_string(static_cast<int>(manager.lastStepDuration(time::Unit::Millisecond))) +
       " millisecond(s)" +
       " (elapsed: " + std::to_string(static_cast<int>(manager.elapsed(time::Unit::Millisecond))) +
-      " millisecond(s))",
-      utils::Level::Verbose
+      " millisecond(s))"
     );
 # endif
 
@@ -213,7 +212,7 @@ namespace mas {
     Entities::iterator eit = m_entities.end();
     while (it != eit) {
       if (it->second->components() == 0u || it->second->markedForDeletion()) {
-        log("Erasing entity " + it->second->uuid().toString(), utils::Level::Verbose);
+        verbose("Erasing entity " + it->second->uuid().toString());
         it = m_entities.erase(it);
       }
       else {
@@ -222,7 +221,7 @@ namespace mas {
     }
 
     if (m_entities.size() != s) {
-      log("Removed " + std::to_string(s - m_entities.size()) + " empty entity(ies)");
+      debug("Removed " + std::to_string(s - m_entities.size()) + " empty entity(ies)");
     }
   }
 

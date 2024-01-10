@@ -110,7 +110,7 @@ namespace pge {
   Game::performAction(float x, float y) {
     // Only handle actions when the game is not disabled.
     if (m_state.disabled) {
-      log("Ignoring action while menu is disabled");
+      debug("Ignoring action while menu is disabled");
       return;
     }
 
@@ -128,7 +128,7 @@ namespace pge {
 
     // Handle the creation of a new object.
     float a = m_state.attractiveness / (MAX_ATTRACTIVENESS - 1.0f);
-    log("Creating new attractor at " + p.toString() + " with force " + std::to_string(a), utils::Level::Info);
+    info("Creating new attractor at " + p.toString() + " with force " + std::to_string(a));
     mas::environment::spawnAttractor(m_env, p, a);
   }
 
@@ -176,10 +176,9 @@ namespace pge {
     float baseFPS = m_launcher.desiredFPS() / s;
     m_launcher.setDesiredFramerate(baseFPS * m_state.speed);
 
-    log(
+    info(
       "Simulation speed updated from " + std::to_string(s) +
-      " to " + std::to_string(m_state.speed),
-      utils::Level::Info
+      " to " + std::to_string(m_state.speed)
     );
   }
 
@@ -197,10 +196,9 @@ namespace pge {
       m_state.attractiveness = -MAX_ATTRACTIVENESS + 1.0f;
     }
 
-    log(
+    info(
       "Attractiveness updated from " + std::to_string(a) +
-      " to " + std::to_string(m_state.attractiveness),
-      utils::Level::Info
+      " to " + std::to_string(m_state.attractiveness)
     );
   }
 
@@ -234,10 +232,10 @@ namespace pge {
     m_state.disabled = !enable;
 
     if (m_state.disabled) {
-      log("Disabled game UI", utils::Level::Verbose);
+      verbose("Disabled game UI");
     }
     else {
-      log("Enabled game UI", utils::Level::Verbose);
+      verbose("Enabled game UI");
     }
   }
 

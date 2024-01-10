@@ -84,7 +84,7 @@ namespace mas {
     Guard guard(m_simThreadLocker);
     m_desiredFPS = fps;
 
-    log("Setting desired framerate to " + std::to_string(static_cast<int>(m_desiredFPS)), utils::Level::Info);
+    info("Setting desired framerate to " + std::to_string(static_cast<int>(m_desiredFPS)));
   }
 
   void
@@ -170,7 +170,7 @@ namespace mas {
       return;
     }
 
-    log("Performing single simulation step", utils::Level::Info);
+    info("Performing single simulation step");
     simulate(false, m_desiredFPS);
   }
 
@@ -194,17 +194,17 @@ namespace mas {
 
       switch (m_state) {
         case State::PauseRequested:
-          log("Pausing environment simulation", utils::Level::Info);
+          info("Pausing environment simulation");
           m_state = State::Paused;
           m_simThreadLocker.unlock();
           break;
         case State::ResumeRequested:
-          log("Resuming environment simulation", utils::Level::Info);
+          info("Resuming environment simulation");
           m_state = State::Running;
           m_simThreadLocker.unlock();
           break;
         case State::StopRequested:
-          log("Stopping environment simulation", utils::Level::Info);
+          info("Stopping environment simulation");
           m_state = State::Stopped;
           m_simThreadLocker.unlock();
           done = true;
